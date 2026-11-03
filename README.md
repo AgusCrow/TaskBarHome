@@ -40,13 +40,14 @@ TBH/
 
 - [x] Scaffolding del proyecto e inicialización de Git
 - [x] Configuración de reglas (`AGENTS.md`) y arquitectura inicial
-- [ ] Implementar mock vault de Obsidian con Kanban, To-Do, Calendario y Notas
-- [ ] Desarrollar parser backend para Markdown, Kanban de Obsidian y tareas
-- [ ] Implementar servidor Fastify con File Watcher y WebSocket broadcast
-- [ ] Desarrollar frontend en Vite + React con Tailwind CSS
-- [ ] Crear widgets de TV: Kanban, Calendario semanal, To-Do, Timers, Clima y Fondo de fotos
-- [ ] Desarrollar modo Kiosk / Fullscreen para navegador de Smart TV
-- [ ] Verificar funcionamiento end-to-end con recarga en vivo al editar en Obsidian
+- [x] Implementar mock vault de Obsidian con Kanban, To-Do, Calendario y Notas
+- [x] Desarrollar parser backend para Markdown, Kanban de Obsidian y tareas
+- [x] Implementar servidor Fastify con File Watcher y WebSocket broadcast
+- [x] Desarrollar frontend en Vite + React con Tailwind CSS
+- [x] Crear widgets de TV: Kanban, Calendario semanal, To-Do, Timers, Clima y Fondo de fotos
+- [x] Desarrollar modo Kiosk / Fullscreen para navegador de Smart TV
+- [x] Verificar funcionamiento end-to-end con recarga en vivo al editar en Obsidian
+- [ ] Conectar con tu bóveda real de Obsidian (actualizando `.env`)
 
 ---
 

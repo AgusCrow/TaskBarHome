@@ -1,23 +1,152 @@
 ﻿{
     "edges":  [
-
+                  {
+                      "from":  "client/src/App.tsx",
+                      "to":  "./components/AmbientBackground",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "client/src/App.tsx",
+                      "to":  "./components/Header",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "client/src/App.tsx",
+                      "to":  "./components/KanbanWidget",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "client/src/App.tsx",
+                      "to":  "./components/TasksWidget",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "client/src/App.tsx",
+                      "to":  "./components/CalendarWidget",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "client/src/App.tsx",
+                      "to":  "./components/TimersWidget",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "client/src/App.tsx",
+                      "to":  "./components/NotesWidget",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "client/src/App.tsx",
+                      "to":  "./types",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "client/src/main.tsx",
+                      "to":  "./App",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "client/src/components/CalendarWidget.tsx",
+                      "to":  "../types",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "client/src/components/Header.tsx",
+                      "to":  "../types",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "client/src/components/KanbanWidget.tsx",
+                      "to":  "../types",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "client/src/components/NotesWidget.tsx",
+                      "to":  "../types",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "client/src/components/TasksWidget.tsx",
+                      "to":  "../types",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "client/src/components/TimersWidget.tsx",
+                      "to":  "../types",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "server/src/index.ts",
+                      "to":  "./services/vault.js",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "server/src/index.ts",
+                      "to":  "./services/timers.js",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "server/src/index.ts",
+                      "to":  "./services/weather.js",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "server/src/index.ts",
+                      "to":  "./services/photos.js",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "server/src/index.ts",
+                      "to":  "./types.js",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "server/src/parsers/markdown.ts",
+                      "to":  "../types.js",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "server/src/services/timers.ts",
+                      "to":  "../types.js",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "server/src/services/vault.ts",
+                      "to":  "../parsers/markdown.js",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "server/src/services/vault.ts",
+                      "to":  "../types.js",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "server/src/services/weather.ts",
+                      "to":  "../types.js",
+                      "type":  "import"
+                  }
               ],
     "projectRoot":  "D:\\Proyectos\\TBH",
-    "generatedAt":  "2026-11-03 15:05:22",
+    "generatedAt":  "2026-11-03 15:27:11",
     "metrics":  {
                     "extensions":  {
-                                       ".example":  1,
+                                       ".tsx":  9,
                                        ".gitignore":  1,
-                                       ".json":  1,
+                                       ".json":  8,
+                                       ".ts":  9,
+                                       ".example":  1,
+                                       ".html":  1,
+                                       ".css":  1,
+                                       ".js":  2,
                                        ".md":  7
                                    },
-                    "totalEdges":  0,
-                    "totalFiles":  10
+                    "totalEdges":  25,
+                    "totalFiles":  39
                 },
     "nodes":  [
                   {
                       "label":  ".env.example",
-                      "sizeBytes":  451,
+                      "sizeBytes":  452,
                       "isHub":  false,
                       "id":  ".env.example",
                       "type":  ".example"
@@ -31,24 +160,31 @@
                   },
                   {
                       "label":  "AGENTS.md",
-                      "sizeBytes":  1171,
+                      "sizeBytes":  1172,
                       "isHub":  false,
                       "id":  "AGENTS.md",
                       "type":  ".md"
                   },
                   {
                       "label":  "graph.json",
-                      "sizeBytes":  979,
+                      "sizeBytes":  3178,
                       "isHub":  false,
                       "id":  "graph.json",
                       "type":  ".json"
                   },
                   {
                       "label":  "GRAPH_REPORT.md",
-                      "sizeBytes":  762,
+                      "sizeBytes":  808,
                       "isHub":  false,
                       "id":  "GRAPH_REPORT.md",
                       "type":  ".md"
+                  },
+                  {
+                      "label":  "package.json",
+                      "sizeBytes":  345,
+                      "isHub":  true,
+                      "id":  "package.json",
+                      "type":  ".json"
                   },
                   {
                       "label":  "README.md",
@@ -58,32 +194,228 @@
                       "type":  ".md"
                   },
                   {
+                      "label":  "index.html",
+                      "sizeBytes":  724,
+                      "isHub":  true,
+                      "id":  "client/index.html",
+                      "type":  ".html"
+                  },
+                  {
+                      "label":  "package-lock.json",
+                      "sizeBytes":  94596,
+                      "isHub":  false,
+                      "id":  "client/package-lock.json",
+                      "type":  ".json"
+                  },
+                  {
+                      "label":  "package.json",
+                      "sizeBytes":  569,
+                      "isHub":  true,
+                      "id":  "client/package.json",
+                      "type":  ".json"
+                  },
+                  {
+                      "label":  "postcss.config.js",
+                      "sizeBytes":  80,
+                      "isHub":  false,
+                      "id":  "client/postcss.config.js",
+                      "type":  ".js"
+                  },
+                  {
+                      "label":  "tailwind.config.js",
+                      "sizeBytes":  515,
+                      "isHub":  false,
+                      "id":  "client/tailwind.config.js",
+                      "type":  ".js"
+                  },
+                  {
+                      "label":  "tsconfig.json",
+                      "sizeBytes":  508,
+                      "isHub":  false,
+                      "id":  "client/tsconfig.json",
+                      "type":  ".json"
+                  },
+                  {
+                      "label":  "vite.config.ts",
+                      "sizeBytes":  380,
+                      "isHub":  false,
+                      "id":  "client/vite.config.ts",
+                      "type":  ".ts"
+                  },
+                  {
+                      "label":  "App.tsx",
+                      "sizeBytes":  5348,
+                      "isHub":  true,
+                      "id":  "client/src/App.tsx",
+                      "type":  ".tsx"
+                  },
+                  {
+                      "label":  "index.css",
+                      "sizeBytes":  969,
+                      "isHub":  true,
+                      "id":  "client/src/index.css",
+                      "type":  ".css"
+                  },
+                  {
+                      "label":  "main.tsx",
+                      "sizeBytes":  250,
+                      "isHub":  true,
+                      "id":  "client/src/main.tsx",
+                      "type":  ".tsx"
+                  },
+                  {
+                      "label":  "types.ts",
+                      "sizeBytes":  1332,
+                      "isHub":  false,
+                      "id":  "client/src/types.ts",
+                      "type":  ".ts"
+                  },
+                  {
+                      "label":  "AmbientBackground.tsx",
+                      "sizeBytes":  1421,
+                      "isHub":  false,
+                      "id":  "client/src/components/AmbientBackground.tsx",
+                      "type":  ".tsx"
+                  },
+                  {
+                      "label":  "CalendarWidget.tsx",
+                      "sizeBytes":  2700,
+                      "isHub":  false,
+                      "id":  "client/src/components/CalendarWidget.tsx",
+                      "type":  ".tsx"
+                  },
+                  {
+                      "label":  "Header.tsx",
+                      "sizeBytes":  4497,
+                      "isHub":  false,
+                      "id":  "client/src/components/Header.tsx",
+                      "type":  ".tsx"
+                  },
+                  {
+                      "label":  "KanbanWidget.tsx",
+                      "sizeBytes":  4476,
+                      "isHub":  false,
+                      "id":  "client/src/components/KanbanWidget.tsx",
+                      "type":  ".tsx"
+                  },
+                  {
+                      "label":  "NotesWidget.tsx",
+                      "sizeBytes":  2378,
+                      "isHub":  false,
+                      "id":  "client/src/components/NotesWidget.tsx",
+                      "type":  ".tsx"
+                  },
+                  {
+                      "label":  "TasksWidget.tsx",
+                      "sizeBytes":  4086,
+                      "isHub":  false,
+                      "id":  "client/src/components/TasksWidget.tsx",
+                      "type":  ".tsx"
+                  },
+                  {
+                      "label":  "TimersWidget.tsx",
+                      "sizeBytes":  7632,
+                      "isHub":  false,
+                      "id":  "client/src/components/TimersWidget.tsx",
+                      "type":  ".tsx"
+                  },
+                  {
                       "label":  "calendar.md",
-                      "sizeBytes":  193,
+                      "sizeBytes":  194,
                       "isHub":  false,
                       "id":  "mock-vault/calendar.md",
                       "type":  ".md"
                   },
                   {
                       "label":  "kanban.md",
-                      "sizeBytes":  375,
+                      "sizeBytes":  376,
                       "isHub":  false,
                       "id":  "mock-vault/kanban.md",
                       "type":  ".md"
                   },
                   {
                       "label":  "notes.md",
-                      "sizeBytes":  188,
+                      "sizeBytes":  189,
                       "isHub":  false,
                       "id":  "mock-vault/notes.md",
                       "type":  ".md"
                   },
                   {
                       "label":  "tasks.md",
-                      "sizeBytes":  267,
+                      "sizeBytes":  268,
                       "isHub":  false,
                       "id":  "mock-vault/tasks.md",
                       "type":  ".md"
+                  },
+                  {
+                      "label":  "package-lock.json",
+                      "sizeBytes":  61718,
+                      "isHub":  true,
+                      "id":  "server/package-lock.json",
+                      "type":  ".json"
+                  },
+                  {
+                      "label":  "package.json",
+                      "sizeBytes":  509,
+                      "isHub":  true,
+                      "id":  "server/package.json",
+                      "type":  ".json"
+                  },
+                  {
+                      "label":  "tsconfig.json",
+                      "sizeBytes":  266,
+                      "isHub":  true,
+                      "id":  "server/tsconfig.json",
+                      "type":  ".json"
+                  },
+                  {
+                      "label":  "index.ts",
+                      "sizeBytes":  5970,
+                      "isHub":  true,
+                      "id":  "server/src/index.ts",
+                      "type":  ".ts"
+                  },
+                  {
+                      "label":  "types.ts",
+                      "sizeBytes":  1332,
+                      "isHub":  true,
+                      "id":  "server/src/types.ts",
+                      "type":  ".ts"
+                  },
+                  {
+                      "label":  "markdown.ts",
+                      "sizeBytes":  5099,
+                      "isHub":  true,
+                      "id":  "server/src/parsers/markdown.ts",
+                      "type":  ".ts"
+                  },
+                  {
+                      "label":  "photos.ts",
+                      "sizeBytes":  1228,
+                      "isHub":  true,
+                      "id":  "server/src/services/photos.ts",
+                      "type":  ".ts"
+                  },
+                  {
+                      "label":  "timers.ts",
+                      "sizeBytes":  3227,
+                      "isHub":  true,
+                      "id":  "server/src/services/timers.ts",
+                      "type":  ".ts"
+                  },
+                  {
+                      "label":  "vault.ts",
+                      "sizeBytes":  3435,
+                      "isHub":  true,
+                      "id":  "server/src/services/vault.ts",
+                      "type":  ".ts"
+                  },
+                  {
+                      "label":  "weather.ts",
+                      "sizeBytes":  2328,
+                      "isHub":  true,
+                      "id":  "server/src/services/weather.ts",
+                      "type":  ".ts"
                   }
               ]
 }

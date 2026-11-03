@@ -6,3 +6,4 @@
 - [ ] Comprar café y frutas
 - [x] Planificar comidas de la semana
 - [x] Configurar copias de seguridad de la PC
+

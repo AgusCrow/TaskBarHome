@@ -17,3 +17,4 @@
    - Commits con prefijo convencional (`feat:`, `fix:`, etc.) en inglés y mensaje en español.
 3. **Graphify:**
    - Mantener actualizado el grafo de arquitectura (`graph.json` y `GRAPH_REPORT.md`) ante cambios estructurales.
+

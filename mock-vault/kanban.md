@@ -22,3 +22,4 @@ kanban-plugin: basic
 
 - [x] Elegir arquitectura basada en Obsidian
 - [x] Crear repositorio y scaffolding
+
