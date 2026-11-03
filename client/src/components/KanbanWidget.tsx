@@ -100,3 +100,4 @@ export const KanbanWidget: React.FC<KanbanWidgetProps> = ({ board, isTvMode = fa
     </div>
   );
 };
+

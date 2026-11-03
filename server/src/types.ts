@@ -77,3 +77,4 @@ export interface DashboardPayload {
   photos: string[];
   lastUpdated: string;
 }
+

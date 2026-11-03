@@ -127,21 +127,24 @@
                   }
               ],
     "projectRoot":  "D:\\Proyectos\\TBH",
-    "generatedAt":  "2026-11-03 15:27:11",
+    "generatedAt":  "2026-11-03 16:30:43",
     "metrics":  {
                     "extensions":  {
-                                       ".tsx":  9,
-                                       ".gitignore":  1,
-                                       ".json":  8,
-                                       ".ts":  9,
                                        ".example":  1,
-                                       ".html":  1,
-                                       ".css":  1,
+                                       ".gitkeep":  1,
+                                       "[no-ext]":  1,
+                                       ".ts":  9,
+                                       ".json":  8,
                                        ".js":  2,
-                                       ".md":  7
+                                       ".md":  11,
+                                       ".yml":  1,
+                                       ".css":  1,
+                                       ".gitignore":  1,
+                                       ".html":  1,
+                                       ".tsx":  9
                                    },
                     "totalEdges":  25,
-                    "totalFiles":  39
+                    "totalFiles":  46
                 },
     "nodes":  [
                   {
@@ -166,36 +169,50 @@
                       "type":  ".md"
                   },
                   {
+                      "label":  "docker-compose.yml",
+                      "sizeBytes":  475,
+                      "isHub":  true,
+                      "id":  "docker-compose.yml",
+                      "type":  ".yml"
+                  },
+                  {
+                      "label":  "Dockerfile",
+                      "sizeBytes":  930,
+                      "isHub":  false,
+                      "id":  "Dockerfile",
+                      "type":  "[no-ext]"
+                  },
+                  {
                       "label":  "graph.json",
-                      "sizeBytes":  3178,
+                      "sizeBytes":  16227,
                       "isHub":  false,
                       "id":  "graph.json",
                       "type":  ".json"
                   },
                   {
                       "label":  "GRAPH_REPORT.md",
-                      "sizeBytes":  808,
+                      "sizeBytes":  3752,
                       "isHub":  false,
                       "id":  "GRAPH_REPORT.md",
                       "type":  ".md"
                   },
                   {
                       "label":  "package.json",
-                      "sizeBytes":  345,
+                      "sizeBytes":  346,
                       "isHub":  true,
                       "id":  "package.json",
                       "type":  ".json"
                   },
                   {
                       "label":  "README.md",
-                      "sizeBytes":  2719,
+                      "sizeBytes":  2788,
                       "isHub":  true,
                       "id":  "README.md",
                       "type":  ".md"
                   },
                   {
                       "label":  "index.html",
-                      "sizeBytes":  724,
+                      "sizeBytes":  725,
                       "isHub":  true,
                       "id":  "client/index.html",
                       "type":  ".html"
@@ -209,112 +226,112 @@
                   },
                   {
                       "label":  "package.json",
-                      "sizeBytes":  569,
+                      "sizeBytes":  570,
                       "isHub":  true,
                       "id":  "client/package.json",
                       "type":  ".json"
                   },
                   {
                       "label":  "postcss.config.js",
-                      "sizeBytes":  80,
+                      "sizeBytes":  81,
                       "isHub":  false,
                       "id":  "client/postcss.config.js",
                       "type":  ".js"
                   },
                   {
                       "label":  "tailwind.config.js",
-                      "sizeBytes":  515,
+                      "sizeBytes":  516,
                       "isHub":  false,
                       "id":  "client/tailwind.config.js",
                       "type":  ".js"
                   },
                   {
                       "label":  "tsconfig.json",
-                      "sizeBytes":  508,
+                      "sizeBytes":  509,
                       "isHub":  false,
                       "id":  "client/tsconfig.json",
                       "type":  ".json"
                   },
                   {
                       "label":  "vite.config.ts",
-                      "sizeBytes":  380,
+                      "sizeBytes":  381,
                       "isHub":  false,
                       "id":  "client/vite.config.ts",
                       "type":  ".ts"
                   },
                   {
                       "label":  "App.tsx",
-                      "sizeBytes":  5348,
+                      "sizeBytes":  5349,
                       "isHub":  true,
                       "id":  "client/src/App.tsx",
                       "type":  ".tsx"
                   },
                   {
                       "label":  "index.css",
-                      "sizeBytes":  969,
+                      "sizeBytes":  970,
                       "isHub":  true,
                       "id":  "client/src/index.css",
                       "type":  ".css"
                   },
                   {
                       "label":  "main.tsx",
-                      "sizeBytes":  250,
+                      "sizeBytes":  251,
                       "isHub":  true,
                       "id":  "client/src/main.tsx",
                       "type":  ".tsx"
                   },
                   {
                       "label":  "types.ts",
-                      "sizeBytes":  1332,
+                      "sizeBytes":  1333,
                       "isHub":  false,
                       "id":  "client/src/types.ts",
                       "type":  ".ts"
                   },
                   {
                       "label":  "AmbientBackground.tsx",
-                      "sizeBytes":  1421,
+                      "sizeBytes":  1422,
                       "isHub":  false,
                       "id":  "client/src/components/AmbientBackground.tsx",
                       "type":  ".tsx"
                   },
                   {
                       "label":  "CalendarWidget.tsx",
-                      "sizeBytes":  2700,
+                      "sizeBytes":  2701,
                       "isHub":  false,
                       "id":  "client/src/components/CalendarWidget.tsx",
                       "type":  ".tsx"
                   },
                   {
                       "label":  "Header.tsx",
-                      "sizeBytes":  4497,
+                      "sizeBytes":  4498,
                       "isHub":  false,
                       "id":  "client/src/components/Header.tsx",
                       "type":  ".tsx"
                   },
                   {
                       "label":  "KanbanWidget.tsx",
-                      "sizeBytes":  4476,
+                      "sizeBytes":  4477,
                       "isHub":  false,
                       "id":  "client/src/components/KanbanWidget.tsx",
                       "type":  ".tsx"
                   },
                   {
                       "label":  "NotesWidget.tsx",
-                      "sizeBytes":  2378,
+                      "sizeBytes":  2379,
                       "isHub":  false,
                       "id":  "client/src/components/NotesWidget.tsx",
                       "type":  ".tsx"
                   },
                   {
                       "label":  "TasksWidget.tsx",
-                      "sizeBytes":  4086,
+                      "sizeBytes":  4087,
                       "isHub":  false,
                       "id":  "client/src/components/TasksWidget.tsx",
                       "type":  ".tsx"
                   },
                   {
                       "label":  "TimersWidget.tsx",
-                      "sizeBytes":  7632,
+                      "sizeBytes":  7633,
                       "isHub":  false,
                       "id":  "client/src/components/TimersWidget.tsx",
                       "type":  ".tsx"
@@ -348,6 +365,13 @@
                       "type":  ".md"
                   },
                   {
+                      "label":  ".gitkeep",
+                      "sizeBytes":  70,
+                      "isHub":  false,
+                      "id":  "photos/.gitkeep",
+                      "type":  ".gitkeep"
+                  },
+                  {
                       "label":  "package-lock.json",
                       "sizeBytes":  61718,
                       "isHub":  true,
@@ -356,66 +380,94 @@
                   },
                   {
                       "label":  "package.json",
-                      "sizeBytes":  509,
+                      "sizeBytes":  510,
                       "isHub":  true,
                       "id":  "server/package.json",
                       "type":  ".json"
                   },
                   {
                       "label":  "tsconfig.json",
-                      "sizeBytes":  266,
+                      "sizeBytes":  267,
                       "isHub":  true,
                       "id":  "server/tsconfig.json",
                       "type":  ".json"
                   },
                   {
                       "label":  "index.ts",
-                      "sizeBytes":  5970,
+                      "sizeBytes":  6617,
                       "isHub":  true,
                       "id":  "server/src/index.ts",
                       "type":  ".ts"
                   },
                   {
                       "label":  "types.ts",
-                      "sizeBytes":  1332,
+                      "sizeBytes":  1333,
                       "isHub":  true,
                       "id":  "server/src/types.ts",
                       "type":  ".ts"
                   },
                   {
                       "label":  "markdown.ts",
-                      "sizeBytes":  5099,
+                      "sizeBytes":  5100,
                       "isHub":  true,
                       "id":  "server/src/parsers/markdown.ts",
                       "type":  ".ts"
                   },
                   {
                       "label":  "photos.ts",
-                      "sizeBytes":  1228,
+                      "sizeBytes":  1229,
                       "isHub":  true,
                       "id":  "server/src/services/photos.ts",
                       "type":  ".ts"
                   },
                   {
                       "label":  "timers.ts",
-                      "sizeBytes":  3227,
+                      "sizeBytes":  3228,
                       "isHub":  true,
                       "id":  "server/src/services/timers.ts",
                       "type":  ".ts"
                   },
                   {
                       "label":  "vault.ts",
-                      "sizeBytes":  3435,
+                      "sizeBytes":  3436,
                       "isHub":  true,
                       "id":  "server/src/services/vault.ts",
                       "type":  ".ts"
                   },
                   {
                       "label":  "weather.ts",
-                      "sizeBytes":  2328,
+                      "sizeBytes":  2329,
                       "isHub":  true,
                       "id":  "server/src/services/weather.ts",
                       "type":  ".ts"
+                  },
+                  {
+                      "label":  "calendar.md",
+                      "sizeBytes":  251,
+                      "isHub":  false,
+                      "id":  "vault/calendar.md",
+                      "type":  ".md"
+                  },
+                  {
+                      "label":  "kanban.md",
+                      "sizeBytes":  436,
+                      "isHub":  false,
+                      "id":  "vault/kanban.md",
+                      "type":  ".md"
+                  },
+                  {
+                      "label":  "notes.md",
+                      "sizeBytes":  523,
+                      "isHub":  false,
+                      "id":  "vault/notes.md",
+                      "type":  ".md"
+                  },
+                  {
+                      "label":  "tasks.md",
+                      "sizeBytes":  329,
+                      "isHub":  false,
+                      "id":  "vault/tasks.md",
+                      "type":  ".md"
                   }
               ]
 }

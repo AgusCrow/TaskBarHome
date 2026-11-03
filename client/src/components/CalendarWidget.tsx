@@ -61,3 +61,4 @@ export const CalendarWidget: React.FC<CalendarWidgetProps> = ({ events, isTvMode
     </div>
   );
 };
+

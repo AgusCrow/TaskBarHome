@@ -55,3 +55,4 @@ export const NotesWidget: React.FC<NotesWidgetProps> = ({ notes, isTvMode = fals
     </div>
   );
 };
+

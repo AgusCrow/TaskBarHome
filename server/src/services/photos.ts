@@ -31,3 +31,4 @@ export function getPhotos(photosDir: string): string[] {
 
   return localPhotos;
 }
+

@@ -70,3 +70,4 @@ export async function fetchWeather(lat: number, lon: number, cityName: string): 
     return cachedWeather;
   }
 }
+

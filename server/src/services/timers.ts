@@ -137,3 +137,4 @@ export function setCustomTimer(id: string, label: string, minutes: number): Time
   if (onTimerChangeCallback) onTimerChangeCallback();
   return timer;
 }
+

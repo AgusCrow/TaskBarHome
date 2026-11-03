@@ -1,0 +1,20 @@
+services:
+  tbh:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: tbh-dashboard
+    restart: unless-stopped
+    ports:
+      - "3001:3001"
+    environment:
+      - PORT=3001
+      - HOST=0.0.0.0
+      - OBSIDIAN_VAULT_PATH=/data/vault
+      - PHOTOS_PATH=/data/photos
+      - WEATHER_CITY_NAME=Buenos Aires
+      - WEATHER_LATITUDE=-34.6037
+      - WEATHER_LONGITUDE=-58.3816
+    volumes:
+      - ./vault:/data/vault
+      - ./photos:/data/photos

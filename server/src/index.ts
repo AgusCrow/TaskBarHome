@@ -177,6 +177,24 @@ async function start() {
     return setCustomTimer(id || `custom-${Date.now()}`, label, minutes);
   });
 
+  // Serve compiled client if present (production / single-port mode)
+  const CLIENT_DIST_PATH = path.resolve(__dirname, '../../client/dist');
+  if (fs.existsSync(CLIENT_DIST_PATH)) {
+    await fastify.register(fastifyStatic, {
+      root: CLIENT_DIST_PATH,
+      prefix: '/',
+      decorateReply: false
+    });
+
+    fastify.setNotFoundHandler((req, reply) => {
+      if (req.raw.url && req.raw.url.startsWith('/api')) {
+        return reply.status(404).send({ error: 'Endpoint not found' });
+      }
+      return reply.sendFile('index.html', CLIENT_DIST_PATH);
+    });
+    fastify.log.info(`Serving client build from: ${CLIENT_DIST_PATH}`);
+  }
+
   try {
     await fastify.listen({ port: PORT, host: HOST });
     console.log(`\n========================================`);

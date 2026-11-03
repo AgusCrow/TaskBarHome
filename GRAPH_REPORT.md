@@ -6,24 +6,28 @@ Generated automatically by Graphify.
 
 ## 1. Architectural Metrics
 
-* Total Scanned Files: 39
+* Total Scanned Files: 46
 * Total Module Relationships: 25
 
 ### File Breakdown by Extension
-* **.tsx**: 9 files
-* **.gitignore**: 1 files
-* **.json**: 8 files
-* **.ts**: 9 files
 * **.example**: 1 files
-* **.html**: 1 files
-* **.css**: 1 files
+* **.gitkeep**: 1 files
+* **[no-ext]**: 1 files
+* **.ts**: 9 files
+* **.json**: 8 files
 * **.js**: 2 files
-* **.md**: 7 files
+* **.md**: 11 files
+* **.yml**: 1 files
+* **.css**: 1 files
+* **.gitignore**: 1 files
+* **.html**: 1 files
+* **.tsx**: 9 files
 
 ---
 
 ## 2. Core Hub Nodes (Entry Points & Anchors)
 
+* docker-compose.yml
 * package.json
 * README.md
 * client/index.html

@@ -93,3 +93,4 @@ export const TasksWidget: React.FC<TasksWidgetProps> = ({ tasks, isTvMode = fals
     </div>
   );
 };
+
