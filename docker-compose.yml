@@ -6,7 +6,7 @@ services:
     container_name: tbh-dashboard
     restart: unless-stopped
     ports:
-      - "3001:3001"
+      - "3050:3001"
     environment:
       - PORT=3001
       - HOST=0.0.0.0
@@ -18,3 +18,4 @@ services:
     volumes:
       - ./vault:/data/vault
       - ./photos:/data/photos
+
