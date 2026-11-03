@@ -1,0 +1,89 @@
+﻿{
+    "edges":  [
+
+              ],
+    "projectRoot":  "D:\\Proyectos\\TBH",
+    "generatedAt":  "2026-11-03 15:05:22",
+    "metrics":  {
+                    "extensions":  {
+                                       ".example":  1,
+                                       ".gitignore":  1,
+                                       ".json":  1,
+                                       ".md":  7
+                                   },
+                    "totalEdges":  0,
+                    "totalFiles":  10
+                },
+    "nodes":  [
+                  {
+                      "label":  ".env.example",
+                      "sizeBytes":  451,
+                      "isHub":  false,
+                      "id":  ".env.example",
+                      "type":  ".example"
+                  },
+                  {
+                      "label":  ".gitignore",
+                      "sizeBytes":  384,
+                      "isHub":  false,
+                      "id":  ".gitignore",
+                      "type":  ".gitignore"
+                  },
+                  {
+                      "label":  "AGENTS.md",
+                      "sizeBytes":  1171,
+                      "isHub":  false,
+                      "id":  "AGENTS.md",
+                      "type":  ".md"
+                  },
+                  {
+                      "label":  "graph.json",
+                      "sizeBytes":  979,
+                      "isHub":  false,
+                      "id":  "graph.json",
+                      "type":  ".json"
+                  },
+                  {
+                      "label":  "GRAPH_REPORT.md",
+                      "sizeBytes":  762,
+                      "isHub":  false,
+                      "id":  "GRAPH_REPORT.md",
+                      "type":  ".md"
+                  },
+                  {
+                      "label":  "README.md",
+                      "sizeBytes":  2719,
+                      "isHub":  true,
+                      "id":  "README.md",
+                      "type":  ".md"
+                  },
+                  {
+                      "label":  "calendar.md",
+                      "sizeBytes":  193,
+                      "isHub":  false,
+                      "id":  "mock-vault/calendar.md",
+                      "type":  ".md"
+                  },
+                  {
+                      "label":  "kanban.md",
+                      "sizeBytes":  375,
+                      "isHub":  false,
+                      "id":  "mock-vault/kanban.md",
+                      "type":  ".md"
+                  },
+                  {
+                      "label":  "notes.md",
+                      "sizeBytes":  188,
+                      "isHub":  false,
+                      "id":  "mock-vault/notes.md",
+                      "type":  ".md"
+                  },
+                  {
+                      "label":  "tasks.md",
+                      "sizeBytes":  267,
+                      "isHub":  false,
+                      "id":  "mock-vault/tasks.md",
+                      "type":  ".md"
+                  }
+              ]
+}
