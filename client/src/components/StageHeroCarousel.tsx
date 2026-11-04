@@ -1,25 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   ChevronLeft,
   ChevronRight,
-  ThumbsUp,
-  ThumbsDown,
-  Pin,
-  EyeOff,
-  RefreshCw,
   ArrowRight,
   Zap,
-  Activity
+  Activity,
+  Image as ImageIcon,
+  Play,
+  Pause,
+  Maximize2,
+  FolderKanban
 } from 'lucide-react';
-import type { DailyFocus, TaskItem, ProjectItem, WorkflowItem } from '../types';
+import type { DailyFocus, TaskItem, ProjectItem, KanbanBoard } from '../types';
 
 interface StageHeroCarouselProps {
   dailyFocus: DailyFocus | null;
   tasks: TaskItem[];
   projects: ProjectItem[];
-  workflows: WorkflowItem[];
+  kanban: KanbanBoard | null;
+  photos: string[];
   onStartFocus: (label?: string) => void;
   onOpenQuickAdd: () => void;
+  onSelectView: (view: 'stage' | 'kanban' | 'tasks' | 'calendar' | 'timers' | 'notes' | 'workflows') => void;
   isTvMode?: boolean;
 }
 
@@ -32,84 +34,124 @@ interface StageSlide {
   energyScore?: number;
   focusScore?: number;
   buttonLabel: string;
-  actionKind: 'focus' | 'task' | 'project' | 'workflow';
-  artTheme: 'waves' | 'mountains' | 'nebula' | 'dawn';
+  actionKind: 'focus' | 'task' | 'project' | 'photos';
+  artTheme: 'mountains' | 'waves' | 'dawn' | 'photo';
+  imageUrl?: string;
 }
 
 export const StageHeroCarousel: React.FC<StageHeroCarouselProps> = ({
   dailyFocus,
   tasks,
   projects,
-  workflows,
+  kanban,
+  photos,
   onStartFocus,
   onOpenQuickAdd,
+  onSelectView,
   isTvMode = false
 }) => {
-  // Construir las diapositivas con datos reales de la bóveda
+  // Manejo de foto actual y auto-play para el widget de fotos
+  const [photoIndex, setPhotoIndex] = useState(0);
+  const [isPhotoAutoPlay, setIsPhotoAutoPlay] = useState(true);
+  const [fullscreenPhoto, setFullscreenPhoto] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!isPhotoAutoPlay || photos.length <= 1) return;
+    const interval = setInterval(() => {
+      setPhotoIndex((prev) => (prev + 1) % photos.length);
+    }, 15000);
+    return () => clearInterval(interval);
+  }, [isPhotoAutoPlay, photos.length]);
+
+  const prevPhoto = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (photos.length === 0) return;
+    setPhotoIndex((prev) => (prev - 1 + photos.length) % photos.length);
+  };
+
+  const nextPhoto = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (photos.length === 0) return;
+    setPhotoIndex((prev) => (prev + 1) % photos.length);
+  };
+
+  const toggleAutoPlay = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIsPhotoAutoPlay((prev) => !prev);
+  };
+
+  // Construir diapositivas con datos reales de la bóveda (Sin mockups de Machine)
   const slides: StageSlide[] = React.useMemo(() => {
     const list: StageSlide[] = [];
 
     // 1. Focus principal del día
     list.push({
       id: 'focus-today',
-      category: 'TBH / TODAY',
-      subhead: 'Today\'s Focus • 00 Human / 10 Daily Notes',
+      category: '00 HUMAN / TODAY',
+      subhead: "Today's Focus • 00 Human / 10 Daily Notes",
       title: dailyFocus?.focus || 'Definir el objetivo prioritario del día en tu nota diaria.',
       energyScore: dailyFocus?.energyScore,
       focusScore: dailyFocus?.focusQualityScore,
-      buttonLabel: 'Iniciar foco',
+      buttonLabel: 'Iniciar foco (25m)',
       actionKind: 'focus',
       artTheme: 'mountains'
     });
 
-    // 2. Tarea prioritaria pendiente
-    const pendingUrgent = tasks.find((t) => !t.completed && (t.tags.includes('urgente') || t.tags.includes('foco'))) ||
-      tasks.find((t) => !t.completed);
+    // 2. Proyectos Reales de Obsidian (Kanban Board y notas de proyectos)
+    const kanbanTotal = kanban?.columns.reduce((acc, col) => acc + col.cards.length, 0) || 0;
+    const inProgressCards =
+      kanban?.columns.find((c) => /curso|progress|doing|haciendo/i.test(c.name))?.cards.length || 0;
+    const completedCards =
+      kanban?.columns.find((c) => /complet|done|hecho|termin/i.test(c.name))?.cards.length || 0;
+    const activeProjectsCount = projects.filter(p => p.status === 'active').length || projects.length;
+
+    list.push({
+      id: 'projects-kanban',
+      category: '00 HUMAN / PROYECTOS',
+      subhead: `Tablero Kanban • ${activeProjectsCount} proyectos activos`,
+      title: `${kanbanTotal} tareas en el tablero: ${inProgressCards} en curso, ${completedCards} terminadas`,
+      meta: kanban?.title ? `${kanban.title} • 00 Human/30 Projects` : '00 Human / 30 Projects / Kanban Board.md',
+      buttonLabel: 'Abrir tablero Kanban',
+      actionKind: 'project',
+      artTheme: 'dawn'
+    });
+
+    // 3. Tarea prioritaria pendiente de la lista
+    const pendingUrgent =
+      tasks.find(
+        (t) => !t.completed && (t.priority === 'highest' || t.priority === 'high' || t.tags.includes('urgente'))
+      ) || tasks.find((t) => !t.completed);
+
     if (pendingUrgent) {
       list.push({
         id: 'task-priority',
-        category: 'TBH / NEXT ACTION',
-        subhead: `Task • ${pendingUrgent.file}`,
+        category: '00 HUMAN / TAREA PRIORITARIA',
+        subhead: `Task • ${pendingUrgent.project || pendingUrgent.file}`,
         title: pendingUrgent.text,
-        meta: pendingUrgent.dueDate ? `Vence: ${pendingUrgent.dueDate}` : undefined,
-        buttonLabel: 'Hacer ahora',
+        meta: pendingUrgent.dueDate ? `📅 Vencimiento: ${pendingUrgent.dueDate}` : undefined,
+        buttonLabel: 'Marcar en foco',
         actionKind: 'task',
         artTheme: 'waves'
       });
     }
 
-    // 3. Proyecto activo
-    const activeProject = projects.find((p) => p.status === 'active');
-    if (activeProject) {
+    // 4. Slide de Galería Familiar si hay fotos
+    if (photos.length > 0) {
       list.push({
-        id: 'project-active',
-        category: 'TBH / PROJECT',
-        subhead: `Active Project • ${activeProject.area || 'Workspace'}`,
-        title: activeProject.title,
-        meta: '00 Human / 30 Projects',
-        buttonLabel: 'Abrir proyecto',
-        actionKind: 'project',
-        artTheme: 'dawn'
-      });
-    }
-
-    // 4. Workflow de Machine
-    if (workflows.length > 0) {
-      const wf = workflows[0];
-      list.push({
-        id: 'workflow-machine',
-        category: 'EMAI / MACHINE',
-        subhead: `Automation • ${wf.path}`,
-        title: `${wf.name}: Preparado para ejecutar drafts sin tocar tus notas`,
-        meta: `${wf.findingsCount} lecciones aprendidas registradas`,
-        buttonLabel: 'Ver workflow',
-        actionKind: 'workflow',
-        artTheme: 'nebula'
+        id: 'family-photos',
+        category: 'AMBIENT / FOTOS',
+        subhead: `Álbum Familiar • ${photos.length} fotos cargadas`,
+        title: 'Recuerdos y Álbum Familiar de Fondo',
+        meta: 'Carpeta /photos en ZacrowServer',
+        buttonLabel: 'Ver fotos',
+        actionKind: 'photos',
+        artTheme: 'photo',
+        imageUrl: photos[photoIndex % photos.length]
       });
     }
 
     return list;
-  }, [dailyFocus, tasks, projects, workflows]);
+  }, [dailyFocus, kanban, tasks, photos, photoIndex]);
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -126,16 +168,20 @@ export const StageHeroCarousel: React.FC<StageHeroCarouselProps> = ({
   const handleAction = () => {
     if (current.actionKind === 'focus') {
       onStartFocus(current.title);
+    } else if (current.actionKind === 'project') {
+      onSelectView('kanban');
     } else if (current.actionKind === 'task') {
-      onStartFocus(`Tarea: ${current.title}`);
-    } else {
-      onOpenQuickAdd();
+      onSelectView('tasks');
+    } else if (current.actionKind === 'photos') {
+      if (photos.length > 0) {
+        setFullscreenPhoto(photos[photoIndex % photos.length]);
+      }
     }
   };
 
   return (
     <div className="relative w-full my-auto py-2 flex items-center justify-center select-none">
-      {/* Tarjeta previa asomándose a la izquierda */}
+      {/* Tarjeta previa a la izquierda */}
       <div
         onClick={prevSlide}
         className="hidden xl:block absolute left-0 w-[18%] h-[82%] rounded-3xl bg-[#112328]/50 border border-white/5 opacity-30 scale-95 cursor-pointer blur-[1px] hover:opacity-50 transition-all pointer-events-auto overflow-hidden p-6"
@@ -157,42 +203,50 @@ export const StageHeroCarousel: React.FC<StageHeroCarouselProps> = ({
         <ChevronLeft className="w-5 h-5" />
       </button>
 
-      {/* Tarjeta Central Cinemática (Idéntica a la captura de EMAI HQ) */}
+      {/* Tarjeta Central Cinemática */}
       <div className="w-full max-w-4xl min-h-[380px] md:min-h-[420px] rounded-3xl border border-[var(--line)] bg-gradient-to-br from-[#183138] via-[#122428] to-[#0c181b] shadow-[0_20px_60px_rgba(0,0,0,0.6)] relative overflow-hidden flex flex-col justify-between p-6 md:p-10 z-10">
-        {/* Fondo Artístico Procedural Estilo Paisaje Volumétrico / Olas Orientales */}
-        <div className="absolute inset-0 pointer-events-none opacity-45 overflow-hidden">
-          {/* Degradado luminoso derecho */}
-          <div className="absolute -right-24 -top-24 w-96 h-96 bg-[var(--accent)]/15 rounded-full blur-3xl" />
-          <div className="absolute right-0 bottom-0 w-[55%] h-full opacity-60">
-            <svg
-              viewBox="0 0 500 400"
-              className="w-full h-full object-cover"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              {/* Nubes y ondas estilizadas */}
-              <path
-                d="M150 400 C 200 320, 260 300, 320 330 C 380 360, 440 290, 500 310 L 500 400 Z"
-                fill="#203d45"
-                fillOpacity="0.7"
-              />
-              <path
-                d="M220 400 C 270 280, 340 250, 400 280 C 450 300, 480 260, 500 270 L 500 400 Z"
-                fill="#2c515a"
-                fillOpacity="0.5"
-              />
-              <path
-                d="M300 400 C 340 220, 410 200, 470 230 C 500 245, 500 220, 500 220 L 500 400 Z"
-                fill="#f1bc90"
-                fillOpacity="0.18"
-              />
-              {/* Crestas de relieve */}
-              <circle cx="420" cy="140" r="38" fill="#e7d4c0" fillOpacity="0.25" />
-              <circle cx="460" cy="130" r="48" fill="#e7d4c0" fillOpacity="0.15" />
-              <circle cx="380" cy="160" r="32" fill="#203d45" fillOpacity="0.6" />
-            </svg>
+        {/* Fondo Artístico o Foto */}
+        {current.imageUrl ? (
+          <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-35">
+            <img
+              src={current.imageUrl}
+              alt="Foto familiar"
+              className="w-full h-full object-cover scale-105 filter blur-[0.5px]"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0c181b] via-[#122428]/80 to-transparent" />
           </div>
-        </div>
+        ) : (
+          <div className="absolute inset-0 pointer-events-none opacity-45 overflow-hidden">
+            <div className="absolute -right-24 -top-24 w-96 h-96 bg-[var(--accent)]/15 rounded-full blur-3xl" />
+            <div className="absolute right-0 bottom-0 w-[55%] h-full opacity-60">
+              <svg
+                viewBox="0 0 500 400"
+                className="w-full h-full object-cover"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M150 400 C 200 320, 260 300, 320 330 C 380 360, 440 290, 500 310 L 500 400 Z"
+                  fill="#203d45"
+                  fillOpacity="0.7"
+                />
+                <path
+                  d="M220 400 C 270 280, 340 250, 400 280 C 450 300, 480 260, 500 270 L 500 400 Z"
+                  fill="#2c515a"
+                  fillOpacity="0.5"
+                />
+                <path
+                  d="M300 400 C 340 220, 410 200, 470 230 C 500 245, 500 220, 500 220 L 500 400 Z"
+                  fill="#f1bc90"
+                  fillOpacity="0.18"
+                />
+                <circle cx="420" cy="140" r="38" fill="#e7d4c0" fillOpacity="0.25" />
+                <circle cx="460" cy="130" r="48" fill="#e7d4c0" fillOpacity="0.15" />
+                <circle cx="380" cy="160" r="32" fill="#203d45" fillOpacity="0.6" />
+              </svg>
+            </div>
+          </div>
+        )}
 
         {/* Header de la tarjeta */}
         <div className="relative z-10">
@@ -207,7 +261,7 @@ export const StageHeroCarousel: React.FC<StageHeroCarouselProps> = ({
               </span>
             </div>
 
-            {/* Scores de Energía y Foco si aplican */}
+            {/* Scores o Contador */}
             <div className="flex items-center gap-2">
               {current.energyScore !== undefined && (
                 <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-950/60 border border-emerald-500/30 text-emerald-300">
@@ -239,54 +293,84 @@ export const StageHeroCarousel: React.FC<StageHeroCarouselProps> = ({
           </h2>
 
           {current.meta && (
-            <p className="text-xs md:text-sm text-[var(--muted)] mt-2 font-mono opacity-80">
-              {current.meta}
+            <p className="text-xs md:text-sm text-[var(--muted)] mt-2 font-mono opacity-80 flex items-center gap-2">
+              {current.actionKind === 'project' && <FolderKanban className="w-3.5 h-3.5 text-[var(--accent)]" />}
+              <span>{current.meta}</span>
             </p>
           )}
         </div>
 
-        {/* Footer de la tarjeta con acciones e interacción */}
-        <div className="relative z-10 pt-8 mt-6 border-t border-white/5 flex flex-wrap items-center justify-between gap-4">
-          {/* Botones de acción rápida a la izquierda */}
-          <div className="flex items-center gap-1.5 p-1 rounded-xl bg-black/30 border border-white/5 text-[var(--muted)]">
-            <button
-              onClick={() => {}}
-              className="p-1.5 rounded-lg hover:text-[var(--ink)] hover:bg-white/10 transition-colors"
-              title="Priorizar / Like"
-            >
-              <ThumbsUp className="w-3.5 h-3.5" />
-            </button>
-            <button
-              onClick={() => {}}
-              className="p-1.5 rounded-lg hover:text-[var(--ink)] hover:bg-white/10 transition-colors"
-              title="Postergar / Dislike"
-            >
-              <ThumbsDown className="w-3.5 h-3.5" />
-            </button>
-            <button
-              onClick={() => {}}
-              className="p-1.5 rounded-lg hover:text-[var(--ink)] hover:bg-white/10 transition-colors"
-              title="Fijar en Home"
-            >
-              <Pin className="w-3.5 h-3.5" />
-            </button>
-            <button
-              onClick={() => {}}
-              className="p-1.5 rounded-lg hover:text-[var(--ink)] hover:bg-white/10 transition-colors"
-              title="Ocultar"
-            >
-              <EyeOff className="w-3.5 h-3.5" />
-            </button>
-            <button
-              onClick={nextSlide}
-              className="p-1.5 rounded-lg hover:text-[var(--ink)] hover:bg-white/10 transition-colors"
-              title="Siguiente idea"
-            >
-              <RefreshCw className="w-3.5 h-3.5" />
-            </button>
+        {/* Footer: Widget REAL de Fotos a la izquierda + Botón de acción a la derecha */}
+        <div className="relative z-10 pt-6 mt-6 border-t border-white/5 flex flex-wrap items-center justify-between gap-4">
+          {/* Control y visor de FOTOS en lugar de botones decorativos */}
+          <div className="flex items-center gap-2.5 p-1.5 rounded-2xl bg-black/40 border border-white/10 backdrop-blur-md">
+            {photos.length > 0 ? (
+              <>
+                {/* Miniatura de la foto */}
+                <div
+                  onClick={() => setFullscreenPhoto(photos[photoIndex % photos.length])}
+                  className="w-10 h-10 rounded-xl overflow-hidden border border-white/20 cursor-pointer hover:brightness-110 transition-all shrink-0 bg-slate-900"
+                  title="Ver foto en pantalla completa"
+                >
+                  <img
+                    src={photos[photoIndex % photos.length]}
+                    alt="Miniatura"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+
+                {/* Controles de fotos */}
+                <div className="flex items-center gap-1 text-[var(--muted)]">
+                  <button
+                    onClick={prevPhoto}
+                    className="p-1 rounded-lg hover:text-[var(--ink)] hover:bg-white/10 transition-colors"
+                    title="Foto anterior"
+                  >
+                    <ChevronLeft className="w-3.5 h-3.5" />
+                  </button>
+
+                  <button
+                    onClick={toggleAutoPlay}
+                    className="p-1 rounded-lg hover:text-[var(--ink)] hover:bg-white/10 transition-colors text-[var(--accent)]"
+                    title={isPhotoAutoPlay ? 'Pausar carrusel' : 'Reproducir carrusel'}
+                  >
+                    {isPhotoAutoPlay ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
+                  </button>
+
+                  <button
+                    onClick={nextPhoto}
+                    className="p-1 rounded-lg hover:text-[var(--ink)] hover:bg-white/10 transition-colors"
+                    title="Foto siguiente"
+                  >
+                    <ChevronRight className="w-3.5 h-3.5" />
+                  </button>
+
+                  <span className="text-[11px] font-mono px-1 opacity-80">
+                    {photoIndex + 1}/{photos.length}
+                  </span>
+
+                  <button
+                    onClick={() => setFullscreenPhoto(photos[photoIndex % photos.length])}
+                    className="p-1 rounded-lg hover:text-[var(--ink)] hover:bg-white/10 transition-colors ml-0.5"
+                    title="Ver en grande"
+                  >
+                    <Maximize2 className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+              </>
+            ) : (
+              <button
+                onClick={onOpenQuickAdd}
+                className="flex items-center gap-2 px-3 py-1.5 text-xs text-[var(--muted)] hover:text-[var(--ink)] transition-colors"
+                title="Abrir captura rápida"
+              >
+                <ImageIcon className="w-4 h-4 text-[var(--accent)]" />
+                <span className="font-light">Cargar fotos en <code className="text-[var(--accent)] font-mono">photos/</code></span>
+              </button>
+            )}
           </div>
 
-          {/* Botón de acción principal melocotón (Exacto a la captura) */}
+          {/* Botón de acción principal melocotón */}
           <button
             onClick={handleAction}
             className="px-6 py-2.5 rounded-2xl bg-[var(--accent)] text-[#1a2d33] font-semibold text-sm hover:brightness-105 active:scale-95 transition-all shadow-[0_4px_16px_rgba(241,188,144,0.3)] flex items-center gap-2 group"
@@ -306,7 +390,7 @@ export const StageHeroCarousel: React.FC<StageHeroCarouselProps> = ({
         <ChevronRight className="w-5 h-5" />
       </button>
 
-      {/* Tarjeta siguiente asomándose a la derecha */}
+      {/* Tarjeta siguiente a la derecha */}
       <div
         onClick={nextSlide}
         className="hidden xl:block absolute right-0 w-[18%] h-[82%] rounded-3xl bg-[#112328]/50 border border-white/5 opacity-30 scale-95 cursor-pointer blur-[1px] hover:opacity-50 transition-all pointer-events-auto overflow-hidden p-6"
@@ -318,6 +402,28 @@ export const StageHeroCarousel: React.FC<StageHeroCarouselProps> = ({
           {slides[(currentIndex + 1) % slides.length]?.title}
         </h4>
       </div>
+
+      {/* Modal de Foto Completa */}
+      {fullscreenPhoto && (
+        <div
+          onClick={() => setFullscreenPhoto(null)}
+          className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4 cursor-pointer"
+        >
+          <div className="relative max-w-5xl max-h-[90vh] overflow-hidden rounded-3xl border border-white/20 shadow-2xl">
+            <img
+              src={fullscreenPhoto}
+              alt="Foto ampliada"
+              className="w-full h-full object-contain max-h-[85vh]"
+            />
+            <button
+              onClick={() => setFullscreenPhoto(null)}
+              className="absolute top-4 right-4 p-2 rounded-full bg-black/60 text-white hover:bg-black/80 text-sm font-bold"
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

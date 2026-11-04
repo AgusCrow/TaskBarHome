@@ -220,9 +220,11 @@ export const App: React.FC = () => {
                 dailyFocus={data?.dailyFocus || null}
                 tasks={data?.tasks || []}
                 projects={data?.projects || []}
-                workflows={data?.workflows || []}
+                kanban={data?.kanban || null}
+                photos={data?.photos || []}
                 onStartFocus={handleStartFocusTimer}
                 onOpenQuickAdd={() => setIsQuickAddOpen(true)}
+                onSelectView={setCurrentView}
                 isTvMode={isTvMode}
               />
 

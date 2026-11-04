@@ -6,26 +6,26 @@ Generated automatically by Graphify.
 
 ## 1. Architectural Metrics
 
-* Total Scanned Files: 126
-* Total Module Relationships: 63
+* Total Scanned Files: 150
+* Total Module Relationships: 110
 
 ### File Breakdown by Extension
-* **.example**: 1 files
+* **.example**: 2 files
 * **.gitkeep**: 1 files
 * **[no-ext]**: 1 files
-* **.ts**: 13 files
-* **.zip**: 1 files
+* **.ts**: 22 files
+* **.zip**: 2 files
 * **.xml**: 1 files
 * **.js**: 6 files
-* **.md**: 47 files
+* **.md**: 48 files
 * **.json**: 10 files
-* **.yml**: 1 files
-* **.css**: 5 files
+* **.yml**: 2 files
+* **.css**: 6 files
 * **.webp**: 2 files
 * **.gitignore**: 1 files
 * **.woff2**: 4 files
 * **.html**: 2 files
-* **.tsx**: 21 files
+* **.tsx**: 31 files
 * **.svg**: 9 files
 
 ---
@@ -55,6 +55,14 @@ Generated automatically by Graphify.
 * server/src/services/vault.ts
 * server/src/services/weather.ts
 * server/src/services/writer.ts
+* tbh-dashboard-interactivo/docker-compose.yml
+* tbh-dashboard-interactivo/client/src/App.tsx
+* tbh-dashboard-interactivo/client/src/index.css
+* tbh-dashboard-interactivo/server/src/index.ts
+* tbh-dashboard-interactivo/server/src/types.ts
+* tbh-dashboard-interactivo/server/src/parsers/markdown.ts
+* tbh-dashboard-interactivo/server/src/services/vault.ts
+* tbh-dashboard-interactivo/server/src/services/writer.ts
 * vault/Machine/Outputs/README.md
 * vault/Machine/Workflows/Client Update/README.md
 * vault/Machine/Workflows/Client Update/output/README.md

@@ -314,32 +314,267 @@
                       "from":  "server/src/services/writer.ts",
                       "to":  "../types.js",
                       "type":  "import"
+                  },
+                  {
+                      "from":  "tbh-dashboard-interactivo/client/src/App.tsx",
+                      "to":  "./components/AmbientBackground",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "tbh-dashboard-interactivo/client/src/App.tsx",
+                      "to":  "./components/Header",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "tbh-dashboard-interactivo/client/src/App.tsx",
+                      "to":  "./components/KanbanWidget",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "tbh-dashboard-interactivo/client/src/App.tsx",
+                      "to":  "./components/TasksWidget",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "tbh-dashboard-interactivo/client/src/App.tsx",
+                      "to":  "./components/CalendarWidget",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "tbh-dashboard-interactivo/client/src/App.tsx",
+                      "to":  "./components/TimersWidget",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "tbh-dashboard-interactivo/client/src/App.tsx",
+                      "to":  "./components/NotesWidget",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "tbh-dashboard-interactivo/client/src/App.tsx",
+                      "to":  "./components/FocusPanel",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "tbh-dashboard-interactivo/client/src/App.tsx",
+                      "to":  "./components/QuickAdd",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "tbh-dashboard-interactivo/client/src/App.tsx",
+                      "to":  "./components/TimerAlert",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "tbh-dashboard-interactivo/client/src/App.tsx",
+                      "to":  "./components/Toast",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "tbh-dashboard-interactivo/client/src/App.tsx",
+                      "to":  "./lib/actions",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "tbh-dashboard-interactivo/client/src/App.tsx",
+                      "to":  "./types",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "tbh-dashboard-interactivo/client/src/components/CalendarWidget.tsx",
+                      "to":  "../types",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "tbh-dashboard-interactivo/client/src/components/CalendarWidget.tsx",
+                      "to":  "../lib/actions",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "tbh-dashboard-interactivo/client/src/components/CalendarWidget.tsx",
+                      "to":  "../lib/useToday",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "tbh-dashboard-interactivo/client/src/components/CalendarWidget.tsx",
+                      "to":  "../lib/dates",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "tbh-dashboard-interactivo/client/src/components/FocusPanel.tsx",
+                      "to":  "../types",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "tbh-dashboard-interactivo/client/src/components/FocusPanel.tsx",
+                      "to":  "../lib/actions",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "tbh-dashboard-interactivo/client/src/components/FocusPanel.tsx",
+                      "to":  "../lib/useToday",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "tbh-dashboard-interactivo/client/src/components/FocusPanel.tsx",
+                      "to":  "../lib/dates",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "tbh-dashboard-interactivo/client/src/components/FocusPanel.tsx",
+                      "to":  "./TaskRow",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "tbh-dashboard-interactivo/client/src/components/KanbanWidget.tsx",
+                      "to":  "../types",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "tbh-dashboard-interactivo/client/src/components/KanbanWidget.tsx",
+                      "to":  "../lib/actions",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "tbh-dashboard-interactivo/client/src/components/QuickAdd.tsx",
+                      "to":  "../lib/actions",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "tbh-dashboard-interactivo/client/src/components/QuickAdd.tsx",
+                      "to":  "../lib/dates",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "tbh-dashboard-interactivo/client/src/components/TaskRow.tsx",
+                      "to":  "../types",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "tbh-dashboard-interactivo/client/src/components/TaskRow.tsx",
+                      "to":  "../lib/actions",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "tbh-dashboard-interactivo/client/src/components/TaskRow.tsx",
+                      "to":  "../lib/dates",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "tbh-dashboard-interactivo/client/src/components/TasksWidget.tsx",
+                      "to":  "../types",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "tbh-dashboard-interactivo/client/src/components/TasksWidget.tsx",
+                      "to":  "../lib/actions",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "tbh-dashboard-interactivo/client/src/components/TasksWidget.tsx",
+                      "to":  "../lib/useToday",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "tbh-dashboard-interactivo/client/src/components/TasksWidget.tsx",
+                      "to":  "./TaskRow",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "tbh-dashboard-interactivo/client/src/components/TimerAlert.tsx",
+                      "to":  "../types",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "tbh-dashboard-interactivo/client/src/lib/actions.tsx",
+                      "to":  "./api",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "tbh-dashboard-interactivo/client/src/lib/actions.tsx",
+                      "to":  "../types",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "tbh-dashboard-interactivo/client/src/lib/useToday.ts",
+                      "to":  "./dates",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "tbh-dashboard-interactivo/server/src/index.ts",
+                      "to":  "./services/vault.js",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "tbh-dashboard-interactivo/server/src/index.ts",
+                      "to":  "./services/timers.js",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "tbh-dashboard-interactivo/server/src/index.ts",
+                      "to":  "./services/weather.js",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "tbh-dashboard-interactivo/server/src/index.ts",
+                      "to":  "./services/photos.js",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "tbh-dashboard-interactivo/server/src/index.ts",
+                      "to":  "./types.js",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "tbh-dashboard-interactivo/server/src/parsers/markdown.ts",
+                      "to":  "../types.js",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "tbh-dashboard-interactivo/server/src/services/vault.ts",
+                      "to":  "../parsers/markdown.js",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "tbh-dashboard-interactivo/server/src/services/vault.ts",
+                      "to":  "../types.js",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "tbh-dashboard-interactivo/server/src/services/writer.ts",
+                      "to":  "../parsers/markdown.js",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "tbh-dashboard-interactivo/server/src/services/writer.ts",
+                      "to":  "../types.js",
+                      "type":  "import"
                   }
               ],
     "projectRoot":  "D:\\Proyectos\\TBH",
-    "generatedAt":  "2026-11-04 02:26:55",
+    "generatedAt":  "2026-11-04 11:49:02",
     "metrics":  {
                     "extensions":  {
-                                       ".example":  1,
+                                       ".example":  2,
                                        ".gitkeep":  1,
                                        "[no-ext]":  1,
-                                       ".ts":  13,
-                                       ".zip":  1,
+                                       ".ts":  22,
+                                       ".zip":  2,
                                        ".xml":  1,
                                        ".js":  6,
-                                       ".md":  47,
+                                       ".md":  48,
                                        ".json":  10,
-                                       ".yml":  1,
-                                       ".css":  5,
+                                       ".yml":  2,
+                                       ".css":  6,
                                        ".webp":  2,
                                        ".gitignore":  1,
                                        ".woff2":  4,
                                        ".html":  2,
-                                       ".tsx":  21,
+                                       ".tsx":  31,
                                        ".svg":  9
                                    },
-                    "totalEdges":  63,
-                    "totalFiles":  126
+                    "totalEdges":  110,
+                    "totalFiles":  150
                 },
     "nodes":  [
                   {
@@ -379,14 +614,14 @@
                   },
                   {
                       "label":  "graph.json",
-                      "sizeBytes":  50159,
+                      "sizeBytes":  49652,
                       "isHub":  false,
                       "id":  "graph.json",
                       "type":  ".json"
                   },
                   {
                       "label":  "GRAPH_REPORT.md",
-                      "sizeBytes":  5027,
+                      "sizeBytes":  5033,
                       "isHub":  false,
                       "id":  "GRAPH_REPORT.md",
                       "type":  ".md"
@@ -421,7 +656,7 @@
                   },
                   {
                       "label":  "repomix-output.xml",
-                      "sizeBytes":  319968,
+                      "sizeBytes":  444752,
                       "isHub":  false,
                       "id":  "repomix-output.xml",
                       "type":  ".xml"
@@ -432,6 +667,13 @@
                       "isHub":  false,
                       "id":  "repomix.config.json",
                       "type":  ".json"
+                  },
+                  {
+                      "label":  "tbh-dashboard-interactivo.zip",
+                      "sizeBytes":  36122,
+                      "isHub":  false,
+                      "id":  "tbh-dashboard-interactivo.zip",
+                      "type":  ".zip"
                   },
                   {
                       "label":  "index.html",
@@ -484,7 +726,7 @@
                   },
                   {
                       "label":  "App.tsx",
-                      "sizeBytes":  11481,
+                      "sizeBytes":  11567,
                       "isHub":  true,
                       "id":  "client/src/App.tsx",
                       "type":  ".tsx"
@@ -554,7 +796,7 @@
                   },
                   {
                       "label":  "Header.tsx",
-                      "sizeBytes":  4498,
+                      "sizeBytes":  6551,
                       "isHub":  false,
                       "id":  "client/src/components/Header.tsx",
                       "type":  ".tsx"
@@ -589,7 +831,7 @@
                   },
                   {
                       "label":  "StageHeroCarousel.tsx",
-                      "sizeBytes":  12594,
+                      "sizeBytes":  17553,
                       "isHub":  false,
                       "id":  "client/src/components/StageHeroCarousel.tsx",
                       "type":  ".tsx"
@@ -1071,6 +1313,167 @@
                       "type":  ".ts"
                   },
                   {
+                      "label":  ".env.example",
+                      "sizeBytes":  535,
+                      "isHub":  false,
+                      "id":  "tbh-dashboard-interactivo/.env.example",
+                      "type":  ".example"
+                  },
+                  {
+                      "label":  "docker-compose.yml",
+                      "sizeBytes":  666,
+                      "isHub":  true,
+                      "id":  "tbh-dashboard-interactivo/docker-compose.yml",
+                      "type":  ".yml"
+                  },
+                  {
+                      "label":  "App.tsx",
+                      "sizeBytes":  7200,
+                      "isHub":  true,
+                      "id":  "tbh-dashboard-interactivo/client/src/App.tsx",
+                      "type":  ".tsx"
+                  },
+                  {
+                      "label":  "index.css",
+                      "sizeBytes":  1264,
+                      "isHub":  true,
+                      "id":  "tbh-dashboard-interactivo/client/src/index.css",
+                      "type":  ".css"
+                  },
+                  {
+                      "label":  "types.ts",
+                      "sizeBytes":  1587,
+                      "isHub":  false,
+                      "id":  "tbh-dashboard-interactivo/client/src/types.ts",
+                      "type":  ".ts"
+                  },
+                  {
+                      "label":  "CalendarWidget.tsx",
+                      "sizeBytes":  10152,
+                      "isHub":  false,
+                      "id":  "tbh-dashboard-interactivo/client/src/components/CalendarWidget.tsx",
+                      "type":  ".tsx"
+                  },
+                  {
+                      "label":  "FocusPanel.tsx",
+                      "sizeBytes":  6838,
+                      "isHub":  false,
+                      "id":  "tbh-dashboard-interactivo/client/src/components/FocusPanel.tsx",
+                      "type":  ".tsx"
+                  },
+                  {
+                      "label":  "KanbanWidget.tsx",
+                      "sizeBytes":  8682,
+                      "isHub":  false,
+                      "id":  "tbh-dashboard-interactivo/client/src/components/KanbanWidget.tsx",
+                      "type":  ".tsx"
+                  },
+                  {
+                      "label":  "QuickAdd.tsx",
+                      "sizeBytes":  6681,
+                      "isHub":  false,
+                      "id":  "tbh-dashboard-interactivo/client/src/components/QuickAdd.tsx",
+                      "type":  ".tsx"
+                  },
+                  {
+                      "label":  "TaskRow.tsx",
+                      "sizeBytes":  3877,
+                      "isHub":  false,
+                      "id":  "tbh-dashboard-interactivo/client/src/components/TaskRow.tsx",
+                      "type":  ".tsx"
+                  },
+                  {
+                      "label":  "TasksWidget.tsx",
+                      "sizeBytes":  4312,
+                      "isHub":  false,
+                      "id":  "tbh-dashboard-interactivo/client/src/components/TasksWidget.tsx",
+                      "type":  ".tsx"
+                  },
+                  {
+                      "label":  "TimerAlert.tsx",
+                      "sizeBytes":  1583,
+                      "isHub":  false,
+                      "id":  "tbh-dashboard-interactivo/client/src/components/TimerAlert.tsx",
+                      "type":  ".tsx"
+                  },
+                  {
+                      "label":  "Toast.tsx",
+                      "sizeBytes":  977,
+                      "isHub":  false,
+                      "id":  "tbh-dashboard-interactivo/client/src/components/Toast.tsx",
+                      "type":  ".tsx"
+                  },
+                  {
+                      "label":  "actions.tsx",
+                      "sizeBytes":  2460,
+                      "isHub":  false,
+                      "id":  "tbh-dashboard-interactivo/client/src/lib/actions.tsx",
+                      "type":  ".tsx"
+                  },
+                  {
+                      "label":  "api.ts",
+                      "sizeBytes":  1506,
+                      "isHub":  false,
+                      "id":  "tbh-dashboard-interactivo/client/src/lib/api.ts",
+                      "type":  ".ts"
+                  },
+                  {
+                      "label":  "dates.ts",
+                      "sizeBytes":  1307,
+                      "isHub":  false,
+                      "id":  "tbh-dashboard-interactivo/client/src/lib/dates.ts",
+                      "type":  ".ts"
+                  },
+                  {
+                      "label":  "useToday.ts",
+                      "sizeBytes":  398,
+                      "isHub":  false,
+                      "id":  "tbh-dashboard-interactivo/client/src/lib/useToday.ts",
+                      "type":  ".ts"
+                  },
+                  {
+                      "label":  "index.ts",
+                      "sizeBytes":  9264,
+                      "isHub":  true,
+                      "id":  "tbh-dashboard-interactivo/server/src/index.ts",
+                      "type":  ".ts"
+                  },
+                  {
+                      "label":  "types.ts",
+                      "sizeBytes":  1594,
+                      "isHub":  true,
+                      "id":  "tbh-dashboard-interactivo/server/src/types.ts",
+                      "type":  ".ts"
+                  },
+                  {
+                      "label":  "markdown.ts",
+                      "sizeBytes":  5785,
+                      "isHub":  true,
+                      "id":  "tbh-dashboard-interactivo/server/src/parsers/markdown.ts",
+                      "type":  ".ts"
+                  },
+                  {
+                      "label":  "vault.ts",
+                      "sizeBytes":  3696,
+                      "isHub":  true,
+                      "id":  "tbh-dashboard-interactivo/server/src/services/vault.ts",
+                      "type":  ".ts"
+                  },
+                  {
+                      "label":  "writer.ts",
+                      "sizeBytes":  10608,
+                      "isHub":  true,
+                      "id":  "tbh-dashboard-interactivo/server/src/services/writer.ts",
+                      "type":  ".ts"
+                  },
+                  {
+                      "label":  "notes.md",
+                      "sizeBytes":  522,
+                      "isHub":  false,
+                      "id":  "tbh-dashboard-interactivo/vault/notes.md",
+                      "type":  ".md"
+                  },
+                  {
                       "label":  "AGENTS.md",
                       "sizeBytes":  799,
                       "isHub":  false,
@@ -1128,7 +1531,7 @@
                   },
                   {
                       "label":  "2026-11-04.md",
-                      "sizeBytes":  466,
+                      "sizeBytes":  467,
                       "isHub":  false,
                       "id":  "vault/00 Human/10 Daily Notes/2026-11-04.md",
                       "type":  ".md"
