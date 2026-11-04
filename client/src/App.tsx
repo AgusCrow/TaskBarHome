@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { AmbientBackground } from './components/AmbientBackground';
 import { Header } from './components/Header';
 import { KanbanWidget } from './components/KanbanWidget';
@@ -6,13 +6,53 @@ import { TasksWidget } from './components/TasksWidget';
 import { CalendarWidget } from './components/CalendarWidget';
 import { TimersWidget } from './components/TimersWidget';
 import { NotesWidget } from './components/NotesWidget';
+import { FocusPanel } from './components/FocusPanel';
+import { GamificationWidget } from './components/GamificationWidget';
+import { QuickAdd } from './components/QuickAdd';
+import { TimerAlert } from './components/TimerAlert';
+import { Toast, type ToastState } from './components/Toast';
+import { ActionsProvider } from './lib/actions';
 import type { DashboardPayload } from './types';
+
+const MODE_KEY = 'tbh-mode';
+
+/** ?mode=tv / ?mode=control fija el modo y lo recuerda; sin parámetro usa el último guardado (por defecto TV). */
+function initialIsTvMode(): boolean {
+  try {
+    const param = new URLSearchParams(window.location.search).get('mode');
+    if (param === 'tv' || param === 'control') {
+      localStorage.setItem(MODE_KEY, param);
+      return param === 'tv';
+    }
+    return localStorage.getItem(MODE_KEY) !== 'control';
+  } catch {
+    return true;
+  }
+}
 
 export const App: React.FC = () => {
   const [data, setData] = useState<DashboardPayload | null>(null);
   const [isConnected, setIsConnected] = useState(false);
-  const [isTvMode, setIsTvMode] = useState(true);
+  const [isTvMode, setIsTvMode] = useState(initialIsTvMode);
+  const [toast, setToast] = useState<ToastState | null>(null);
   const wsRef = useRef<WebSocket | null>(null);
+  const toastTimer = useRef<ReturnType<typeof setTimeout>>();
+
+  const notify = useCallback((msg: string, kind: 'ok' | 'error' = 'ok') => {
+    clearTimeout(toastTimer.current);
+    setToast({ id: Date.now(), msg, kind });
+    toastTimer.current = setTimeout(() => setToast(null), kind === 'error' ? 4500 : 2200);
+  }, []);
+
+  const toggleMode = () =>
+    setIsTvMode((prev) => {
+      try {
+        localStorage.setItem(MODE_KEY, prev ? 'control' : 'tv');
+      } catch {
+        /* sin almacenamiento */
+      }
+      return !prev;
+    });
 
   // Initial fetch as fallback
   useEffect(() => {
@@ -98,6 +138,7 @@ export const App: React.FC = () => {
   };
 
   return (
+    <ActionsProvider notify={notify}>
     <div className="min-h-screen text-slate-100 p-4 md:p-6 lg:p-8 flex flex-col justify-between relative selection:bg-sky-500 selection:text-white">
       {/* Dynamic Background Slideshow */}
       <AmbientBackground photos={data?.photos || []} />
@@ -107,8 +148,21 @@ export const App: React.FC = () => {
         weather={data?.weather || null}
         isConnected={isConnected}
         isTvMode={isTvMode}
-        onToggleTvMode={() => setIsTvMode((prev) => !prev)}
+        onToggleTvMode={toggleMode}
       />
+
+      {/* Aviso cuando termina un temporizador */}
+      <TimerAlert
+        timers={data?.timers || []}
+        isTvMode={isTvMode}
+        onDismiss={(id) => handleTimerAction(id, 'reset')}
+      />
+
+      {/* Barra de Gamificación (Rachas, XP y Progreso) */}
+      <GamificationWidget tasks={data?.tasks || []} isTvMode={isTvMode} />
+
+      {/* Hoy / Foco: lo que requiere atención ahora */}
+      <FocusPanel data={data} isTvMode={isTvMode} />
 
       {/* Main Grid Content */}
       <main className="flex-1 flex flex-col gap-6">
@@ -155,9 +209,13 @@ export const App: React.FC = () => {
           </div>
         )}
       </footer>
+
+      {/* Captura rápida (solo Modo Control) */}
+      {!isTvMode && <QuickAdd />}
+      <Toast toast={toast} />
     </div>
+    </ActionsProvider>
   );
 };
 
 export default App;
-

@@ -1,4 +1,11 @@
-export interface KanbanCard {
+/** Referencia a una línea concreta de un archivo de la bóveda (para escribir de vuelta). */
+export interface LineRef {
+  file: string;
+  line: number;
+  raw: string;
+}
+
+export interface KanbanCard extends LineRef {
   id: string;
   text: string;
   completed: boolean;
@@ -12,18 +19,20 @@ export interface KanbanColumn {
 
 export interface KanbanBoard {
   title: string;
+  file: string;
   columns: KanbanColumn[];
 }
 
-export interface TaskItem {
+export interface TaskItem extends LineRef {
   id: string;
   text: string;
   completed: boolean;
   dueDate?: string;
+  completedDate?: string;
   tags: string[];
 }
 
-export interface CalendarEvent {
+export interface CalendarEvent extends LineRef {
   id: string;
   title: string;
   date: string;
@@ -77,4 +86,3 @@ export interface DashboardPayload {
   photos: string[];
   lastUpdated: string;
 }
-

@@ -1,10 +1,16 @@
-import type { KanbanBoard, KanbanColumn, KanbanCard, TaskItem, CalendarEvent, NoteItem, NoteSection } from '../types.js';
+import type { KanbanBoard, KanbanColumn, TaskItem, CalendarEvent, NoteItem, NoteSection } from '../types.js';
+
+/** Divide un archivo en líneas aceptando tanto \n como \r\n. */
+export function splitLines(content: string): string[] {
+  return content.split(/\r?\n/);
+}
 
 /**
  * Parses an Obsidian Kanban board file into structured columns and cards.
+ * Cada tarjeta guarda `file`, `line` y `raw` para poder escribir de vuelta.
  */
 export function parseKanban(content: string, filename: string): KanbanBoard {
-  const lines = content.split('\n');
+  const lines = splitLines(content);
   const columns: KanbanColumn[] = [];
   let currentColumn: KanbanColumn | null = null;
   let inFrontmatter = false;
@@ -38,9 +44,12 @@ export function parseKanban(content: string, filename: string): KanbanBoard {
 
       if (cardText.length > 0) {
         currentColumn.cards.push({
-          id: `card-${currentColumn.cards.length}-${Math.random().toString(36).substring(2, 7)}`,
+          id: `${filename}:${i}`,
           text: cardText,
-          completed: isCompleted
+          completed: isCompleted,
+          file: filename,
+          line: i,
+          raw: rawLine
         });
       }
     }
@@ -49,6 +58,7 @@ export function parseKanban(content: string, filename: string): KanbanBoard {
   const title = filename.replace(/\.md$/, '').replace(/[-_]/g, ' ');
   return {
     title: title.charAt(0).toUpperCase() + title.slice(1),
+    file: filename,
     columns
   };
 }
@@ -56,18 +66,26 @@ export function parseKanban(content: string, filename: string): KanbanBoard {
 /**
  * Parses markdown tasks (standard checklists, with optional dates and tags).
  */
-export function parseTasks(content: string): TaskItem[] {
-  const lines = content.split('\n');
+export function parseTasks(content: string, filename: string): TaskItem[] {
+  const lines = splitLines(content);
   const tasks: TaskItem[] = [];
 
   for (let i = 0; i < lines.length; i++) {
-    const line = lines[i].trim();
+    const rawLine = lines[i];
+    const line = rawLine.trim();
     if (!line.startsWith('- [ ]') && !line.startsWith('- [x]') && !line.startsWith('- [X]')) {
       continue;
     }
 
     const completed = line.startsWith('- [x]') || line.startsWith('- [X]');
     let rawText = line.replace(/^- \[( |x|X)\]\s*/, '').trim();
+
+    // Fecha de cierre que agrega Obsidian Tasks: ✅ YYYY-MM-DD
+    const doneMatch = rawText.match(/✅\s*(\d{4}-\d{2}-\d{2})/);
+    const completedDate = doneMatch ? doneMatch[1] : undefined;
+    if (doneMatch) {
+      rawText = rawText.replace(doneMatch[0], '').trim();
+    }
 
     // Extract due date: 📅 YYYY-MM-DD or due:YYYY-MM-DD
     const dateMatch = rawText.match(/(?:📅|due:)\s*(\d{4}-\d{2}-\d{2})/);
@@ -80,15 +98,19 @@ export function parseTasks(content: string): TaskItem[] {
     const tagMatches = rawText.match(/#([\w-]+)/g);
     const tags = tagMatches ? tagMatches.map(t => t.replace('#', '')) : [];
     if (tagMatches) {
-      rawText = rawText.replace(/#([\w-]+)/g, '').trim();
+      rawText = rawText.replace(/#([\w-]+)/g, '').replace(/\s{2,}/g, ' ').trim();
     }
 
     tasks.push({
-      id: `task-${tasks.length}-${Math.random().toString(36).substring(2, 7)}`,
+      id: `${filename}:${i}`,
       text: rawText,
       completed,
       dueDate,
-      tags
+      completedDate,
+      tags,
+      file: filename,
+      line: i,
+      raw: rawLine
     });
   }
 
@@ -101,21 +123,25 @@ export function parseTasks(content: string): TaskItem[] {
  * - 2026-11-04 19:00 - Event Name
  * - 2026-11-04 - Event Name
  */
-export function parseCalendar(content: string): CalendarEvent[] {
-  const lines = content.split('\n');
+export function parseCalendar(content: string, filename: string): CalendarEvent[] {
+  const lines = splitLines(content);
   const events: CalendarEvent[] = [];
 
   for (let i = 0; i < lines.length; i++) {
-    const line = lines[i].trim();
+    const rawLine = lines[i];
+    const line = rawLine.trim();
     const eventMatch = line.match(/^(?:-\s*)?(\d{4}-\d{2}-\d{2})(?:\s+(\d{1,2}:\d{2}))?\s*[-–:]\s*(.+)$/);
 
     if (eventMatch) {
       const [, date, time, title] = eventMatch;
       events.push({
-        id: `event-${events.length}-${Math.random().toString(36).substring(2, 7)}`,
+        id: `${filename}:${i}`,
         date,
         time: time || undefined,
-        title: title.trim()
+        title: title.trim(),
+        file: filename,
+        line: i,
+        raw: rawLine
       });
     }
   }
@@ -132,7 +158,7 @@ export function parseCalendar(content: string): CalendarEvent[] {
  * Parses markdown notes into organized sections.
  */
 export function parseNotes(content: string, filename: string): NoteItem {
-  const lines = content.split('\n');
+  const lines = splitLines(content);
   const sections: NoteSection[] = [];
   let currentSection: NoteSection | null = null;
   let inFrontmatter = false;
@@ -175,4 +201,3 @@ export function parseNotes(content: string, filename: string): NoteItem {
     raw: content
   };
 }
-

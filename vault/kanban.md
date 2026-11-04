@@ -22,3 +22,4 @@ kanban-plugin: basic
 
 - [x] Crear arquitectura y dashboard para la TV
 - [x] Inicializar bóveda real de Obsidian
+

@@ -6,7 +6,20 @@ import cors from '@fastify/cors';
 import fastifyStatic from '@fastify/static';
 import fastifyWebsocket from '@fastify/websocket';
 import dotenv from 'dotenv';
-import { startVaultWatcher, getVaultData, registerVaultListener } from './services/vault.js';
+import crypto from 'node:crypto';
+import type { FastifyReply, FastifyRequest } from 'fastify';
+import { startVaultWatcher, getVaultData, registerVaultListener, refreshVault } from './services/vault.js';
+import {
+  WriteError,
+  serialize,
+  addTask,
+  toggleCheckbox,
+  addEvent,
+  addNote,
+  addKanbanCard,
+  moveKanbanCard,
+  deleteItem
+} from './services/writer.js';
 import { getTimers, startTimer, pauseTimer, resetTimer, setCustomTimer, registerTimerListener } from './services/timers.js';
 import { fetchWeather } from './services/weather.js';
 import { getPhotos } from './services/photos.js';
@@ -37,6 +50,17 @@ const PHOTOS_PATH = path.resolve(
 const WEATHER_LAT = parseFloat(process.env.WEATHER_LATITUDE || '-34.6037');
 const WEATHER_LON = parseFloat(process.env.WEATHER_LONGITUDE || '-58.3816');
 const WEATHER_CITY = process.env.WEATHER_CITY_NAME || 'Buenos Aires';
+
+// PIN opcional para escribir en la bóveda (recomendado si exponés el puerto por Tailscale)
+const CONTROL_PIN = process.env.CONTROL_PIN || '';
+
+function pinOk(request: FastifyRequest): boolean {
+  if (!CONTROL_PIN) return true;
+  const sent = String(request.headers['x-tbh-pin'] ?? '');
+  const a = Buffer.from(sent);
+  const b = Buffer.from(CONTROL_PIN);
+  return a.length === b.length && crypto.timingSafeEqual(a, b);
+}
 
 const fastify = Fastify({ logger: true });
 
@@ -177,6 +201,39 @@ async function start() {
     return setCustomTimer(id || `custom-${Date.now()}`, label, minutes);
   });
 
+  // ---------- Escritura sobre la bóveda ----------
+  fastify.get('/api/config', async () => ({ pinRequired: Boolean(CONTROL_PIN) }));
+
+  /** Registra una ruta de escritura: valida PIN, serializa, guarda y empuja el estado nuevo a todos. */
+  function vaultWrite(route: string, op: (body: any) => void) {
+    fastify.post(route, async (request: FastifyRequest, reply: FastifyReply) => {
+      if (!pinOk(request)) return reply.status(401).send({ error: 'PIN incorrecto o faltante' });
+      try {
+        await serialize(() => op((request.body ?? {}) as any));
+        refreshVault(VAULT_PATH);
+        return { ok: true };
+      } catch (err) {
+        if (err instanceof WriteError) {
+          if (err.status === 409) refreshVault(VAULT_PATH); // el cliente estaba desactualizado
+          return reply.status(err.status).send({ error: err.message });
+        }
+        fastify.log.error(err, `Vault write failed: ${route}`);
+        return reply.status(500).send({ error: 'No se pudo escribir en la bóveda' });
+      }
+    });
+  }
+
+  const ref = (b: any) => ({ file: String(b.file ?? ''), line: Number(b.line), raw: String(b.raw ?? '') });
+
+  vaultWrite('/api/vault/tasks', b => addTask(VAULT_PATH, b));
+  vaultWrite('/api/vault/tasks/toggle', b => toggleCheckbox(VAULT_PATH, ref(b), true));
+  vaultWrite('/api/vault/events', b => addEvent(VAULT_PATH, b));
+  vaultWrite('/api/vault/notes', b => addNote(VAULT_PATH, b));
+  vaultWrite('/api/vault/kanban/cards', b => addKanbanCard(VAULT_PATH, getVaultData().kanban?.file, b));
+  vaultWrite('/api/vault/kanban/toggle', b => toggleCheckbox(VAULT_PATH, ref(b), false));
+  vaultWrite('/api/vault/kanban/move', b => moveKanbanCard(VAULT_PATH, ref(b), b.toColumn));
+  vaultWrite('/api/vault/delete', b => deleteItem(VAULT_PATH, ref(b)));
+
   // Serve compiled client if present (production / single-port mode)
   const CLIENT_DIST_PATH = path.resolve(__dirname, '../../client/dist');
   if (fs.existsSync(CLIENT_DIST_PATH)) {
@@ -190,7 +247,10 @@ async function start() {
       if (req.raw.url && req.raw.url.startsWith('/api')) {
         return reply.status(404).send({ error: 'Endpoint not found' });
       }
-      return reply.sendFile('index.html', CLIENT_DIST_PATH);
+      // sendFile no está decorado (decorateReply: false), se envía el index a mano
+      return reply.type('text/html; charset=utf-8').send(
+        fs.readFileSync(path.join(CLIENT_DIST_PATH, 'index.html'))
+      );
     });
     fastify.log.info(`Serving client build from: ${CLIENT_DIST_PATH}`);
   }

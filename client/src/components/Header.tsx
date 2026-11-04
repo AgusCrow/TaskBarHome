@@ -46,7 +46,7 @@ export const Header: React.FC<HeaderProps> = ({
   });
 
   return (
-    <header className="glass-panel rounded-2xl px-6 py-4 flex flex-wrap items-center justify-between gap-4 mb-6">
+    <header className="glass-panel rounded-3xl border border-white/10 px-6 py-4 flex flex-wrap items-center justify-between gap-4 mb-6 shadow-2xl">
       {/* Clock & Date */}
       <div className="flex items-baseline gap-4">
         <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight font-mono text-white drop-shadow">

@@ -43,4 +43,14 @@
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(148, 163, 184, 0.5);
 }
+/* La TV no permite seleccionar texto, pero los campos de formulario sí deben poder escribirse */
+input,
+textarea {
+  -webkit-user-select: text;
+  user-select: text;
+}
 
+/* Respeta la barra de gestos en celulares con notch */
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}

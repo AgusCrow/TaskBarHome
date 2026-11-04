@@ -16,6 +16,12 @@ export function registerVaultListener(callback: () => void) {
   onVaultChangeCallback = callback;
 }
 
+/** Re-lee la bóveda y avisa a los clientes sin esperar al watcher (usado tras escribir). */
+export function refreshVault(vaultPath: string) {
+  parseVault(vaultPath);
+  if (onVaultChangeCallback) onVaultChangeCallback();
+}
+
 export function parseVault(vaultPath: string) {
   if (!fs.existsSync(vaultPath)) {
     console.warn(`[Vault] Path does not exist: ${vaultPath}`);
@@ -43,11 +49,11 @@ export function parseVault(vaultPath: string) {
 
       // Check for Tasks / To-Do
       if (lowerName.includes('task') || lowerName.includes('todo') || lowerName.includes('quehacer')) {
-        const parsed = parseTasks(content);
+        const parsed = parseTasks(content, entry.name);
         allTasks.push(...parsed);
       } else {
         // Also extract standalone checkboxes from other files if present
-        const inlineTasks = parseTasks(content);
+        const inlineTasks = parseTasks(content, entry.name);
         if (inlineTasks.length > 0 && !lowerName.includes('kanban')) {
           allTasks.push(...inlineTasks);
         }
@@ -55,7 +61,7 @@ export function parseVault(vaultPath: string) {
 
       // Check for Calendar / Events
       if (lowerName.includes('calendar') || lowerName.includes('agenda') || lowerName.includes('evento')) {
-        const parsedEvents = parseCalendar(content);
+        const parsedEvents = parseCalendar(content, entry.name);
         allCalendar.push(...parsedEvents);
       }
 
@@ -111,4 +117,3 @@ export function getVaultData() {
     notes: currentNotes
   };
 }
-

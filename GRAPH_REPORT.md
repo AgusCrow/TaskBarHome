@@ -6,22 +6,23 @@ Generated automatically by Graphify.
 
 ## 1. Architectural Metrics
 
-* Total Scanned Files: 46
-* Total Module Relationships: 25
+* Total Scanned Files: 60
+* Total Module Relationships: 55
 
 ### File Breakdown by Extension
 * **.example**: 1 files
 * **.gitkeep**: 1 files
 * **[no-ext]**: 1 files
-* **.ts**: 9 files
-* **.json**: 8 files
+* **.ts**: 13 files
+* **.json**: 10 files
+* **.xml**: 1 files
 * **.js**: 2 files
 * **.md**: 11 files
 * **.yml**: 1 files
 * **.css**: 1 files
 * **.gitignore**: 1 files
 * **.html**: 1 files
-* **.tsx**: 9 files
+* **.tsx**: 16 files
 
 ---
 
@@ -45,6 +46,7 @@ Generated automatically by Graphify.
 * server/src/services/timers.ts
 * server/src/services/vault.ts
 * server/src/services/weather.ts
+* server/src/services/writer.ts
 
 ---
 
@@ -59,24 +61,29 @@ flowchart TD
     client_src_App_tsx["client/src/App.tsx"] --> __components_CalendarWidget["./components/CalendarWidget"]
     client_src_App_tsx["client/src/App.tsx"] --> __components_TimersWidget["./components/TimersWidget"]
     client_src_App_tsx["client/src/App.tsx"] --> __components_NotesWidget["./components/NotesWidget"]
+    client_src_App_tsx["client/src/App.tsx"] --> __components_FocusPanel["./components/FocusPanel"]
+    client_src_App_tsx["client/src/App.tsx"] --> __components_GamificationWidget["./components/GamificationWidget"]
+    client_src_App_tsx["client/src/App.tsx"] --> __components_QuickAdd["./components/QuickAdd"]
+    client_src_App_tsx["client/src/App.tsx"] --> __components_TimerAlert["./components/TimerAlert"]
+    client_src_App_tsx["client/src/App.tsx"] --> __components_Toast["./components/Toast"]
+    client_src_App_tsx["client/src/App.tsx"] --> __lib_actions["./lib/actions"]
     client_src_App_tsx["client/src/App.tsx"] --> __types["./types"]
     client_src_main_tsx["client/src/main.tsx"] --> __App["./App"]
     client_src_components_CalendarWidget_tsx["client/src/components/CalendarWidget.tsx"] --> ___types["../types"]
+    client_src_components_CalendarWidget_tsx["client/src/components/CalendarWidget.tsx"] --> ___lib_actions["../lib/actions"]
+    client_src_components_CalendarWidget_tsx["client/src/components/CalendarWidget.tsx"] --> ___lib_useToday["../lib/useToday"]
+    client_src_components_CalendarWidget_tsx["client/src/components/CalendarWidget.tsx"] --> ___lib_dates["../lib/dates"]
+    client_src_components_FocusPanel_tsx["client/src/components/FocusPanel.tsx"] --> ___types["../types"]
+    client_src_components_FocusPanel_tsx["client/src/components/FocusPanel.tsx"] --> ___lib_actions["../lib/actions"]
+    client_src_components_FocusPanel_tsx["client/src/components/FocusPanel.tsx"] --> ___lib_useToday["../lib/useToday"]
+    client_src_components_FocusPanel_tsx["client/src/components/FocusPanel.tsx"] --> ___lib_dates["../lib/dates"]
+    client_src_components_FocusPanel_tsx["client/src/components/FocusPanel.tsx"] --> __TaskRow["./TaskRow"]
+    client_src_components_GamificationWidget_tsx["client/src/components/GamificationWidget.tsx"] --> ___types["../types"]
     client_src_components_Header_tsx["client/src/components/Header.tsx"] --> ___types["../types"]
     client_src_components_KanbanWidget_tsx["client/src/components/KanbanWidget.tsx"] --> ___types["../types"]
+    client_src_components_KanbanWidget_tsx["client/src/components/KanbanWidget.tsx"] --> ___lib_actions["../lib/actions"]
     client_src_components_NotesWidget_tsx["client/src/components/NotesWidget.tsx"] --> ___types["../types"]
-    client_src_components_TasksWidget_tsx["client/src/components/TasksWidget.tsx"] --> ___types["../types"]
-    client_src_components_TimersWidget_tsx["client/src/components/TimersWidget.tsx"] --> ___types["../types"]
-    server_src_index_ts["server/src/index.ts"] --> __services_vault_js["./services/vault.js"]
-    server_src_index_ts["server/src/index.ts"] --> __services_timers_js["./services/timers.js"]
-    server_src_index_ts["server/src/index.ts"] --> __services_weather_js["./services/weather.js"]
-    server_src_index_ts["server/src/index.ts"] --> __services_photos_js["./services/photos.js"]
-    server_src_index_ts["server/src/index.ts"] --> __types_js["./types.js"]
-    server_src_parsers_markdown_ts["server/src/parsers/markdown.ts"] --> ___types_js["../types.js"]
-    server_src_services_timers_ts["server/src/services/timers.ts"] --> ___types_js["../types.js"]
-    server_src_services_vault_ts["server/src/services/vault.ts"] --> ___parsers_markdown_js["../parsers/markdown.js"]
-    server_src_services_vault_ts["server/src/services/vault.ts"] --> ___types_js["../types.js"]
-    server_src_services_weather_ts["server/src/services/weather.ts"] --> ___types_js["../types.js"]
+    client_src_components_QuickAdd_tsx["client/src/components/QuickAdd.tsx"] --> ___lib_actions["../lib/actions"]
 ```
 
 ---

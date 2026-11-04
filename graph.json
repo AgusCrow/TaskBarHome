@@ -37,6 +37,36 @@
                   },
                   {
                       "from":  "client/src/App.tsx",
+                      "to":  "./components/FocusPanel",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "client/src/App.tsx",
+                      "to":  "./components/GamificationWidget",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "client/src/App.tsx",
+                      "to":  "./components/QuickAdd",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "client/src/App.tsx",
+                      "to":  "./components/TimerAlert",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "client/src/App.tsx",
+                      "to":  "./components/Toast",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "client/src/App.tsx",
+                      "to":  "./lib/actions",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "client/src/App.tsx",
                       "to":  "./types",
                       "type":  "import"
                   },
@@ -51,6 +81,51 @@
                       "type":  "import"
                   },
                   {
+                      "from":  "client/src/components/CalendarWidget.tsx",
+                      "to":  "../lib/actions",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "client/src/components/CalendarWidget.tsx",
+                      "to":  "../lib/useToday",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "client/src/components/CalendarWidget.tsx",
+                      "to":  "../lib/dates",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "client/src/components/FocusPanel.tsx",
+                      "to":  "../types",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "client/src/components/FocusPanel.tsx",
+                      "to":  "../lib/actions",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "client/src/components/FocusPanel.tsx",
+                      "to":  "../lib/useToday",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "client/src/components/FocusPanel.tsx",
+                      "to":  "../lib/dates",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "client/src/components/FocusPanel.tsx",
+                      "to":  "./TaskRow",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "client/src/components/GamificationWidget.tsx",
+                      "to":  "../types",
+                      "type":  "import"
+                  },
+                  {
                       "from":  "client/src/components/Header.tsx",
                       "to":  "../types",
                       "type":  "import"
@@ -61,8 +136,38 @@
                       "type":  "import"
                   },
                   {
+                      "from":  "client/src/components/KanbanWidget.tsx",
+                      "to":  "../lib/actions",
+                      "type":  "import"
+                  },
+                  {
                       "from":  "client/src/components/NotesWidget.tsx",
                       "to":  "../types",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "client/src/components/QuickAdd.tsx",
+                      "to":  "../lib/actions",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "client/src/components/QuickAdd.tsx",
+                      "to":  "../lib/dates",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "client/src/components/TaskRow.tsx",
+                      "to":  "../types",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "client/src/components/TaskRow.tsx",
+                      "to":  "../lib/actions",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "client/src/components/TaskRow.tsx",
+                      "to":  "../lib/dates",
                       "type":  "import"
                   },
                   {
@@ -71,8 +176,43 @@
                       "type":  "import"
                   },
                   {
+                      "from":  "client/src/components/TasksWidget.tsx",
+                      "to":  "../lib/actions",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "client/src/components/TasksWidget.tsx",
+                      "to":  "../lib/useToday",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "client/src/components/TasksWidget.tsx",
+                      "to":  "./TaskRow",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "client/src/components/TimerAlert.tsx",
+                      "to":  "../types",
+                      "type":  "import"
+                  },
+                  {
                       "from":  "client/src/components/TimersWidget.tsx",
                       "to":  "../types",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "client/src/lib/actions.tsx",
+                      "to":  "./api",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "client/src/lib/actions.tsx",
+                      "to":  "../types",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "client/src/lib/useToday.ts",
+                      "to":  "./dates",
                       "type":  "import"
                   },
                   {
@@ -124,27 +264,38 @@
                       "from":  "server/src/services/weather.ts",
                       "to":  "../types.js",
                       "type":  "import"
+                  },
+                  {
+                      "from":  "server/src/services/writer.ts",
+                      "to":  "../parsers/markdown.js",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "server/src/services/writer.ts",
+                      "to":  "../types.js",
+                      "type":  "import"
                   }
               ],
     "projectRoot":  "D:\\Proyectos\\TBH",
-    "generatedAt":  "2026-11-03 16:30:43",
+    "generatedAt":  "2026-11-03 22:27:23",
     "metrics":  {
                     "extensions":  {
                                        ".example":  1,
                                        ".gitkeep":  1,
                                        "[no-ext]":  1,
-                                       ".ts":  9,
-                                       ".json":  8,
+                                       ".ts":  13,
+                                       ".json":  10,
+                                       ".xml":  1,
                                        ".js":  2,
                                        ".md":  11,
                                        ".yml":  1,
                                        ".css":  1,
                                        ".gitignore":  1,
                                        ".html":  1,
-                                       ".tsx":  9
+                                       ".tsx":  16
                                    },
-                    "totalEdges":  25,
-                    "totalFiles":  46
+                    "totalEdges":  55,
+                    "totalFiles":  60
                 },
     "nodes":  [
                   {
@@ -156,7 +307,7 @@
                   },
                   {
                       "label":  ".gitignore",
-                      "sizeBytes":  384,
+                      "sizeBytes":  418,
                       "isHub":  false,
                       "id":  ".gitignore",
                       "type":  ".gitignore"
@@ -170,35 +321,42 @@
                   },
                   {
                       "label":  "docker-compose.yml",
-                      "sizeBytes":  475,
+                      "sizeBytes":  476,
                       "isHub":  true,
                       "id":  "docker-compose.yml",
                       "type":  ".yml"
                   },
                   {
                       "label":  "Dockerfile",
-                      "sizeBytes":  930,
+                      "sizeBytes":  931,
                       "isHub":  false,
                       "id":  "Dockerfile",
                       "type":  "[no-ext]"
                   },
                   {
                       "label":  "graph.json",
-                      "sizeBytes":  16227,
+                      "sizeBytes":  18216,
                       "isHub":  false,
                       "id":  "graph.json",
                       "type":  ".json"
                   },
                   {
                       "label":  "GRAPH_REPORT.md",
-                      "sizeBytes":  3752,
+                      "sizeBytes":  3842,
                       "isHub":  false,
                       "id":  "GRAPH_REPORT.md",
                       "type":  ".md"
                   },
                   {
+                      "label":  "package-lock.json",
+                      "sizeBytes":  78468,
+                      "isHub":  false,
+                      "id":  "package-lock.json",
+                      "type":  ".json"
+                  },
+                  {
                       "label":  "package.json",
-                      "sizeBytes":  346,
+                      "sizeBytes":  424,
                       "isHub":  true,
                       "id":  "package.json",
                       "type":  ".json"
@@ -209,6 +367,20 @@
                       "isHub":  true,
                       "id":  "README.md",
                       "type":  ".md"
+                  },
+                  {
+                      "label":  "repomix-output.xml",
+                      "sizeBytes":  200873,
+                      "isHub":  false,
+                      "id":  "repomix-output.xml",
+                      "type":  ".xml"
+                  },
+                  {
+                      "label":  "repomix.config.json",
+                      "sizeBytes":  746,
+                      "isHub":  false,
+                      "id":  "repomix.config.json",
+                      "type":  ".json"
                   },
                   {
                       "label":  "index.html",
@@ -261,14 +433,14 @@
                   },
                   {
                       "label":  "App.tsx",
-                      "sizeBytes":  5349,
+                      "sizeBytes":  7407,
                       "isHub":  true,
                       "id":  "client/src/App.tsx",
                       "type":  ".tsx"
                   },
                   {
                       "label":  "index.css",
-                      "sizeBytes":  970,
+                      "sizeBytes":  1264,
                       "isHub":  true,
                       "id":  "client/src/index.css",
                       "type":  ".css"
@@ -282,7 +454,7 @@
                   },
                   {
                       "label":  "types.ts",
-                      "sizeBytes":  1333,
+                      "sizeBytes":  1587,
                       "isHub":  false,
                       "id":  "client/src/types.ts",
                       "type":  ".ts"
@@ -296,21 +468,35 @@
                   },
                   {
                       "label":  "CalendarWidget.tsx",
-                      "sizeBytes":  2701,
+                      "sizeBytes":  10152,
                       "isHub":  false,
                       "id":  "client/src/components/CalendarWidget.tsx",
                       "type":  ".tsx"
                   },
                   {
+                      "label":  "FocusPanel.tsx",
+                      "sizeBytes":  6838,
+                      "isHub":  false,
+                      "id":  "client/src/components/FocusPanel.tsx",
+                      "type":  ".tsx"
+                  },
+                  {
+                      "label":  "GamificationWidget.tsx",
+                      "sizeBytes":  3985,
+                      "isHub":  false,
+                      "id":  "client/src/components/GamificationWidget.tsx",
+                      "type":  ".tsx"
+                  },
+                  {
                       "label":  "Header.tsx",
-                      "sizeBytes":  4498,
+                      "sizeBytes":  4532,
                       "isHub":  false,
                       "id":  "client/src/components/Header.tsx",
                       "type":  ".tsx"
                   },
                   {
                       "label":  "KanbanWidget.tsx",
-                      "sizeBytes":  4477,
+                      "sizeBytes":  8682,
                       "isHub":  false,
                       "id":  "client/src/components/KanbanWidget.tsx",
                       "type":  ".tsx"
@@ -323,10 +509,31 @@
                       "type":  ".tsx"
                   },
                   {
+                      "label":  "QuickAdd.tsx",
+                      "sizeBytes":  6681,
+                      "isHub":  false,
+                      "id":  "client/src/components/QuickAdd.tsx",
+                      "type":  ".tsx"
+                  },
+                  {
+                      "label":  "TaskRow.tsx",
+                      "sizeBytes":  3877,
+                      "isHub":  false,
+                      "id":  "client/src/components/TaskRow.tsx",
+                      "type":  ".tsx"
+                  },
+                  {
                       "label":  "TasksWidget.tsx",
-                      "sizeBytes":  4087,
+                      "sizeBytes":  4312,
                       "isHub":  false,
                       "id":  "client/src/components/TasksWidget.tsx",
+                      "type":  ".tsx"
+                  },
+                  {
+                      "label":  "TimerAlert.tsx",
+                      "sizeBytes":  1583,
+                      "isHub":  false,
+                      "id":  "client/src/components/TimerAlert.tsx",
                       "type":  ".tsx"
                   },
                   {
@@ -335,6 +542,41 @@
                       "isHub":  false,
                       "id":  "client/src/components/TimersWidget.tsx",
                       "type":  ".tsx"
+                  },
+                  {
+                      "label":  "Toast.tsx",
+                      "sizeBytes":  977,
+                      "isHub":  false,
+                      "id":  "client/src/components/Toast.tsx",
+                      "type":  ".tsx"
+                  },
+                  {
+                      "label":  "actions.tsx",
+                      "sizeBytes":  2460,
+                      "isHub":  false,
+                      "id":  "client/src/lib/actions.tsx",
+                      "type":  ".tsx"
+                  },
+                  {
+                      "label":  "api.ts",
+                      "sizeBytes":  1506,
+                      "isHub":  false,
+                      "id":  "client/src/lib/api.ts",
+                      "type":  ".ts"
+                  },
+                  {
+                      "label":  "dates.ts",
+                      "sizeBytes":  1307,
+                      "isHub":  false,
+                      "id":  "client/src/lib/dates.ts",
+                      "type":  ".ts"
+                  },
+                  {
+                      "label":  "useToday.ts",
+                      "sizeBytes":  398,
+                      "isHub":  false,
+                      "id":  "client/src/lib/useToday.ts",
+                      "type":  ".ts"
                   },
                   {
                       "label":  "calendar.md",
@@ -366,7 +608,7 @@
                   },
                   {
                       "label":  ".gitkeep",
-                      "sizeBytes":  70,
+                      "sizeBytes":  71,
                       "isHub":  false,
                       "id":  "photos/.gitkeep",
                       "type":  ".gitkeep"
@@ -394,21 +636,21 @@
                   },
                   {
                       "label":  "index.ts",
-                      "sizeBytes":  6617,
+                      "sizeBytes":  9264,
                       "isHub":  true,
                       "id":  "server/src/index.ts",
                       "type":  ".ts"
                   },
                   {
                       "label":  "types.ts",
-                      "sizeBytes":  1333,
+                      "sizeBytes":  1594,
                       "isHub":  true,
                       "id":  "server/src/types.ts",
                       "type":  ".ts"
                   },
                   {
                       "label":  "markdown.ts",
-                      "sizeBytes":  5100,
+                      "sizeBytes":  5785,
                       "isHub":  true,
                       "id":  "server/src/parsers/markdown.ts",
                       "type":  ".ts"
@@ -429,7 +671,7 @@
                   },
                   {
                       "label":  "vault.ts",
-                      "sizeBytes":  3436,
+                      "sizeBytes":  3696,
                       "isHub":  true,
                       "id":  "server/src/services/vault.ts",
                       "type":  ".ts"
@@ -442,29 +684,36 @@
                       "type":  ".ts"
                   },
                   {
+                      "label":  "writer.ts",
+                      "sizeBytes":  10608,
+                      "isHub":  true,
+                      "id":  "server/src/services/writer.ts",
+                      "type":  ".ts"
+                  },
+                  {
                       "label":  "calendar.md",
-                      "sizeBytes":  251,
+                      "sizeBytes":  252,
                       "isHub":  false,
                       "id":  "vault/calendar.md",
                       "type":  ".md"
                   },
                   {
                       "label":  "kanban.md",
-                      "sizeBytes":  436,
+                      "sizeBytes":  437,
                       "isHub":  false,
                       "id":  "vault/kanban.md",
                       "type":  ".md"
                   },
                   {
                       "label":  "notes.md",
-                      "sizeBytes":  523,
+                      "sizeBytes":  524,
                       "isHub":  false,
                       "id":  "vault/notes.md",
                       "type":  ".md"
                   },
                   {
                       "label":  "tasks.md",
-                      "sizeBytes":  329,
+                      "sizeBytes":  330,
                       "isHub":  false,
                       "id":  "vault/tasks.md",
                       "type":  ".md"

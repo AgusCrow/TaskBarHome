@@ -5,3 +5,4 @@
 - [ ] Sincronizar bóveda de Obsidian entre PC y celular #setup
 - [ ] Regar las plantas del balcón #casa
 - [x] Inicializar proyecto y configurar Docker Compose
+
