@@ -6,8 +6,8 @@ Generated automatically by Graphify.
 
 ## 1. Architectural Metrics
 
-* Total Scanned Files: 125
-* Total Module Relationships: 62
+* Total Scanned Files: 127
+* Total Module Relationships: 64
 
 ### File Breakdown by Extension
 * **.example**: 1 files
@@ -25,7 +25,7 @@ Generated automatically by Graphify.
 * **.gitignore**: 1 files
 * **.woff2**: 4 files
 * **.html**: 2 files
-* **.tsx**: 19 files
+* **.tsx**: 21 files
 * **.svg**: 9 files
 
 ---
@@ -67,8 +67,9 @@ Generated automatically by Graphify.
 flowchart TD
     client_src_App_tsx["client/src/App.tsx"] --> __components_AmbientBackground["./components/AmbientBackground"]
     client_src_App_tsx["client/src/App.tsx"] --> __components_Header["./components/Header"]
-    client_src_App_tsx["client/src/App.tsx"] --> __components_NorthStarHero["./components/NorthStarHero"]
     client_src_App_tsx["client/src/App.tsx"] --> __components_DateStrip["./components/DateStrip"]
+    client_src_App_tsx["client/src/App.tsx"] --> __components_StageHeroCarousel["./components/StageHeroCarousel"]
+    client_src_App_tsx["client/src/App.tsx"] --> __components_FloatingDock["./components/FloatingDock"]
     client_src_App_tsx["client/src/App.tsx"] --> __components_WorkflowsView["./components/WorkflowsView"]
     client_src_App_tsx["client/src/App.tsx"] --> __components_KanbanWidget["./components/KanbanWidget"]
     client_src_App_tsx["client/src/App.tsx"] --> __components_TasksWidget["./components/TasksWidget"]
@@ -94,7 +95,6 @@ flowchart TD
     client_src_components_FocusPanel_tsx["client/src/components/FocusPanel.tsx"] --> ___lib_useToday["../lib/useToday"]
     client_src_components_FocusPanel_tsx["client/src/components/FocusPanel.tsx"] --> ___lib_dates["../lib/dates"]
     client_src_components_FocusPanel_tsx["client/src/components/FocusPanel.tsx"] --> __TaskRow["./TaskRow"]
-    client_src_components_GamificationWidget_tsx["client/src/components/GamificationWidget.tsx"] --> ___types["../types"]
 ```
 
 ---

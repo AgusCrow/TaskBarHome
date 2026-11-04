@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { AmbientBackground } from './components/AmbientBackground';
 import { Header } from './components/Header';
-import { NorthStarHero } from './components/NorthStarHero';
 import { DateStrip } from './components/DateStrip';
+import { StageHeroCarousel } from './components/StageHeroCarousel';
+import { FloatingDock, type NavView } from './components/FloatingDock';
 import { WorkflowsView } from './components/WorkflowsView';
 import { KanbanWidget } from './components/KanbanWidget';
 import { TasksWidget } from './components/TasksWidget';
@@ -37,8 +38,11 @@ export const App: React.FC = () => {
   const [data, setData] = useState<DashboardPayload | null>(null);
   const [isConnected, setIsConnected] = useState(false);
   const [isTvMode, setIsTvMode] = useState(initialIsTvMode);
-  const [activeTab, setActiveTab] = useState<'today' | 'kanban' | 'workflows'>('today');
-  const [selectedDate, setSelectedDate] = useState<string>(() => new Intl.DateTimeFormat('en-CA').format(new Date()));
+  const [currentView, setCurrentView] = useState<NavView>('stage');
+  const [selectedDate, setSelectedDate] = useState<string>(() =>
+    new Intl.DateTimeFormat('en-CA').format(new Date())
+  );
+  const [isQuickAddOpen, setIsQuickAddOpen] = useState(false);
   const [toast, setToast] = useState<ToastState | null>(null);
   const wsRef = useRef<WebSocket | null>(null);
   const toastTimer = useRef<ReturnType<typeof setTimeout>>();
@@ -59,15 +63,15 @@ export const App: React.FC = () => {
       return !prev;
     });
 
-  const handleStartFocusTimer = () => {
+  const handleStartFocusTimer = (label = 'Focus Deep Work') => {
     const focusTimer = data?.timers.find((t) => /focus|pomodoro|enfoque/i.test(t.label));
     if (focusTimer) {
       handleTimerAction(focusTimer.id, 'start');
       notify(`Iniciando ${focusTimer.label}`);
     } else {
       const id = `focus-${Date.now()}`;
-      handleTimerAction(id, 'custom', 25, 'Focus Deep Work');
-      notify('Timer de foco (25m) iniciado');
+      handleTimerAction(id, 'custom', 25, label);
+      notify(`Timer iniciado: ${label} (25 min)`);
     }
   };
 
@@ -154,116 +158,171 @@ export const App: React.FC = () => {
     }
   };
 
+  const getBreadcrumbLabel = () => {
+    switch (currentView) {
+      case 'stage':
+        return 'Home';
+      case 'kanban':
+        return 'Proyectos / Kanban';
+      case 'tasks':
+        return 'Tareas';
+      case 'calendar':
+        return 'Agenda';
+      case 'timers':
+        return 'Temporizadores';
+      case 'notes':
+        return 'Notas';
+      case 'workflows':
+        return 'Workflows IA';
+      default:
+        return 'Home';
+    }
+  };
+
   return (
     <ActionsProvider notify={notify}>
-    <div className="min-h-screen text-[var(--ink)] p-4 md:p-6 lg:p-8 flex flex-col justify-between relative selection:bg-[var(--accent)] selection:text-[#162a30]">
-      {/* Dynamic Background Slideshow */}
-      <AmbientBackground photos={data?.photos || []} />
+      <div className="min-h-screen text-[var(--ink)] px-4 md:px-8 py-3 md:py-4 flex flex-col justify-between relative selection:bg-[var(--accent)] selection:text-[#162a30] pb-24">
+        {/* Dynamic Background Slideshow */}
+        <AmbientBackground photos={data?.photos || []} />
 
-      {/* Header with Masthead Clock, Weather, TV toggle & Tabs */}
-      <Header
-        weather={data?.weather || null}
-        isConnected={isConnected}
-        isTvMode={isTvMode}
-        onToggleTvMode={toggleMode}
-        activeTab={activeTab}
-        onSelectTab={setActiveTab}
-      />
+        {/* Top Header Strip (EMAI / Home + Clock + Controls) */}
+        <Header
+          weather={data?.weather || null}
+          isConnected={isConnected}
+          isTvMode={isTvMode}
+          onToggleTvMode={toggleMode}
+          onOpenQuickAdd={() => setIsQuickAddOpen(true)}
+          currentBreadcrumb={getBreadcrumbLabel()}
+        />
 
-      {/* Aviso cuando termina un temporizador */}
-      <TimerAlert
-        timers={data?.timers || []}
-        isTvMode={isTvMode}
-        onDismiss={(id) => handleTimerAction(id, 'reset')}
-      />
+        {/* Horizontal DateStrip Bar with Indicators & Badges */}
+        <DateStrip
+          events={data?.calendar || []}
+          tasks={data?.tasks || []}
+          workflows={data?.workflows || []}
+          selectedDate={selectedDate}
+          onSelectDate={setSelectedDate}
+          isTvMode={isTvMode}
+        />
 
-      {/* Main Content Area based on Active Tab */}
-      <main className="flex-1 flex flex-col gap-6">
-        {activeTab === 'today' && (
-          <>
-            {/* North Star Hero: Next Move / Objetivo Prioritario del Día */}
-            <NorthStarHero
-              dailyFocus={data?.dailyFocus || null}
-              isTvMode={isTvMode}
-              onStartFocusTimer={handleStartFocusTimer}
-            />
+        {/* Aviso cuando termina un temporizador */}
+        <TimerAlert
+          timers={data?.timers || []}
+          isTvMode={isTvMode}
+          onDismiss={(id) => handleTimerAction(id, 'reset')}
+        />
 
-            {/* DateStrip Selector */}
-            <DateStrip
-              events={data?.calendar || []}
-              selectedDate={selectedDate}
-              onSelectDate={setSelectedDate}
-            />
+        {/* Main Interactive Stage */}
+        <main className="flex-1 flex flex-col justify-center my-2">
+          {currentView === 'stage' && (
+            <div className="flex flex-col gap-8 w-full">
+              {/* Central Cinematic Coverflow Hero Card (Exacto a captura EMAI) */}
+              <StageHeroCarousel
+                dailyFocus={data?.dailyFocus || null}
+                tasks={data?.tasks || []}
+                projects={data?.projects || []}
+                workflows={data?.workflows || []}
+                onStartFocus={handleStartFocusTimer}
+                onOpenQuickAdd={() => setIsQuickAddOpen(true)}
+                isTvMode={isTvMode}
+              />
 
-            {/* Barra de Gamificación (Rachas, XP y Progreso) */}
-            <GamificationWidget tasks={data?.tasks || []} isTvMode={isTvMode} />
-
-            {/* Hoy / Foco: lo que requiere atención ahora */}
-            <FocusPanel data={data} isTvMode={isTvMode} />
-
-            {/* 3-Column Bento Dashboard Grid */}
-            <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 flex-1">
-              {/* Column 1: Tasks & Quehaceres */}
-              <TasksWidget tasks={data?.tasks || []} isTvMode={isTvMode} />
-
-              {/* Column 2: Calendar & Events */}
-              <CalendarWidget events={data?.calendar || []} isTvMode={isTvMode} />
-
-              {/* Column 3: Timers & Notes */}
-              <div className="flex flex-col gap-6">
-                <TimersWidget
-                  timers={data?.timers || []}
-                  onTimerAction={handleTimerAction}
-                  isTvMode={isTvMode}
-                />
-                <NotesWidget notes={data?.notes || []} isTvMode={isTvMode} />
+              {/* Paneles Bento de Apoyo (Visibles al hacer scroll o en pantallas amplias) */}
+              <div className="space-y-6 pt-4 border-t border-white/5 opacity-85 hover:opacity-100 transition-opacity">
+                <GamificationWidget tasks={data?.tasks || []} isTvMode={isTvMode} />
+                <FocusPanel data={data} isTvMode={isTvMode} />
               </div>
-            </section>
-          </>
-        )}
+            </div>
+          )}
 
-        {activeTab === 'kanban' && (
-          <div className="space-y-6">
-            <KanbanWidget board={data?.kanban || null} isTvMode={isTvMode} />
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {currentView === 'kanban' && (
+            <div className="w-full space-y-6 py-4 animate-in fade-in duration-300">
+              <KanbanWidget board={data?.kanban || null} isTvMode={isTvMode} />
+            </div>
+          )}
+
+          {currentView === 'tasks' && (
+            <div className="w-full max-w-5xl mx-auto py-4 animate-in fade-in duration-300">
               <TasksWidget tasks={data?.tasks || []} isTvMode={isTvMode} />
+            </div>
+          )}
+
+          {currentView === 'calendar' && (
+            <div className="w-full max-w-5xl mx-auto py-4 animate-in fade-in duration-300">
+              <CalendarWidget events={data?.calendar || []} isTvMode={isTvMode} />
+            </div>
+          )}
+
+          {currentView === 'timers' && (
+            <div className="w-full max-w-4xl mx-auto py-4 animate-in fade-in duration-300">
+              <TimersWidget
+                timers={data?.timers || []}
+                onTimerAction={handleTimerAction}
+                isTvMode={isTvMode}
+              />
+            </div>
+          )}
+
+          {currentView === 'notes' && (
+            <div className="w-full max-w-5xl mx-auto py-4 animate-in fade-in duration-300">
               <NotesWidget notes={data?.notes || []} isTvMode={isTvMode} />
+            </div>
+          )}
+
+          {currentView === 'workflows' && (
+            <div className="w-full max-w-6xl mx-auto py-4 animate-in fade-in duration-300">
+              <WorkflowsView
+                workflows={data?.workflows || []}
+                projects={data?.projects || []}
+                isTvMode={isTvMode}
+              />
+            </div>
+          )}
+        </main>
+
+        {/* Floating Dock de Navegación Inferior (Estilo macOS / iPadOS) */}
+        <FloatingDock
+          currentView={currentView}
+          onSelectView={setCurrentView}
+          onOpenQuickAdd={() => setIsQuickAddOpen(true)}
+          isTvMode={isTvMode}
+        />
+
+        {/* Modal de Captura Rápida */}
+        {isQuickAddOpen && (
+          <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+            <div className="w-full max-w-lg relative">
+              <button
+                onClick={() => setIsQuickAddOpen(false)}
+                className="absolute -top-3 -right-3 z-50 w-7 h-7 rounded-full bg-slate-800 text-white flex items-center justify-center hover:bg-slate-700 text-sm font-bold shadow-lg"
+              >
+                ✕
+              </button>
+              <QuickAdd />
             </div>
           </div>
         )}
 
-        {activeTab === 'workflows' && (
-          <WorkflowsView
-            workflows={data?.workflows || []}
-            projects={data?.projects || []}
-            isTvMode={isTvMode}
-          />
-        )}
-      </main>
-
-      {/* Minimalistic ambient footer */}
-      <footer className="mt-8 flex items-center justify-between text-[11px] text-[var(--muted)] opacity-80 px-2 border-t border-[var(--line)] pt-3">
-        <div className="flex items-center gap-2">
-          <span className="font-semibold text-[var(--ink)]">TBH Ambient Dashboard</span>
-          <span>•</span>
-          <span>Obsidian Local-First · Two-Hemisphere System</span>
-        </div>
-        {data?.lastUpdated && (
-          <div>
-            Última sync:{' '}
-            {new Date(data.lastUpdated).toLocaleTimeString('es-AR', {
-              hour: '2-digit',
-              minute: '2-digit',
-              second: '2-digit'
-            })}
+        {/* Ambient Footer Info */}
+        <footer className="w-full flex items-center justify-between text-[11px] text-[var(--muted)] opacity-60 px-2 mt-4 select-none">
+          <div className="flex items-center gap-2">
+            <span>TBH Ambient Dashboard</span>
+            <span>•</span>
+            <span>Obsidian Two-Hemisphere</span>
           </div>
-        )}
-      </footer>
+          {data?.lastUpdated && (
+            <div>
+              Sync:{' '}
+              {new Date(data.lastUpdated).toLocaleTimeString('es-AR', {
+                hour: '2-digit',
+                minute: '2-digit'
+              })}
+            </div>
+          )}
+        </footer>
 
-      {/* Captura rápida (solo Modo Control) */}
-      {!isTvMode && <QuickAdd />}
-      <Toast toast={toast} />
-    </div>
+        <Toast toast={toast} />
+      </div>
     </ActionsProvider>
   );
 };

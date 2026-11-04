@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { CloudSun, Wind, Wifi, Maximize2, Minimize2, Tv, Smartphone, LayoutDashboard, Kanban, Cpu } from 'lucide-react';
+import {
+  Maximize2,
+  Minimize2,
+  Tv,
+  Smartphone,
+  Plus
+} from 'lucide-react';
 import type { WeatherData } from '../types';
 
 interface HeaderProps {
@@ -7,8 +13,8 @@ interface HeaderProps {
   isConnected: boolean;
   isTvMode: boolean;
   onToggleTvMode: () => void;
-  activeTab: 'today' | 'kanban' | 'workflows';
-  onSelectTab: (tab: 'today' | 'kanban' | 'workflows') => void;
+  onOpenQuickAdd: () => void;
+  currentBreadcrumb?: string;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -16,8 +22,8 @@ export const Header: React.FC<HeaderProps> = ({
   isConnected,
   isTvMode,
   onToggleTvMode,
-  activeTab,
-  onSelectTab
+  onOpenQuickAdd,
+  currentBreadcrumb = 'Home'
 }) => {
   const [time, setTime] = useState(new Date());
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -41,143 +47,81 @@ export const Header: React.FC<HeaderProps> = ({
     hour12: false
   });
 
-  const seconds = isTvMode
-    ? null
-    : time.toLocaleTimeString('es-AR', { second: '2-digit' });
-
   const formattedDate = time.toLocaleDateString('es-AR', {
     weekday: 'long',
-    day: 'numeric',
     month: 'long',
-    year: 'numeric'
+    day: 'numeric'
   });
 
   return (
-    <header className="mb-6">
-      {/* Top Nav Line */}
-      <div className="flex flex-wrap items-center justify-between gap-4 mb-4 pb-3 border-b border-[var(--line)]">
-        {/* Brand Wordmark */}
-        <div className="flex items-center gap-3">
-          <div className="w-7 h-7 rounded-full bg-[var(--accent)] flex items-center justify-center text-[#283135] font-black text-xs shadow-md">
-            TBH
-          </div>
-          <span className="text-sm font-medium tracking-wide text-[var(--ink)]">
-            Command Center <span className="text-[var(--muted)] opacity-60">· Obsidian HQ</span>
-          </span>
-        </div>
-
-        {/* Navigation Tabs (Hoy / Kanban / Workflows) */}
-        <nav className="flex items-center gap-1.5 p-1 rounded-xl bg-black/20 border border-[var(--line)]">
-          <button
-            onClick={() => onSelectTab('today')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all flex items-center gap-1.5 ${
-              activeTab === 'today'
-                ? 'bg-[#d4e4e1] text-[#233f45] font-semibold shadow-sm'
-                : 'text-[var(--muted)] hover:text-[var(--ink)]'
-            }`}
-          >
-            <LayoutDashboard className="w-3.5 h-3.5" />
-            <span>Hoy</span>
-          </button>
-          <button
-            onClick={() => onSelectTab('kanban')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all flex items-center gap-1.5 ${
-              activeTab === 'kanban'
-                ? 'bg-[#d4e4e1] text-[#233f45] font-semibold shadow-sm'
-                : 'text-[var(--muted)] hover:text-[var(--ink)]'
-            }`}
-          >
-            <Kanban className="w-3.5 h-3.5" />
-            <span>Proyectos</span>
-          </button>
-          <button
-            onClick={() => onSelectTab('workflows')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all flex items-center gap-1.5 ${
-              activeTab === 'workflows'
-                ? 'bg-[#d4e4e1] text-[#233f45] font-semibold shadow-sm'
-                : 'text-[var(--muted)] hover:text-[var(--ink)]'
-            }`}
-          >
-            <Cpu className="w-3.5 h-3.5" />
-            <span>Workflows IA</span>
-          </button>
-        </nav>
-
-        {/* Right Status & Controls */}
-        <div className="flex items-center gap-3">
-          {/* Live Sync Dot */}
-          <div
-            title={isConnected ? 'Sincronizado en tiempo real' : 'Reconectando...'}
-            className="flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium border border-[var(--line)] bg-[var(--surface)] text-[var(--muted)]"
-          >
-            <span
-              className={`w-2 h-2 rounded-full ${
-                isConnected ? 'bg-emerald-400 animate-pulse' : 'bg-rose-400'
-              }`}
-            />
-            <Wifi className="w-3 h-3" />
-            <span className="hidden sm:inline">{isConnected ? 'En vivo' : 'Offline'}</span>
-          </div>
-
-          {/* Mode Switcher */}
-          <button
-            onClick={onToggleTvMode}
-            className="action-btn text-xs !min-h-[34px] !py-1 !px-2.5"
-            title="Alternar Modo TV y Modo Control"
-          >
-            {isTvMode ? <Tv className="w-3.5 h-3.5 text-[var(--accent)]" /> : <Smartphone className="w-3.5 h-3.5 text-[var(--accent)]" />}
-            <span className="hidden sm:inline">{isTvMode ? 'TV Mode' : 'Control'}</span>
-          </button>
-
-          {/* Fullscreen Toggle */}
-          <button
-            onClick={toggleFullscreen}
-            className="p-1.5 rounded-lg border border-[var(--line)] bg-[var(--surface)] text-[var(--muted)] hover:text-[var(--ink)] transition-colors"
-            title="Pantalla completa"
-          >
-            {isFullscreen ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
-          </button>
-        </div>
+    <header className="w-full flex items-center justify-between py-2 text-xs text-[var(--muted)] select-none">
+      {/* Breadcrumb a la izquierda (EMAI / Home) */}
+      <div className="flex items-center gap-2">
+        <span className="font-bold tracking-wider text-[var(--ink)]">TBH</span>
+        <span className="opacity-40">/</span>
+        <span className="font-normal text-[var(--ink)]/90 capitalize">{currentBreadcrumb}</span>
+        
+        {/* Sync status dot */}
+        <span
+          className={`w-1.5 h-1.5 rounded-full ml-1.5 transition-colors ${
+            isConnected ? 'bg-emerald-400 shadow-[0_0_8px_#34d399]' : 'bg-rose-400 animate-ping'
+          }`}
+          title={isConnected ? 'Sincronizado en tiempo real' : 'Reconectando...'}
+        />
       </div>
 
-      {/* EMAI Masthead Clock & Weather */}
-      <div className="flex flex-wrap items-baseline justify-between gap-6 pt-2">
-        {/* Huge 72px Rubik Clock */}
-        <div className="flex items-baseline gap-4 md:gap-6">
-          <div className="flex items-baseline">
-            <span className="text-6xl md:text-7xl lg:text-8xl font-normal tracking-tight text-[var(--ink)] font-sans">
-              {hoursMinutes}
-            </span>
-            {seconds && (
-              <span className="text-2xl md:text-3xl font-light text-[var(--muted)] opacity-60 ml-1">
-                :{seconds}
-              </span>
-            )}
+      {/* Controles centrales discretos */}
+      <div className="flex items-center gap-2">
+        <button
+          onClick={toggleFullscreen}
+          className="p-1.5 rounded-lg hover:text-[var(--ink)] hover:bg-white/5 transition-colors opacity-70 hover:opacity-100"
+          title={isFullscreen ? 'Salir de pantalla completa' : 'Pantalla completa (F11)'}
+        >
+          {isFullscreen ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
+        </button>
+      </div>
+
+      {/* Lado derecho: Reloj + Fecha + Botón Acción + TV Toggle */}
+      <div className="flex items-center gap-3 md:gap-4">
+        {/* Clima sutil */}
+        {weather && (
+          <div className="hidden lg:flex items-center gap-1.5 text-xs text-[var(--muted)] opacity-80">
+            <span>{weather.city}:</span>
+            <span className="font-medium text-[var(--ink)]">{weather.temperature}°C</span>
           </div>
-          <span className="text-base md:text-lg text-[var(--muted)] capitalize font-normal">
+        )}
+
+        {/* Reloj y Fecha (Exacto a la captura) */}
+        <div className="flex items-baseline gap-2">
+          <span className="font-normal text-lg md:text-xl text-[var(--ink)] tracking-tight font-sans">
+            {hoursMinutes}
+          </span>
+          <span className="hidden sm:inline text-xs text-[var(--muted)] opacity-80 font-light capitalize">
             {formattedDate}
           </span>
         </div>
 
-        {/* Weather Glance Pill */}
-        {weather && (
-          <div className="flex items-center gap-3.5 px-4 py-2 rounded-xl bg-[var(--surface)] border border-[var(--line)]">
-            <CloudSun className="w-7 h-7 text-[var(--accent)] shrink-0" />
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="text-2xl font-bold text-[var(--ink)]">{weather.temperature}°C</span>
-                <span className="text-xs text-[var(--muted)]">({weather.city})</span>
-              </div>
-              <div className="flex items-center gap-2 text-xs text-[var(--muted)]">
-                <span>{weather.description}</span>
-                <span>•</span>
-                <span className="flex items-center gap-1">
-                  <Wind className="w-3 h-3 text-[var(--accent)]" /> {weather.windSpeed} km/h
-                </span>
-              </div>
-            </div>
-          </div>
-        )}
+        {/* Botón de acción rápida con borde sutil */}
+        <button
+          onClick={onOpenQuickAdd}
+          className="px-3 py-1 rounded-xl bg-white/[0.04] hover:bg-white/[0.1] border border-white/10 text-[var(--ink)] transition-all flex items-center gap-1.5 text-xs font-medium"
+        >
+          <Plus className="w-3.5 h-3.5 text-[var(--accent)]" />
+          <span className="hidden md:inline">Capturar</span>
+        </button>
+
+        {/* Toggle Modo TV */}
+        <button
+          onClick={onToggleTvMode}
+          className={`p-1.5 rounded-xl border transition-all ${
+            isTvMode
+              ? 'bg-[var(--accent)]/15 border-[var(--accent)]/40 text-[var(--accent)]'
+              : 'bg-white/[0.04] border-white/10 text-[var(--muted)] hover:text-white'
+          }`}
+          title={isTvMode ? 'Modo TV activado' : 'Modo Control activado'}
+        >
+          {isTvMode ? <Tv className="w-4 h-4" /> : <Smartphone className="w-4 h-4" />}
+        </button>
       </div>
     </header>
   );

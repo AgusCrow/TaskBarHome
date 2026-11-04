@@ -12,12 +12,17 @@
                   },
                   {
                       "from":  "client/src/App.tsx",
-                      "to":  "./components/NorthStarHero",
+                      "to":  "./components/DateStrip",
                       "type":  "import"
                   },
                   {
                       "from":  "client/src/App.tsx",
-                      "to":  "./components/DateStrip",
+                      "to":  "./components/StageHeroCarousel",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "client/src/App.tsx",
+                      "to":  "./components/FloatingDock",
                       "type":  "import"
                   },
                   {
@@ -186,6 +191,11 @@
                       "type":  "import"
                   },
                   {
+                      "from":  "client/src/components/StageHeroCarousel.tsx",
+                      "to":  "../types",
+                      "type":  "import"
+                  },
+                  {
                       "from":  "client/src/components/TaskRow.tsx",
                       "to":  "../types",
                       "type":  "import"
@@ -312,7 +322,7 @@
                   }
               ],
     "projectRoot":  "D:\\Proyectos\\TBH",
-    "generatedAt":  "2026-11-03 23:39:30",
+    "generatedAt":  "2026-11-04 00:34:51",
     "metrics":  {
                     "extensions":  {
                                        ".example":  1,
@@ -330,11 +340,11 @@
                                        ".gitignore":  1,
                                        ".woff2":  4,
                                        ".html":  2,
-                                       ".tsx":  19,
+                                       ".tsx":  21,
                                        ".svg":  9
                                    },
-                    "totalEdges":  62,
-                    "totalFiles":  125
+                    "totalEdges":  64,
+                    "totalFiles":  127
                 },
     "nodes":  [
                   {
@@ -346,7 +356,7 @@
                   },
                   {
                       "label":  ".gitignore",
-                      "sizeBytes":  418,
+                      "sizeBytes":  510,
                       "isHub":  false,
                       "id":  ".gitignore",
                       "type":  ".gitignore"
@@ -374,14 +384,14 @@
                   },
                   {
                       "label":  "graph.json",
-                      "sizeBytes":  28118,
+                      "sizeBytes":  49162,
                       "isHub":  false,
                       "id":  "graph.json",
                       "type":  ".json"
                   },
                   {
                       "label":  "GRAPH_REPORT.md",
-                      "sizeBytes":  4589,
+                      "sizeBytes":  5037,
                       "isHub":  false,
                       "id":  "GRAPH_REPORT.md",
                       "type":  ".md"
@@ -416,7 +426,7 @@
                   },
                   {
                       "label":  "repomix-output.xml",
-                      "sizeBytes":  2027973,
+                      "sizeBytes":  310549,
                       "isHub":  false,
                       "id":  "repomix-output.xml",
                       "type":  ".xml"
@@ -479,7 +489,7 @@
                   },
                   {
                       "label":  "App.tsx",
-                      "sizeBytes":  9489,
+                      "sizeBytes":  11636,
                       "isHub":  true,
                       "id":  "client/src/App.tsx",
                       "type":  ".tsx"
@@ -521,9 +531,16 @@
                   },
                   {
                       "label":  "DateStrip.tsx",
-                      "sizeBytes":  3035,
+                      "sizeBytes":  4247,
                       "isHub":  false,
                       "id":  "client/src/components/DateStrip.tsx",
+                      "type":  ".tsx"
+                  },
+                  {
+                      "label":  "FloatingDock.tsx",
+                      "sizeBytes":  2863,
+                      "isHub":  false,
+                      "id":  "client/src/components/FloatingDock.tsx",
                       "type":  ".tsx"
                   },
                   {
@@ -542,7 +559,7 @@
                   },
                   {
                       "label":  "Header.tsx",
-                      "sizeBytes":  7219,
+                      "sizeBytes":  4498,
                       "isHub":  false,
                       "id":  "client/src/components/Header.tsx",
                       "type":  ".tsx"
@@ -573,6 +590,13 @@
                       "sizeBytes":  6681,
                       "isHub":  false,
                       "id":  "client/src/components/QuickAdd.tsx",
+                      "type":  ".tsx"
+                  },
+                  {
+                      "label":  "StageHeroCarousel.tsx",
+                      "sizeBytes":  12594,
+                      "isHub":  false,
+                      "id":  "client/src/components/StageHeroCarousel.tsx",
                       "type":  ".tsx"
                   },
                   {
@@ -1102,7 +1126,7 @@
                   },
                   {
                       "label":  "2026-11-03.md",
-                      "sizeBytes":  512,
+                      "sizeBytes":  513,
                       "isHub":  false,
                       "id":  "vault/00 Human/10 Daily Notes/2026-11-03.md",
                       "type":  ".md"
