@@ -197,6 +197,7 @@ export function parseNotes(content: string, filename: string): NoteItem {
   return {
     id: `note-${filename.toLowerCase().replace(/[^a-z0-9]/g, '-')}`,
     title: cleanTitle.charAt(0).toUpperCase() + cleanTitle.slice(1),
+    file: filename,
     sections: sections.map(s => ({ title: s.title, content: s.content.trim() })),
     raw: content
   };

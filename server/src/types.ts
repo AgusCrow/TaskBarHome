@@ -1,4 +1,3 @@
-/** Referencia a una línea concreta de un archivo de la bóveda (para escribir de vuelta). */
 export interface LineRef {
   file: string;
   line: number;
@@ -47,6 +46,7 @@ export interface NoteSection {
 export interface NoteItem {
   id: string;
   title: string;
+  file: string;
   sections: NoteSection[];
   raw: string;
 }
@@ -76,6 +76,32 @@ export interface WeatherData {
   updatedAt: string;
 }
 
+export interface DailyFocus {
+  date: string;
+  focus: string;
+  energyScore?: number;
+  focusQualityScore?: number;
+  file?: string;
+}
+
+export interface ProjectItem {
+  id: string;
+  title: string;
+  file: string;
+  status: 'active' | 'complete' | string;
+  type?: string;
+  area?: string;
+  tags: string[];
+}
+
+export interface WorkflowItem {
+  id: string;
+  name: string;
+  path: string;
+  findingsCount: number;
+  lastOutput?: string;
+}
+
 export interface DashboardPayload {
   kanban: KanbanBoard | null;
   tasks: TaskItem[];
@@ -84,5 +110,8 @@ export interface DashboardPayload {
   timers: TimerItem[];
   weather: WeatherData | null;
   photos: string[];
+  dailyFocus: DailyFocus | null;
+  projects: ProjectItem[];
+  workflows: WorkflowItem[];
   lastUpdated: string;
 }

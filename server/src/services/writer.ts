@@ -48,10 +48,24 @@ interface Doc {
 }
 
 function resolveFile(vault: string, file: string): string {
-  if (!file || path.basename(file) !== file || !file.toLowerCase().endsWith('.md')) {
+  if (!file || !file.toLowerCase().endsWith('.md')) {
     throw new WriteError(400, 'Archivo inválido');
   }
-  return path.join(vault, file);
+  const clean = file.replace(/\\/g, '/');
+  if (clean.includes('..')) {
+    throw new WriteError(400, 'Ruta no permitida');
+  }
+
+  const direct = path.join(vault, clean);
+  if (fs.existsSync(direct)) return direct;
+
+  const inHuman = path.join(vault, '00 Human', clean);
+  if (fs.existsSync(inHuman)) return inHuman;
+
+  const inProj = path.join(vault, '00 Human', '30 Projects', clean);
+  if (fs.existsSync(inProj)) return inProj;
+
+  return direct;
 }
 
 function readDoc(vault: string, file: string): Doc {
@@ -96,10 +110,17 @@ function checkRef(doc: Doc, ref: LineRef): void {
 
 function listMd(vault: string): string[] {
   if (!fs.existsSync(vault)) throw new WriteError(500, 'La bóveda no existe en el servidor');
-  return fs
-    .readdirSync(vault, { withFileTypes: true })
-    .filter(e => e.isFile() && e.name.toLowerCase().endsWith('.md'))
-    .map(e => e.name);
+  const files: string[] = [];
+  const scan = (dir: string, rel: string = '') => {
+    for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+      if (e.name.startsWith('.') || e.name === 'node_modules') continue;
+      const subRel = rel ? `${rel}/${e.name}` : e.name;
+      if (e.isDirectory()) scan(path.join(dir, e.name), subRel);
+      else if (e.isFile() && e.name.toLowerCase().endsWith('.md')) files.push(subRel);
+    }
+  };
+  scan(vault);
+  return files;
 }
 
 /** Busca un archivo por nombre; si no existe devuelve el nombre por defecto (se crea al escribir). */

@@ -2,55 +2,95 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --deep: #162a30;
+  --surface: #20393f;
+  --accent: #f1bc90;
+  --ink: #f4f5f1;
+  --muted: #c4d5d8;
+  --line: rgba(230, 244, 245, 0.24);
+}
+
 @layer base {
   body {
     @apply antialiased select-none;
-    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    background-color: var(--deep);
+    color: var(--ink);
+    font-family: 'Rubik', sans-serif;
   }
 }
 
 .glass-panel {
-  background: rgba(15, 23, 42, 0.72);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  background: rgba(32, 57, 63, 0.65);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--line);
+  box-shadow: 0 12px 36px 0 rgba(10, 20, 25, 0.45);
 }
 
 .glass-panel-subtle {
-  background: rgba(30, 41, 59, 0.5);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(25, 46, 52, 0.45);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(230, 244, 245, 0.12);
 }
 
-.glow-border {
-  box-shadow: 0 0 20px -3px rgba(56, 189, 248, 0.25);
+.emai-card {
+  background: rgba(32, 57, 63, 0.55);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  transition: all 0.2s ease;
 }
 
-/* Custom scrollbars */
+.emai-card:hover {
+  border-color: rgba(241, 188, 144, 0.4);
+  background: rgba(36, 64, 71, 0.75);
+}
+
+.action-btn {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  min-height: 40px;
+  padding: 8px 16px;
+  background: rgba(21, 42, 49, 0.5);
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.action-btn:hover {
+  background: #2a4e57;
+  transform: translateY(-1px);
+}
+
+.action-btn.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #283135;
+  font-weight: 600;
+}
+
+.action-btn.primary:hover {
+  background: #ffd3ad;
+}
+
+/* Custom scrollbars matching EMAI */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: rgba(15, 23, 42, 0.3);
+  background: rgba(22, 42, 48, 0.3);
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(148, 163, 184, 0.3);
+  background: rgba(196, 213, 216, 0.25);
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(148, 163, 184, 0.5);
-}
-/* La TV no permite seleccionar texto, pero los campos de formulario sí deben poder escribirse */
-input,
-textarea {
-  -webkit-user-select: text;
-  user-select: text;
-}
-
-/* Respeta la barra de gestos en celulares con notch */
-.safe-bottom {
-  padding-bottom: env(safe-area-inset-bottom, 0px);
+  background: rgba(241, 188, 144, 0.45);
 }

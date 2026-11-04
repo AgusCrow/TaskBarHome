@@ -7,19 +7,25 @@ export default {
   theme: {
     extend: {
       colors: {
-        tv: {
-          bg: '#090d16',
-          panel: 'rgba(15, 23, 42, 0.75)',
-          panelBorder: 'rgba(255, 255, 255, 0.12)',
-          accent: '#38bdf8',
-          accentGlow: 'rgba(56, 189, 248, 0.25)',
+        emai: {
+          deep: '#162a30',
+          deeper: '#0f2026',
+          surface: '#20393f',
+          surfaceHover: '#2a4a52',
+          accent: '#f1bc90',
+          accentHover: '#ffd3ad',
+          accentDark: '#283135',
+          ink: '#f4f5f1',
+          muted: '#c4d5d8',
+          line: 'rgba(230, 244, 245, 0.24)',
+          cardBg: 'rgba(32, 57, 63, 0.72)',
         }
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['Rubik', 'Inter', 'system-ui', 'sans-serif'],
+        mono: ['JetBrains Mono', 'monospace'],
       }
     },
   },
   plugins: [],
 }
-

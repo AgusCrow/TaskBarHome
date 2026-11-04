@@ -21,7 +21,7 @@ const Card: React.FC<{
   tone: string;
   children: React.ReactNode;
 }> = ({ icon, title, count, tone, children }) => (
-  <div className="glass-panel rounded-2xl p-4 flex flex-col min-h-[140px]">
+  <div className="emai-card p-4 flex flex-col min-h-[140px] border border-[var(--line)]">
     <div className="flex items-center justify-between mb-3">
       <div className={`flex items-center gap-2 font-bold text-sm uppercase tracking-wider ${tone}`}>
         {icon}

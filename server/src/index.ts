@@ -78,6 +78,9 @@ async function buildDashboardPayload(): Promise<DashboardPayload> {
     timers,
     weather,
     photos,
+    dailyFocus: vault.dailyFocus,
+    projects: vault.projects,
+    workflows: vault.workflows,
     lastUpdated: new Date().toISOString()
   };
 }

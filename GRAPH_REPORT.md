@@ -6,23 +6,27 @@ Generated automatically by Graphify.
 
 ## 1. Architectural Metrics
 
-* Total Scanned Files: 60
-* Total Module Relationships: 55
+* Total Scanned Files: 125
+* Total Module Relationships: 62
 
 ### File Breakdown by Extension
 * **.example**: 1 files
 * **.gitkeep**: 1 files
 * **[no-ext]**: 1 files
 * **.ts**: 13 files
-* **.json**: 10 files
+* **.zip**: 1 files
 * **.xml**: 1 files
-* **.js**: 2 files
-* **.md**: 11 files
+* **.js**: 6 files
+* **.md**: 48 files
+* **.json**: 10 files
 * **.yml**: 1 files
-* **.css**: 1 files
+* **.css**: 5 files
+* **.webp**: 2 files
 * **.gitignore**: 1 files
-* **.html**: 1 files
-* **.tsx**: 16 files
+* **.woff2**: 4 files
+* **.html**: 2 files
+* **.tsx**: 19 files
+* **.svg**: 9 files
 
 ---
 
@@ -36,6 +40,10 @@ Generated automatically by Graphify.
 * client/src/App.tsx
 * client/src/index.css
 * client/src/main.tsx
+* EMAI FREE Starter Vault/Machine/Outputs/README.md
+* EMAI FREE Starter Vault/Machine/Workflows/Client Update/README.md
+* EMAI FREE Starter Vault/Machine/Workflows/Client Update/output/README.md
+* hq.easymachineai.com-1793757763290/index.html
 * server/package-lock.json
 * server/package.json
 * server/tsconfig.json
@@ -47,6 +55,9 @@ Generated automatically by Graphify.
 * server/src/services/vault.ts
 * server/src/services/weather.ts
 * server/src/services/writer.ts
+* vault/Machine/Outputs/README.md
+* vault/Machine/Workflows/Client Update/README.md
+* vault/Machine/Workflows/Client Update/output/README.md
 
 ---
 
@@ -56,6 +67,9 @@ Generated automatically by Graphify.
 flowchart TD
     client_src_App_tsx["client/src/App.tsx"] --> __components_AmbientBackground["./components/AmbientBackground"]
     client_src_App_tsx["client/src/App.tsx"] --> __components_Header["./components/Header"]
+    client_src_App_tsx["client/src/App.tsx"] --> __components_NorthStarHero["./components/NorthStarHero"]
+    client_src_App_tsx["client/src/App.tsx"] --> __components_DateStrip["./components/DateStrip"]
+    client_src_App_tsx["client/src/App.tsx"] --> __components_WorkflowsView["./components/WorkflowsView"]
     client_src_App_tsx["client/src/App.tsx"] --> __components_KanbanWidget["./components/KanbanWidget"]
     client_src_App_tsx["client/src/App.tsx"] --> __components_TasksWidget["./components/TasksWidget"]
     client_src_App_tsx["client/src/App.tsx"] --> __components_CalendarWidget["./components/CalendarWidget"]
@@ -73,17 +87,14 @@ flowchart TD
     client_src_components_CalendarWidget_tsx["client/src/components/CalendarWidget.tsx"] --> ___lib_actions["../lib/actions"]
     client_src_components_CalendarWidget_tsx["client/src/components/CalendarWidget.tsx"] --> ___lib_useToday["../lib/useToday"]
     client_src_components_CalendarWidget_tsx["client/src/components/CalendarWidget.tsx"] --> ___lib_dates["../lib/dates"]
+    client_src_components_DateStrip_tsx["client/src/components/DateStrip.tsx"] --> ___types["../types"]
+    client_src_components_DateStrip_tsx["client/src/components/DateStrip.tsx"] --> ___lib_useToday["../lib/useToday"]
     client_src_components_FocusPanel_tsx["client/src/components/FocusPanel.tsx"] --> ___types["../types"]
     client_src_components_FocusPanel_tsx["client/src/components/FocusPanel.tsx"] --> ___lib_actions["../lib/actions"]
     client_src_components_FocusPanel_tsx["client/src/components/FocusPanel.tsx"] --> ___lib_useToday["../lib/useToday"]
     client_src_components_FocusPanel_tsx["client/src/components/FocusPanel.tsx"] --> ___lib_dates["../lib/dates"]
     client_src_components_FocusPanel_tsx["client/src/components/FocusPanel.tsx"] --> __TaskRow["./TaskRow"]
     client_src_components_GamificationWidget_tsx["client/src/components/GamificationWidget.tsx"] --> ___types["../types"]
-    client_src_components_Header_tsx["client/src/components/Header.tsx"] --> ___types["../types"]
-    client_src_components_KanbanWidget_tsx["client/src/components/KanbanWidget.tsx"] --> ___types["../types"]
-    client_src_components_KanbanWidget_tsx["client/src/components/KanbanWidget.tsx"] --> ___lib_actions["../lib/actions"]
-    client_src_components_NotesWidget_tsx["client/src/components/NotesWidget.tsx"] --> ___types["../types"]
-    client_src_components_QuickAdd_tsx["client/src/components/QuickAdd.tsx"] --> ___lib_actions["../lib/actions"]
 ```
 
 ---

@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { AmbientBackground } from './components/AmbientBackground';
 import { Header } from './components/Header';
+import { NorthStarHero } from './components/NorthStarHero';
+import { DateStrip } from './components/DateStrip';
+import { WorkflowsView } from './components/WorkflowsView';
 import { KanbanWidget } from './components/KanbanWidget';
 import { TasksWidget } from './components/TasksWidget';
 import { CalendarWidget } from './components/CalendarWidget';
@@ -34,6 +37,8 @@ export const App: React.FC = () => {
   const [data, setData] = useState<DashboardPayload | null>(null);
   const [isConnected, setIsConnected] = useState(false);
   const [isTvMode, setIsTvMode] = useState(initialIsTvMode);
+  const [activeTab, setActiveTab] = useState<'today' | 'kanban' | 'workflows'>('today');
+  const [selectedDate, setSelectedDate] = useState<string>(() => new Intl.DateTimeFormat('en-CA').format(new Date()));
   const [toast, setToast] = useState<ToastState | null>(null);
   const wsRef = useRef<WebSocket | null>(null);
   const toastTimer = useRef<ReturnType<typeof setTimeout>>();
@@ -53,6 +58,18 @@ export const App: React.FC = () => {
       }
       return !prev;
     });
+
+  const handleStartFocusTimer = () => {
+    const focusTimer = data?.timers.find((t) => /focus|pomodoro|enfoque/i.test(t.label));
+    if (focusTimer) {
+      handleTimerAction(focusTimer.id, 'start');
+      notify(`Iniciando ${focusTimer.label}`);
+    } else {
+      const id = `focus-${Date.now()}`;
+      handleTimerAction(id, 'custom', 25, 'Focus Deep Work');
+      notify('Timer de foco (25m) iniciado');
+    }
+  };
 
   // Initial fetch as fallback
   useEffect(() => {
@@ -139,16 +156,18 @@ export const App: React.FC = () => {
 
   return (
     <ActionsProvider notify={notify}>
-    <div className="min-h-screen text-slate-100 p-4 md:p-6 lg:p-8 flex flex-col justify-between relative selection:bg-sky-500 selection:text-white">
+    <div className="min-h-screen text-[var(--ink)] p-4 md:p-6 lg:p-8 flex flex-col justify-between relative selection:bg-[var(--accent)] selection:text-[#162a30]">
       {/* Dynamic Background Slideshow */}
       <AmbientBackground photos={data?.photos || []} />
 
-      {/* Header with Clock, Weather, TV toggle & Status */}
+      {/* Header with Masthead Clock, Weather, TV toggle & Tabs */}
       <Header
         weather={data?.weather || null}
         isConnected={isConnected}
         isTvMode={isTvMode}
         onToggleTvMode={toggleMode}
+        activeTab={activeTab}
+        onSelectTab={setActiveTab}
       />
 
       {/* Aviso cuando termina un temporizador */}
@@ -158,45 +177,76 @@ export const App: React.FC = () => {
         onDismiss={(id) => handleTimerAction(id, 'reset')}
       />
 
-      {/* Barra de Gamificación (Rachas, XP y Progreso) */}
-      <GamificationWidget tasks={data?.tasks || []} isTvMode={isTvMode} />
-
-      {/* Hoy / Foco: lo que requiere atención ahora */}
-      <FocusPanel data={data} isTvMode={isTvMode} />
-
-      {/* Main Grid Content */}
+      {/* Main Content Area based on Active Tab */}
       <main className="flex-1 flex flex-col gap-6">
-        {/* Kanban Board Section */}
-        <section className="w-full">
-          <KanbanWidget board={data?.kanban || null} isTvMode={isTvMode} />
-        </section>
-
-        {/* 3-Column Lower Dashboard Grid */}
-        <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 flex-1">
-          {/* Column 1: Tasks & Quehaceres */}
-          <TasksWidget tasks={data?.tasks || []} isTvMode={isTvMode} />
-
-          {/* Column 2: Calendar & Events */}
-          <CalendarWidget events={data?.calendar || []} isTvMode={isTvMode} />
-
-          {/* Column 3: Timers & Notes */}
-          <div className="flex flex-col gap-6">
-            <TimersWidget
-              timers={data?.timers || []}
-              onTimerAction={handleTimerAction}
+        {activeTab === 'today' && (
+          <>
+            {/* North Star Hero: Next Move / Objetivo Prioritario del Día */}
+            <NorthStarHero
+              dailyFocus={data?.dailyFocus || null}
               isTvMode={isTvMode}
+              onStartFocusTimer={handleStartFocusTimer}
             />
-            <NotesWidget notes={data?.notes || []} isTvMode={isTvMode} />
+
+            {/* DateStrip Selector */}
+            <DateStrip
+              events={data?.calendar || []}
+              selectedDate={selectedDate}
+              onSelectDate={setSelectedDate}
+            />
+
+            {/* Barra de Gamificación (Rachas, XP y Progreso) */}
+            <GamificationWidget tasks={data?.tasks || []} isTvMode={isTvMode} />
+
+            {/* Hoy / Foco: lo que requiere atención ahora */}
+            <FocusPanel data={data} isTvMode={isTvMode} />
+
+            {/* 3-Column Bento Dashboard Grid */}
+            <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 flex-1">
+              {/* Column 1: Tasks & Quehaceres */}
+              <TasksWidget tasks={data?.tasks || []} isTvMode={isTvMode} />
+
+              {/* Column 2: Calendar & Events */}
+              <CalendarWidget events={data?.calendar || []} isTvMode={isTvMode} />
+
+              {/* Column 3: Timers & Notes */}
+              <div className="flex flex-col gap-6">
+                <TimersWidget
+                  timers={data?.timers || []}
+                  onTimerAction={handleTimerAction}
+                  isTvMode={isTvMode}
+                />
+                <NotesWidget notes={data?.notes || []} isTvMode={isTvMode} />
+              </div>
+            </section>
+          </>
+        )}
+
+        {activeTab === 'kanban' && (
+          <div className="space-y-6">
+            <KanbanWidget board={data?.kanban || null} isTvMode={isTvMode} />
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <TasksWidget tasks={data?.tasks || []} isTvMode={isTvMode} />
+              <NotesWidget notes={data?.notes || []} isTvMode={isTvMode} />
+            </div>
           </div>
-        </section>
+        )}
+
+        {activeTab === 'workflows' && (
+          <WorkflowsView
+            workflows={data?.workflows || []}
+            projects={data?.projects || []}
+            isTvMode={isTvMode}
+          />
+        )}
       </main>
 
       {/* Minimalistic ambient footer */}
-      <footer className="mt-6 flex items-center justify-between text-[11px] text-slate-400/80 px-2">
+      <footer className="mt-8 flex items-center justify-between text-[11px] text-[var(--muted)] opacity-80 px-2 border-t border-[var(--line)] pt-3">
         <div className="flex items-center gap-2">
-          <span className="font-semibold text-slate-300">TBH Ambient Dashboard</span>
+          <span className="font-semibold text-[var(--ink)]">TBH Ambient Dashboard</span>
           <span>•</span>
-          <span>Obsidian Local-First</span>
+          <span>Obsidian Local-First · Two-Hemisphere System</span>
         </div>
         {data?.lastUpdated && (
           <div>

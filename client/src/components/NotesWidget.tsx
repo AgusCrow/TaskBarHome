@@ -9,13 +9,13 @@ interface NotesWidgetProps {
 
 export const NotesWidget: React.FC<NotesWidgetProps> = ({ notes, isTvMode = false }) => {
   return (
-    <div className="glass-panel rounded-2xl p-5 flex flex-col h-full">
-      <div className="flex items-center justify-between mb-4 border-b border-slate-700/60 pb-3">
+    <div className="emai-card p-5 flex flex-col h-full">
+      <div className="flex items-center justify-between mb-4 border-b border-[var(--line)] pb-3">
         <div className="flex items-center gap-2.5">
-          <StickyNote className="w-5 h-5 text-amber-300" />
-          <h2 className="font-bold text-lg text-white tracking-wide">Notas & Recordatorios</h2>
+          <StickyNote className="w-5 h-5 text-[var(--accent)]" />
+          <h2 className="font-medium text-lg text-[var(--ink)] tracking-tight">Notas & Contexto</h2>
         </div>
-        <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-300 border border-amber-500/30">
+        <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-[var(--accent)]/15 text-[var(--accent)] border border-[var(--accent)]/30">
           {notes.length} documentos
         </span>
       </div>
@@ -25,20 +25,20 @@ export const NotesWidget: React.FC<NotesWidgetProps> = ({ notes, isTvMode = fals
           note.sections.map((section, idx) => (
             <div
               key={`${note.id}-${idx}`}
-              className={`p-3.5 rounded-xl bg-amber-950/20 border border-amber-800/30 text-amber-100 flex flex-col justify-between shadow-sm hover:border-amber-700/50 transition-colors ${
+              className={`p-3.5 rounded-xl bg-black/25 border border-[var(--line)] text-[var(--ink)] flex flex-col justify-between shadow-sm hover:border-[var(--accent)]/40 transition-colors ${
                 isTvMode ? 'text-sm' : 'text-xs'
               }`}
             >
               <div>
-                <h3 className="font-bold text-amber-300 text-sm mb-1.5 flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+                <h3 className="font-medium text-[var(--accent)] text-sm mb-1.5 flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)]" />
                   {section.title}
                 </h3>
-                <p className="whitespace-pre-line text-slate-200 leading-relaxed font-sans opacity-90">
+                <p className="whitespace-pre-line text-[var(--muted)] leading-relaxed font-sans opacity-95">
                   {section.content}
                 </p>
               </div>
-              <div className="mt-2.5 pt-2 border-t border-amber-900/40 text-[10px] text-amber-400/60 font-mono">
+              <div className="mt-2.5 pt-2 border-t border-[var(--line)] text-[10px] text-[var(--muted)]/60 font-mono">
                 Origen: {note.title}
               </div>
             </div>
@@ -46,9 +46,9 @@ export const NotesWidget: React.FC<NotesWidgetProps> = ({ notes, isTvMode = fals
         )}
 
         {notes.length === 0 && (
-          <div className="col-span-full flex flex-col items-center justify-center py-8 text-slate-400 text-sm">
-            <StickyNote className="w-8 h-8 text-amber-400 mb-2 opacity-50" />
-            <p>No se encontraron notas en `notes.md`</p>
+          <div className="col-span-full flex flex-col items-center justify-center py-8 text-[var(--muted)] text-sm">
+            <StickyNote className="w-8 h-8 text-[var(--accent)]/30 mb-2" />
+            <p>No se encontraron notas en `00 Human/notes.md`</p>
           </div>
         )}
       </div>

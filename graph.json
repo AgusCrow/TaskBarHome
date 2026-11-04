@@ -12,6 +12,21 @@
                   },
                   {
                       "from":  "client/src/App.tsx",
+                      "to":  "./components/NorthStarHero",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "client/src/App.tsx",
+                      "to":  "./components/DateStrip",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "client/src/App.tsx",
+                      "to":  "./components/WorkflowsView",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "client/src/App.tsx",
                       "to":  "./components/KanbanWidget",
                       "type":  "import"
                   },
@@ -96,6 +111,16 @@
                       "type":  "import"
                   },
                   {
+                      "from":  "client/src/components/DateStrip.tsx",
+                      "to":  "../types",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "client/src/components/DateStrip.tsx",
+                      "to":  "../lib/useToday",
+                      "type":  "import"
+                  },
+                  {
                       "from":  "client/src/components/FocusPanel.tsx",
                       "to":  "../types",
                       "type":  "import"
@@ -138,6 +163,11 @@
                   {
                       "from":  "client/src/components/KanbanWidget.tsx",
                       "to":  "../lib/actions",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "client/src/components/NorthStarHero.tsx",
+                      "to":  "../types",
                       "type":  "import"
                   },
                   {
@@ -197,6 +227,11 @@
                   },
                   {
                       "from":  "client/src/components/TimersWidget.tsx",
+                      "to":  "../types",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "client/src/components/WorkflowsView.tsx",
                       "to":  "../types",
                       "type":  "import"
                   },
@@ -277,25 +312,29 @@
                   }
               ],
     "projectRoot":  "D:\\Proyectos\\TBH",
-    "generatedAt":  "2026-11-03 22:27:23",
+    "generatedAt":  "2026-11-03 23:39:30",
     "metrics":  {
                     "extensions":  {
                                        ".example":  1,
                                        ".gitkeep":  1,
                                        "[no-ext]":  1,
                                        ".ts":  13,
-                                       ".json":  10,
+                                       ".zip":  1,
                                        ".xml":  1,
-                                       ".js":  2,
-                                       ".md":  11,
+                                       ".js":  6,
+                                       ".md":  48,
+                                       ".json":  10,
                                        ".yml":  1,
-                                       ".css":  1,
+                                       ".css":  5,
+                                       ".webp":  2,
                                        ".gitignore":  1,
-                                       ".html":  1,
-                                       ".tsx":  16
+                                       ".woff2":  4,
+                                       ".html":  2,
+                                       ".tsx":  19,
+                                       ".svg":  9
                                    },
-                    "totalEdges":  55,
-                    "totalFiles":  60
+                    "totalEdges":  62,
+                    "totalFiles":  125
                 },
     "nodes":  [
                   {
@@ -335,17 +374,24 @@
                   },
                   {
                       "label":  "graph.json",
-                      "sizeBytes":  18216,
+                      "sizeBytes":  28118,
                       "isHub":  false,
                       "id":  "graph.json",
                       "type":  ".json"
                   },
                   {
                       "label":  "GRAPH_REPORT.md",
-                      "sizeBytes":  3842,
+                      "sizeBytes":  4589,
                       "isHub":  false,
                       "id":  "GRAPH_REPORT.md",
                       "type":  ".md"
+                  },
+                  {
+                      "label":  "hq.easymachineai.com-1793757763290.zip",
+                      "sizeBytes":  1308127,
+                      "isHub":  false,
+                      "id":  "hq.easymachineai.com-1793757763290.zip",
+                      "type":  ".zip"
                   },
                   {
                       "label":  "package-lock.json",
@@ -370,7 +416,7 @@
                   },
                   {
                       "label":  "repomix-output.xml",
-                      "sizeBytes":  200873,
+                      "sizeBytes":  2027973,
                       "isHub":  false,
                       "id":  "repomix-output.xml",
                       "type":  ".xml"
@@ -384,7 +430,7 @@
                   },
                   {
                       "label":  "index.html",
-                      "sizeBytes":  725,
+                      "sizeBytes":  758,
                       "isHub":  true,
                       "id":  "client/index.html",
                       "type":  ".html"
@@ -412,7 +458,7 @@
                   },
                   {
                       "label":  "tailwind.config.js",
-                      "sizeBytes":  516,
+                      "sizeBytes":  734,
                       "isHub":  false,
                       "id":  "client/tailwind.config.js",
                       "type":  ".js"
@@ -433,14 +479,14 @@
                   },
                   {
                       "label":  "App.tsx",
-                      "sizeBytes":  7407,
+                      "sizeBytes":  9489,
                       "isHub":  true,
                       "id":  "client/src/App.tsx",
                       "type":  ".tsx"
                   },
                   {
                       "label":  "index.css",
-                      "sizeBytes":  1264,
+                      "sizeBytes":  1905,
                       "isHub":  true,
                       "id":  "client/src/index.css",
                       "type":  ".css"
@@ -454,7 +500,7 @@
                   },
                   {
                       "label":  "types.ts",
-                      "sizeBytes":  1587,
+                      "sizeBytes":  2045,
                       "isHub":  false,
                       "id":  "client/src/types.ts",
                       "type":  ".ts"
@@ -468,14 +514,21 @@
                   },
                   {
                       "label":  "CalendarWidget.tsx",
-                      "sizeBytes":  10152,
+                      "sizeBytes":  10176,
                       "isHub":  false,
                       "id":  "client/src/components/CalendarWidget.tsx",
                       "type":  ".tsx"
                   },
                   {
+                      "label":  "DateStrip.tsx",
+                      "sizeBytes":  3035,
+                      "isHub":  false,
+                      "id":  "client/src/components/DateStrip.tsx",
+                      "type":  ".tsx"
+                  },
+                  {
                       "label":  "FocusPanel.tsx",
-                      "sizeBytes":  6838,
+                      "sizeBytes":  6852,
                       "isHub":  false,
                       "id":  "client/src/components/FocusPanel.tsx",
                       "type":  ".tsx"
@@ -489,21 +542,28 @@
                   },
                   {
                       "label":  "Header.tsx",
-                      "sizeBytes":  4532,
+                      "sizeBytes":  7219,
                       "isHub":  false,
                       "id":  "client/src/components/Header.tsx",
                       "type":  ".tsx"
                   },
                   {
                       "label":  "KanbanWidget.tsx",
-                      "sizeBytes":  8682,
+                      "sizeBytes":  8706,
                       "isHub":  false,
                       "id":  "client/src/components/KanbanWidget.tsx",
                       "type":  ".tsx"
                   },
                   {
+                      "label":  "NorthStarHero.tsx",
+                      "sizeBytes":  3262,
+                      "isHub":  false,
+                      "id":  "client/src/components/NorthStarHero.tsx",
+                      "type":  ".tsx"
+                  },
+                  {
                       "label":  "NotesWidget.tsx",
-                      "sizeBytes":  2379,
+                      "sizeBytes":  2436,
                       "isHub":  false,
                       "id":  "client/src/components/NotesWidget.tsx",
                       "type":  ".tsx"
@@ -524,7 +584,7 @@
                   },
                   {
                       "label":  "TasksWidget.tsx",
-                      "sizeBytes":  4312,
+                      "sizeBytes":  4336,
                       "isHub":  false,
                       "id":  "client/src/components/TasksWidget.tsx",
                       "type":  ".tsx"
@@ -538,7 +598,7 @@
                   },
                   {
                       "label":  "TimersWidget.tsx",
-                      "sizeBytes":  7633,
+                      "sizeBytes":  7704,
                       "isHub":  false,
                       "id":  "client/src/components/TimersWidget.tsx",
                       "type":  ".tsx"
@@ -548,6 +608,13 @@
                       "sizeBytes":  977,
                       "isHub":  false,
                       "id":  "client/src/components/Toast.tsx",
+                      "type":  ".tsx"
+                  },
+                  {
+                      "label":  "WorkflowsView.tsx",
+                      "sizeBytes":  5969,
+                      "isHub":  false,
+                      "id":  "client/src/components/WorkflowsView.tsx",
                       "type":  ".tsx"
                   },
                   {
@@ -577,6 +644,300 @@
                       "isHub":  false,
                       "id":  "client/src/lib/useToday.ts",
                       "type":  ".ts"
+                  },
+                  {
+                      "label":  "AGENTS.md",
+                      "sizeBytes":  799,
+                      "isHub":  false,
+                      "id":  "EMAI FREE Starter Vault/AGENTS.md",
+                      "type":  ".md"
+                  },
+                  {
+                      "label":  "CLAUDE.md",
+                      "sizeBytes":  112,
+                      "isHub":  false,
+                      "id":  "EMAI FREE Starter Vault/CLAUDE.md",
+                      "type":  ".md"
+                  },
+                  {
+                      "label":  "Home.md",
+                      "sizeBytes":  440,
+                      "isHub":  false,
+                      "id":  "EMAI FREE Starter Vault/Home.md",
+                      "type":  ".md"
+                  },
+                  {
+                      "label":  "START HERE.md",
+                      "sizeBytes":  1726,
+                      "isHub":  false,
+                      "id":  "EMAI FREE Starter Vault/START HERE.md",
+                      "type":  ".md"
+                  },
+                  {
+                      "label":  "Example Day.md",
+                      "sizeBytes":  360,
+                      "isHub":  false,
+                      "id":  "EMAI FREE Starter Vault/00 Human/10 Daily Notes/Example Day.md",
+                      "type":  ".md"
+                  },
+                  {
+                      "label":  "Client Website.md",
+                      "sizeBytes":  593,
+                      "isHub":  false,
+                      "id":  "EMAI FREE Starter Vault/00 Human/30 Projects/Client Website.md",
+                      "type":  ".md"
+                  },
+                  {
+                      "label":  "Completed Example.md",
+                      "sizeBytes":  268,
+                      "isHub":  false,
+                      "id":  "EMAI FREE Starter Vault/00 Human/30 Projects/Completed Example.md",
+                      "type":  ".md"
+                  },
+                  {
+                      "label":  "Business Context.md",
+                      "sizeBytes":  384,
+                      "isHub":  false,
+                      "id":  "EMAI FREE Starter Vault/00 Human/70 Context/Business Context.md",
+                      "type":  ".md"
+                  },
+                  {
+                      "label":  "Daily Driver.md",
+                      "sizeBytes":  255,
+                      "isHub":  false,
+                      "id":  "EMAI FREE Starter Vault/00 Human/80 Templates/Daily Driver.md",
+                      "type":  ".md"
+                  },
+                  {
+                      "label":  "Client Updates.md",
+                      "sizeBytes":  160,
+                      "isHub":  false,
+                      "id":  "EMAI FREE Starter Vault/Machine/Logs/Client Updates.md",
+                      "type":  ".md"
+                  },
+                  {
+                      "label":  "README.md",
+                      "sizeBytes":  155,
+                      "isHub":  true,
+                      "id":  "EMAI FREE Starter Vault/Machine/Outputs/README.md",
+                      "type":  ".md"
+                  },
+                  {
+                      "label":  "AGENTS.md",
+                      "sizeBytes":  611,
+                      "isHub":  false,
+                      "id":  "EMAI FREE Starter Vault/Machine/Workflows/Client Update/AGENTS.md",
+                      "type":  ".md"
+                  },
+                  {
+                      "label":  "FINDINGS.md",
+                      "sizeBytes":  323,
+                      "isHub":  false,
+                      "id":  "EMAI FREE Starter Vault/Machine/Workflows/Client Update/FINDINGS.md",
+                      "type":  ".md"
+                  },
+                  {
+                      "label":  "README.md",
+                      "sizeBytes":  475,
+                      "isHub":  true,
+                      "id":  "EMAI FREE Starter Vault/Machine/Workflows/Client Update/README.md",
+                      "type":  ".md"
+                  },
+                  {
+                      "label":  "WORKFLOW.md",
+                      "sizeBytes":  456,
+                      "isHub":  false,
+                      "id":  "EMAI FREE Starter Vault/Machine/Workflows/Client Update/WORKFLOW.md",
+                      "type":  ".md"
+                  },
+                  {
+                      "label":  "Example Update.md",
+                      "sizeBytes":  285,
+                      "isHub":  false,
+                      "id":  "EMAI FREE Starter Vault/Machine/Workflows/Client Update/examples/Example Update.md",
+                      "type":  ".md"
+                  },
+                  {
+                      "label":  "README.md",
+                      "sizeBytes":  151,
+                      "isHub":  true,
+                      "id":  "EMAI FREE Starter Vault/Machine/Workflows/Client Update/output/README.md",
+                      "type":  ".md"
+                  },
+                  {
+                      "label":  "Vault Map.md",
+                      "sizeBytes":  847,
+                      "isHub":  false,
+                      "id":  "EMAI FREE Starter Vault/System/Vault Map.md",
+                      "type":  ".md"
+                  },
+                  {
+                      "label":  "index.html",
+                      "sizeBytes":  32830,
+                      "isHub":  true,
+                      "id":  "hq.easymachineai.com-1793757763290/index.html",
+                      "type":  ".html"
+                  },
+                  {
+                      "label":  "feed.webp",
+                      "sizeBytes":  327950,
+                      "isHub":  false,
+                      "id":  "hq.easymachineai.com-1793757763290/images/feed.webp",
+                      "type":  ".webp"
+                  },
+                  {
+                      "label":  "gcal.svg",
+                      "sizeBytes":  593,
+                      "isHub":  false,
+                      "id":  "hq.easymachineai.com-1793757763290/images/gcal.svg",
+                      "type":  ".svg"
+                  },
+                  {
+                      "label":  "gmail.svg",
+                      "sizeBytes":  619,
+                      "isHub":  false,
+                      "id":  "hq.easymachineai.com-1793757763290/images/gmail.svg",
+                      "type":  ".svg"
+                  },
+                  {
+                      "label":  "instagram.svg",
+                      "sizeBytes":  632,
+                      "isHub":  false,
+                      "id":  "hq.easymachineai.com-1793757763290/images/instagram.svg",
+                      "type":  ".svg"
+                  },
+                  {
+                      "label":  "linkedin.svg",
+                      "sizeBytes":  337,
+                      "isHub":  false,
+                      "id":  "hq.easymachineai.com-1793757763290/images/linkedin.svg",
+                      "type":  ".svg"
+                  },
+                  {
+                      "label":  "messenger.svg",
+                      "sizeBytes":  345,
+                      "isHub":  false,
+                      "id":  "hq.easymachineai.com-1793757763290/images/messenger.svg",
+                      "type":  ".svg"
+                  },
+                  {
+                      "label":  "projects.webp",
+                      "sizeBytes":  474000,
+                      "isHub":  false,
+                      "id":  "hq.easymachineai.com-1793757763290/images/projects.webp",
+                      "type":  ".webp"
+                  },
+                  {
+                      "label":  "rubik-400-latin-ext.woff2",
+                      "sizeBytes":  19400,
+                      "isHub":  false,
+                      "id":  "hq.easymachineai.com-1793757763290/images/rubik-400-latin-ext.woff2",
+                      "type":  ".woff2"
+                  },
+                  {
+                      "label":  "rubik-400-latin.woff2",
+                      "sizeBytes":  35348,
+                      "isHub":  false,
+                      "id":  "hq.easymachineai.com-1793757763290/images/rubik-400-latin.woff2",
+                      "type":  ".woff2"
+                  },
+                  {
+                      "label":  "slack.svg",
+                      "sizeBytes":  533,
+                      "isHub":  false,
+                      "id":  "hq.easymachineai.com-1793757763290/images/slack.svg",
+                      "type":  ".svg"
+                  },
+                  {
+                      "label":  "telegram.svg",
+                      "sizeBytes":  319,
+                      "isHub":  false,
+                      "id":  "hq.easymachineai.com-1793757763290/images/telegram.svg",
+                      "type":  ".svg"
+                  },
+                  {
+                      "label":  "whatsapp.svg",
+                      "sizeBytes":  575,
+                      "isHub":  false,
+                      "id":  "hq.easymachineai.com-1793757763290/images/whatsapp.svg",
+                      "type":  ".svg"
+                  },
+                  {
+                      "label":  "work-sans-400-latin-ext.woff2",
+                      "sizeBytes":  35716,
+                      "isHub":  false,
+                      "id":  "hq.easymachineai.com-1793757763290/images/work-sans-400-latin-ext.woff2",
+                      "type":  ".woff2"
+                  },
+                  {
+                      "label":  "work-sans-400-latin.woff2",
+                      "sizeBytes":  50316,
+                      "isHub":  false,
+                      "id":  "hq.easymachineai.com-1793757763290/images/work-sans-400-latin.woff2",
+                      "type":  ".woff2"
+                  },
+                  {
+                      "label":  "youtube.svg",
+                      "sizeBytes":  371,
+                      "isHub":  false,
+                      "id":  "hq.easymachineai.com-1793757763290/images/youtube.svg",
+                      "type":  ".svg"
+                  },
+                  {
+                      "label":  "classnames.js",
+                      "sizeBytes":  1328,
+                      "isHub":  false,
+                      "id":  "hq.easymachineai.com-1793757763290/scripts/classnames.js",
+                      "type":  ".js"
+                  },
+                  {
+                      "label":  "hyperplex-review.js",
+                      "sizeBytes":  661264,
+                      "isHub":  false,
+                      "id":  "hq.easymachineai.com-1793757763290/scripts/hyperplex-review.js",
+                      "type":  ".js"
+                  },
+                  {
+                      "label":  "react-dom.js",
+                      "sizeBytes":  120585,
+                      "isHub":  false,
+                      "id":  "hq.easymachineai.com-1793757763290/scripts/react-dom.js",
+                      "type":  ".js"
+                  },
+                  {
+                      "label":  "react.js",
+                      "sizeBytes":  11440,
+                      "isHub":  false,
+                      "id":  "hq.easymachineai.com-1793757763290/scripts/react.js",
+                      "type":  ".js"
+                  },
+                  {
+                      "label":  "demo-guide.css",
+                      "sizeBytes":  5195,
+                      "isHub":  false,
+                      "id":  "hq.easymachineai.com-1793757763290/styles/demo-guide.css",
+                      "type":  ".css"
+                  },
+                  {
+                      "label":  "fonts.css",
+                      "sizeBytes":  3617,
+                      "isHub":  false,
+                      "id":  "hq.easymachineai.com-1793757763290/styles/fonts.css",
+                      "type":  ".css"
+                  },
+                  {
+                      "label":  "hq.css",
+                      "sizeBytes":  652381,
+                      "isHub":  false,
+                      "id":  "hq.easymachineai.com-1793757763290/styles/hq.css",
+                      "type":  ".css"
+                  },
+                  {
+                      "label":  "hyperplex.css",
+                      "sizeBytes":  20537,
+                      "isHub":  false,
+                      "id":  "hq.easymachineai.com-1793757763290/styles/hyperplex.css",
+                      "type":  ".css"
                   },
                   {
                       "label":  "calendar.md",
@@ -636,21 +997,21 @@
                   },
                   {
                       "label":  "index.ts",
-                      "sizeBytes":  9264,
+                      "sizeBytes":  9360,
                       "isHub":  true,
                       "id":  "server/src/index.ts",
                       "type":  ".ts"
                   },
                   {
                       "label":  "types.ts",
-                      "sizeBytes":  1594,
+                      "sizeBytes":  2045,
                       "isHub":  true,
                       "id":  "server/src/types.ts",
                       "type":  ".ts"
                   },
                   {
                       "label":  "markdown.ts",
-                      "sizeBytes":  5785,
+                      "sizeBytes":  5805,
                       "isHub":  true,
                       "id":  "server/src/parsers/markdown.ts",
                       "type":  ".ts"
@@ -671,7 +1032,7 @@
                   },
                   {
                       "label":  "vault.ts",
-                      "sizeBytes":  3696,
+                      "sizeBytes":  8207,
                       "isHub":  true,
                       "id":  "server/src/services/vault.ts",
                       "type":  ".ts"
@@ -685,37 +1046,170 @@
                   },
                   {
                       "label":  "writer.ts",
-                      "sizeBytes":  10608,
+                      "sizeBytes":  11312,
                       "isHub":  true,
                       "id":  "server/src/services/writer.ts",
                       "type":  ".ts"
                   },
                   {
-                      "label":  "calendar.md",
-                      "sizeBytes":  252,
+                      "label":  "AGENTS.md",
+                      "sizeBytes":  799,
                       "isHub":  false,
-                      "id":  "vault/calendar.md",
+                      "id":  "vault/AGENTS.md",
                       "type":  ".md"
                   },
                   {
-                      "label":  "kanban.md",
-                      "sizeBytes":  437,
+                      "label":  "CLAUDE.md",
+                      "sizeBytes":  112,
                       "isHub":  false,
-                      "id":  "vault/kanban.md",
+                      "id":  "vault/CLAUDE.md",
+                      "type":  ".md"
+                  },
+                  {
+                      "label":  "Home.md",
+                      "sizeBytes":  440,
+                      "isHub":  false,
+                      "id":  "vault/Home.md",
+                      "type":  ".md"
+                  },
+                  {
+                      "label":  "START HERE.md",
+                      "sizeBytes":  1726,
+                      "isHub":  false,
+                      "id":  "vault/START HERE.md",
+                      "type":  ".md"
+                  },
+                  {
+                      "label":  "calendar.md",
+                      "sizeBytes":  252,
+                      "isHub":  false,
+                      "id":  "vault/00 Human/calendar.md",
                       "type":  ".md"
                   },
                   {
                       "label":  "notes.md",
                       "sizeBytes":  524,
                       "isHub":  false,
-                      "id":  "vault/notes.md",
+                      "id":  "vault/00 Human/notes.md",
                       "type":  ".md"
                   },
                   {
                       "label":  "tasks.md",
                       "sizeBytes":  330,
                       "isHub":  false,
-                      "id":  "vault/tasks.md",
+                      "id":  "vault/00 Human/tasks.md",
+                      "type":  ".md"
+                  },
+                  {
+                      "label":  "2026-11-03.md",
+                      "sizeBytes":  512,
+                      "isHub":  false,
+                      "id":  "vault/00 Human/10 Daily Notes/2026-11-03.md",
+                      "type":  ".md"
+                  },
+                  {
+                      "label":  "Example Day.md",
+                      "sizeBytes":  360,
+                      "isHub":  false,
+                      "id":  "vault/00 Human/10 Daily Notes/Example Day.md",
+                      "type":  ".md"
+                  },
+                  {
+                      "label":  "Client Website.md",
+                      "sizeBytes":  593,
+                      "isHub":  false,
+                      "id":  "vault/00 Human/30 Projects/Client Website.md",
+                      "type":  ".md"
+                  },
+                  {
+                      "label":  "Completed Example.md",
+                      "sizeBytes":  268,
+                      "isHub":  false,
+                      "id":  "vault/00 Human/30 Projects/Completed Example.md",
+                      "type":  ".md"
+                  },
+                  {
+                      "label":  "Kanban Board.md",
+                      "sizeBytes":  437,
+                      "isHub":  false,
+                      "id":  "vault/00 Human/30 Projects/Kanban Board.md",
+                      "type":  ".md"
+                  },
+                  {
+                      "label":  "Business Context.md",
+                      "sizeBytes":  384,
+                      "isHub":  false,
+                      "id":  "vault/00 Human/70 Context/Business Context.md",
+                      "type":  ".md"
+                  },
+                  {
+                      "label":  "Daily Driver.md",
+                      "sizeBytes":  255,
+                      "isHub":  false,
+                      "id":  "vault/00 Human/80 Templates/Daily Driver.md",
+                      "type":  ".md"
+                  },
+                  {
+                      "label":  "Client Updates.md",
+                      "sizeBytes":  160,
+                      "isHub":  false,
+                      "id":  "vault/Machine/Logs/Client Updates.md",
+                      "type":  ".md"
+                  },
+                  {
+                      "label":  "README.md",
+                      "sizeBytes":  155,
+                      "isHub":  true,
+                      "id":  "vault/Machine/Outputs/README.md",
+                      "type":  ".md"
+                  },
+                  {
+                      "label":  "AGENTS.md",
+                      "sizeBytes":  611,
+                      "isHub":  false,
+                      "id":  "vault/Machine/Workflows/Client Update/AGENTS.md",
+                      "type":  ".md"
+                  },
+                  {
+                      "label":  "FINDINGS.md",
+                      "sizeBytes":  323,
+                      "isHub":  false,
+                      "id":  "vault/Machine/Workflows/Client Update/FINDINGS.md",
+                      "type":  ".md"
+                  },
+                  {
+                      "label":  "README.md",
+                      "sizeBytes":  475,
+                      "isHub":  true,
+                      "id":  "vault/Machine/Workflows/Client Update/README.md",
+                      "type":  ".md"
+                  },
+                  {
+                      "label":  "WORKFLOW.md",
+                      "sizeBytes":  456,
+                      "isHub":  false,
+                      "id":  "vault/Machine/Workflows/Client Update/WORKFLOW.md",
+                      "type":  ".md"
+                  },
+                  {
+                      "label":  "Example Update.md",
+                      "sizeBytes":  285,
+                      "isHub":  false,
+                      "id":  "vault/Machine/Workflows/Client Update/examples/Example Update.md",
+                      "type":  ".md"
+                  },
+                  {
+                      "label":  "README.md",
+                      "sizeBytes":  151,
+                      "isHub":  true,
+                      "id":  "vault/Machine/Workflows/Client Update/output/README.md",
+                      "type":  ".md"
+                  },
+                  {
+                      "label":  "Vault Map.md",
+                      "sizeBytes":  847,
+                      "isHub":  false,
+                      "id":  "vault/System/Vault Map.md",
                       "type":  ".md"
                   }
               ]

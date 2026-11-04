@@ -46,7 +46,7 @@ export const KanbanWidget: React.FC<KanbanWidgetProps> = ({ board, isTvMode = fa
   };
 
   return (
-    <div className="glass-panel rounded-2xl p-5 flex flex-col h-full">
+    <div className="emai-card p-5 flex flex-col h-full border border-[var(--line)] shadow-xl">
       <div className="flex items-center justify-between mb-4 border-b border-slate-700/60 pb-3">
         <div className="flex items-center gap-2.5">
           <Columns3 className="w-5 h-5 text-sky-400" />
