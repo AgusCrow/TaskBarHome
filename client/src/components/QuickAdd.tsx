@@ -162,13 +162,22 @@ export const QuickAdd: React.FC = () => {
               <p className="text-xs text-slate-500">Se guarda en la primera columna del tablero Kanban para clasificar después.</p>
             )}
 
-            <button
-              type="submit"
-              disabled={!text.trim() || busy}
-              className="w-full py-3 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-sm disabled:opacity-40"
-            >
-              {busy ? 'Guardando…' : 'Guardar en la bóveda'}
-            </button>
+            <div className="flex items-center justify-end gap-3 pt-3 border-t border-white/10">
+              <button
+                type="button"
+                onClick={() => setOpen(false)}
+                className="px-4 py-2.5 rounded-xl text-xs font-medium text-[var(--muted)] hover:text-white bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 transition-all"
+              >
+                Cancelar
+              </button>
+              <button
+                type="submit"
+                disabled={!text.trim() || busy}
+                className="px-5 py-2.5 rounded-xl bg-[var(--accent)] text-[#1a2d33] font-semibold text-xs hover:brightness-105 active:scale-95 transition-all shadow-[0_4px_16px_rgba(241,188,144,0.25)] disabled:opacity-40"
+              >
+                {busy ? 'Guardando…' : 'Guardar en la bóveda'}
+              </button>
+            </div>
           </form>
         </div>
       )}

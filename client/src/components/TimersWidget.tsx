@@ -166,19 +166,19 @@ export const TimersWidget: React.FC<TimersWidgetProps> = ({
                 className="w-full px-3 py-2 rounded-lg bg-black/40 border border-[var(--line)] text-sm text-[var(--ink)] focus:outline-none focus:border-[var(--accent)]"
               />
             </div>
-            <div className="flex justify-end gap-2 pt-2">
+            <div className="flex items-center justify-end gap-3 pt-3 border-t border-white/10">
               <button
                 type="button"
                 onClick={() => setShowAddModal(false)}
-                className="px-3 py-1.5 rounded-lg text-xs font-medium text-[var(--muted)] hover:text-[var(--ink)]"
+                className="px-4 py-2 rounded-xl text-xs font-medium text-[var(--muted)] hover:text-[var(--ink)] bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 transition-all"
               >
                 Cancelar
               </button>
               <button
                 type="submit"
-                className="px-4 py-1.5 rounded-lg text-xs font-semibold bg-[var(--accent)] text-[#20393f] hover:brightness-110 shadow-sm"
+                className="px-5 py-2 rounded-xl text-xs font-semibold bg-[var(--accent)] text-[#1a2d33] hover:brightness-105 active:scale-95 transition-all shadow-[0_4px_16px_rgba(241,188,144,0.25)]"
               >
-                Crear
+                Crear Timer
               </button>
             </div>
           </form>

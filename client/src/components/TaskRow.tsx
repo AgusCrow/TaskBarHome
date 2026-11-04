@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Calendar, Tag, CheckCircle2, Circle, Trash2, AlertCircle, Folder } from 'lucide-react';
 import type { TaskItem } from '../types';
 import { useActions } from '../lib/actions';
 import { daysBetween, relativeDay } from '../lib/dates';
+import { ConfirmModal } from './ConfirmModal';
 
 interface TaskRowProps {
   task: TaskItem;
@@ -13,6 +14,7 @@ interface TaskRowProps {
 
 export const TaskRow: React.FC<TaskRowProps> = ({ task, today, isTvMode, large = false }) => {
   const { toggleTask, deleteItem } = useActions();
+  const [showConfirm, setShowConfirm] = useState(false);
   const overdue = !!task.dueDate && !task.completed && daysBetween(today, task.dueDate) < 0;
   const dueToday = !!task.dueDate && task.dueDate === today;
 
@@ -111,15 +113,29 @@ export const TaskRow: React.FC<TaskRowProps> = ({ task, today, isTvMode, large =
       </div>
 
       {!isTvMode && (
-        <button
-          onClick={() => {
-            if (window.confirm(`¿Eliminar "${task.text}"?`)) deleteItem(task);
-          }}
-          aria-label="Eliminar tarea"
-          className="p-1.5 rounded-lg text-[var(--muted)] hover:text-rose-400 hover:bg-rose-950/40 opacity-0 group-hover:opacity-100 transition-opacity shrink-0"
-        >
-          <Trash2 className="w-3.5 h-3.5" />
-        </button>
+        <>
+          <button
+            onClick={() => setShowConfirm(true)}
+            aria-label="Eliminar tarea"
+            className="p-1.5 rounded-lg text-[var(--muted)] hover:text-rose-400 hover:bg-rose-950/40 opacity-0 group-hover:opacity-100 transition-opacity shrink-0"
+          >
+            <Trash2 className="w-3.5 h-3.5" />
+          </button>
+
+          <ConfirmModal
+            isOpen={showConfirm}
+            title="¿Eliminar tarea?"
+            message={`¿Estás seguro de que querés borrar permanentemente "${task.text}" de la bóveda de Obsidian?`}
+            confirmText="Eliminar"
+            cancelText="Cancelar"
+            isDestructive={true}
+            onConfirm={() => {
+              deleteItem(task);
+              setShowConfirm(false);
+            }}
+            onCancel={() => setShowConfirm(false)}
+          />
+        </>
       )}
     </div>
   );

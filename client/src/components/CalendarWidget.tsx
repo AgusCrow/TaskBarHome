@@ -4,6 +4,7 @@ import type { CalendarEvent } from '../types';
 import { useActions } from '../lib/actions';
 import { useToday } from '../lib/useToday';
 import { parseDateStr, relativeDay, toDateStr } from '../lib/dates';
+import { ConfirmModal } from './ConfirmModal';
 
 interface CalendarWidgetProps {
   events: CalendarEvent[];
@@ -25,6 +26,7 @@ export const CalendarWidget: React.FC<CalendarWidgetProps> = ({ events, isTvMode
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
   const [busy, setBusy] = useState(false);
+  const [eventToDelete, setEventToDelete] = useState<CalendarEvent | null>(null);
 
   const eventsByDate = useMemo(() => {
     const map = new Map<string, CalendarEvent[]>();
@@ -204,9 +206,7 @@ export const CalendarWidget: React.FC<CalendarWidgetProps> = ({ events, isTvMode
                 )}
                 {!isTvMode && (
                   <button
-                    onClick={() => {
-                      if (window.confirm(`¿Eliminar "${event.title}"?`)) deleteItem(event);
-                    }}
+                    onClick={() => setEventToDelete(event)}
                     aria-label="Eliminar evento"
                     className="p-1.5 rounded-lg text-slate-500 hover:text-rose-400 hover:bg-rose-950/40"
                   >
@@ -234,6 +234,22 @@ export const CalendarWidget: React.FC<CalendarWidgetProps> = ({ events, isTvMode
           {showPast ? 'Ocultar eventos pasados' : 'Mostrar eventos pasados'}
         </button>
       )}
+
+      <ConfirmModal
+        isOpen={Boolean(eventToDelete)}
+        title="¿Eliminar evento de la agenda?"
+        message={`Esta acción eliminará "${eventToDelete?.title ?? ''}" de tu calendario en Obsidian.`}
+        confirmText="Eliminar"
+        cancelText="Cancelar"
+        isDestructive={true}
+        onConfirm={() => {
+          if (eventToDelete) {
+            deleteItem(eventToDelete);
+            setEventToDelete(null);
+          }
+        }}
+        onCancel={() => setEventToDelete(null)}
+      />
     </div>
   );
 };

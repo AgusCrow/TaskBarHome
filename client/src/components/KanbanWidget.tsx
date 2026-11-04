@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Columns3, CheckCircle2, Circle, ChevronLeft, ChevronRight, Trash2 } from 'lucide-react';
 import type { KanbanBoard, KanbanCard } from '../types';
 import { useActions } from '../lib/actions';
+import { ConfirmModal } from './ConfirmModal';
 
 interface KanbanWidgetProps {
   board: KanbanBoard | null;
@@ -26,6 +27,7 @@ export const KanbanWidget: React.FC<KanbanWidgetProps> = ({ board, isTvMode = fa
   const { moveCard, toggleCard, deleteItem } = useActions();
   const [dragging, setDragging] = useState<KanbanCard | null>(null);
   const [overColumn, setOverColumn] = useState<string | null>(null);
+  const [cardToDelete, setCardToDelete] = useState<KanbanCard | null>(null);
 
   if (!board || board.columns.length === 0) {
     return (
@@ -143,9 +145,7 @@ export const KanbanWidget: React.FC<KanbanWidgetProps> = ({ board, isTvMode = fa
                           </button>
                         </div>
                         <button
-                          onClick={() => {
-                            if (window.confirm(`¿Eliminar "${card.text}"?`)) deleteItem(card);
-                          }}
+                          onClick={() => setCardToDelete(card)}
                           aria-label="Eliminar tarjeta"
                           className="p-1 rounded-md text-slate-500 hover:text-rose-400 hover:bg-rose-950/40"
                         >
@@ -166,6 +166,22 @@ export const KanbanWidget: React.FC<KanbanWidgetProps> = ({ board, isTvMode = fa
           );
         })}
       </div>
+
+      <ConfirmModal
+        isOpen={Boolean(cardToDelete)}
+        title="¿Eliminar tarjeta del tablero?"
+        message={`Esta acción removerá "${cardToDelete?.text ?? ''}" del archivo kanban.md en tu bóveda.`}
+        confirmText="Eliminar"
+        cancelText="Cancelar"
+        isDestructive={true}
+        onConfirm={() => {
+          if (cardToDelete) {
+            deleteItem(cardToDelete);
+            setCardToDelete(null);
+          }
+        }}
+        onCancel={() => setCardToDelete(null)}
+      />
     </div>
   );
 };

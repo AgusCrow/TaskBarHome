@@ -111,6 +111,11 @@
                       "type":  "import"
                   },
                   {
+                      "from":  "client/src/components/CalendarWidget.tsx",
+                      "to":  "./ConfirmModal",
+                      "type":  "import"
+                  },
+                  {
                       "from":  "client/src/components/DateStrip.tsx",
                       "to":  "../types",
                       "type":  "import"
@@ -166,6 +171,11 @@
                       "type":  "import"
                   },
                   {
+                      "from":  "client/src/components/KanbanWidget.tsx",
+                      "to":  "./ConfirmModal",
+                      "type":  "import"
+                  },
+                  {
                       "from":  "client/src/components/NorthStarHero.tsx",
                       "to":  "../types",
                       "type":  "import"
@@ -203,6 +213,11 @@
                   {
                       "from":  "client/src/components/TaskRow.tsx",
                       "to":  "../lib/dates",
+                      "type":  "import"
+                  },
+                  {
+                      "from":  "client/src/components/TaskRow.tsx",
+                      "to":  "./ConfirmModal",
                       "type":  "import"
                   },
                   {
@@ -552,7 +567,7 @@
                   }
               ],
     "projectRoot":  "D:\\Proyectos\\TBH",
-    "generatedAt":  "2026-11-04 11:49:02",
+    "generatedAt":  "2026-11-04 12:10:27",
     "metrics":  {
                     "extensions":  {
                                        ".example":  2,
@@ -562,19 +577,21 @@
                                        ".zip":  2,
                                        ".xml":  1,
                                        ".js":  6,
+                                       ".winmd":  5,
                                        ".md":  48,
                                        ".json":  10,
                                        ".yml":  2,
                                        ".css":  6,
                                        ".webp":  2,
                                        ".gitignore":  1,
+                                       ".exe":  9,
                                        ".woff2":  4,
                                        ".html":  2,
-                                       ".tsx":  31,
+                                       ".tsx":  32,
                                        ".svg":  9
                                    },
-                    "totalEdges":  110,
-                    "totalFiles":  150
+                    "totalEdges":  113,
+                    "totalFiles":  165
                 },
     "nodes":  [
                   {
@@ -586,7 +603,7 @@
                   },
                   {
                       "label":  ".gitignore",
-                      "sizeBytes":  510,
+                      "sizeBytes":  556,
                       "isHub":  false,
                       "id":  ".gitignore",
                       "type":  ".gitignore"
@@ -614,14 +631,14 @@
                   },
                   {
                       "label":  "graph.json",
-                      "sizeBytes":  49652,
+                      "sizeBytes":  67302,
                       "isHub":  false,
                       "id":  "graph.json",
                       "type":  ".json"
                   },
                   {
                       "label":  "GRAPH_REPORT.md",
-                      "sizeBytes":  5033,
+                      "sizeBytes":  5447,
                       "isHub":  false,
                       "id":  "GRAPH_REPORT.md",
                       "type":  ".md"
@@ -656,7 +673,7 @@
                   },
                   {
                       "label":  "repomix-output.xml",
-                      "sizeBytes":  444752,
+                      "sizeBytes":  360880,
                       "isHub":  false,
                       "id":  "repomix-output.xml",
                       "type":  ".xml"
@@ -674,6 +691,27 @@
                       "isHub":  false,
                       "id":  "tbh-dashboard-interactivo.zip",
                       "type":  ".zip"
+                  },
+                  {
+                      "label":  "Xbox Accessories Installer.exe",
+                      "sizeBytes":  813088,
+                      "isHub":  false,
+                      "id":  "Xbox Accessories Installer.exe",
+                      "type":  ".exe"
+                  },
+                  {
+                      "label":  "XBOX Installer (1).exe",
+                      "sizeBytes":  813088,
+                      "isHub":  false,
+                      "id":  "XBOX Installer (1).exe",
+                      "type":  ".exe"
+                  },
+                  {
+                      "label":  "XBOX Installer.exe",
+                      "sizeBytes":  813088,
+                      "isHub":  false,
+                      "id":  "XBOX Installer.exe",
+                      "type":  ".exe"
                   },
                   {
                       "label":  "index.html",
@@ -761,9 +799,16 @@
                   },
                   {
                       "label":  "CalendarWidget.tsx",
-                      "sizeBytes":  10176,
+                      "sizeBytes":  10730,
                       "isHub":  false,
                       "id":  "client/src/components/CalendarWidget.tsx",
+                      "type":  ".tsx"
+                  },
+                  {
+                      "label":  "ConfirmModal.tsx",
+                      "sizeBytes":  3430,
+                      "isHub":  false,
+                      "id":  "client/src/components/ConfirmModal.tsx",
                       "type":  ".tsx"
                   },
                   {
@@ -803,7 +848,7 @@
                   },
                   {
                       "label":  "KanbanWidget.tsx",
-                      "sizeBytes":  8706,
+                      "sizeBytes":  9243,
                       "isHub":  false,
                       "id":  "client/src/components/KanbanWidget.tsx",
                       "type":  ".tsx"
@@ -824,21 +869,21 @@
                   },
                   {
                       "label":  "QuickAdd.tsx",
-                      "sizeBytes":  6681,
+                      "sizeBytes":  7248,
                       "isHub":  false,
                       "id":  "client/src/components/QuickAdd.tsx",
                       "type":  ".tsx"
                   },
                   {
                       "label":  "StageHeroCarousel.tsx",
-                      "sizeBytes":  17553,
+                      "sizeBytes":  17564,
                       "isHub":  false,
                       "id":  "client/src/components/StageHeroCarousel.tsx",
                       "type":  ".tsx"
                   },
                   {
                       "label":  "TaskRow.tsx",
-                      "sizeBytes":  5088,
+                      "sizeBytes":  5667,
                       "isHub":  false,
                       "id":  "client/src/components/TaskRow.tsx",
                       "type":  ".tsx"
@@ -859,7 +904,7 @@
                   },
                   {
                       "label":  "TimersWidget.tsx",
-                      "sizeBytes":  7704,
+                      "sizeBytes":  7884,
                       "isHub":  false,
                       "id":  "client/src/components/TimersWidget.tsx",
                       "type":  ".tsx"
@@ -1234,6 +1279,83 @@
                       "isHub":  false,
                       "id":  "photos/.gitkeep",
                       "type":  ".gitkeep"
+                  },
+                  {
+                      "label":  "Microsoft.Services.Store.winmd",
+                      "sizeBytes":  5120,
+                      "isHub":  false,
+                      "id":  "scoped_dir12904_102849784/Microsoft.Services.Store.winmd",
+                      "type":  ".winmd"
+                  },
+                  {
+                      "label":  "Xbox Accessories Installer.exe",
+                      "sizeBytes":  813088,
+                      "isHub":  false,
+                      "id":  "scoped_dir12904_102849784/Xbox Accessories Installer.exe",
+                      "type":  ".exe"
+                  },
+                  {
+                      "label":  "Microsoft.Services.Store.winmd",
+                      "sizeBytes":  5120,
+                      "isHub":  false,
+                      "id":  "scoped_dir12904_111151116/Microsoft.Services.Store.winmd",
+                      "type":  ".winmd"
+                  },
+                  {
+                      "label":  "XBOX Installer (1).exe",
+                      "sizeBytes":  813088,
+                      "isHub":  false,
+                      "id":  "scoped_dir12904_111151116/XBOX Installer (1).exe",
+                      "type":  ".exe"
+                  },
+                  {
+                      "label":  "Microsoft.Services.Store.winmd",
+                      "sizeBytes":  5120,
+                      "isHub":  false,
+                      "id":  "scoped_dir12904_1334233895/Microsoft.Services.Store.winmd",
+                      "type":  ".winmd"
+                  },
+                  {
+                      "label":  "XBOX Installer.exe",
+                      "sizeBytes":  813088,
+                      "isHub":  false,
+                      "id":  "scoped_dir12904_1334233895/XBOX Installer.exe",
+                      "type":  ".exe"
+                  },
+                  {
+                      "label":  "Microsoft.Services.Store.winmd",
+                      "sizeBytes":  5120,
+                      "isHub":  false,
+                      "id":  "scoped_dir12904_1824887970/Microsoft.Services.Store.winmd",
+                      "type":  ".winmd"
+                  },
+                  {
+                      "label":  "XBOX Installer.exe",
+                      "sizeBytes":  813088,
+                      "isHub":  false,
+                      "id":  "scoped_dir12904_1824887970/XBOX Installer.exe",
+                      "type":  ".exe"
+                  },
+                  {
+                      "label":  "Microsoft.Services.Store.winmd",
+                      "sizeBytes":  5120,
+                      "isHub":  false,
+                      "id":  "scoped_dir12904_1842010086/Microsoft.Services.Store.winmd",
+                      "type":  ".winmd"
+                  },
+                  {
+                      "label":  "Xbox Accessories Installer.exe",
+                      "sizeBytes":  813088,
+                      "isHub":  false,
+                      "id":  "scoped_dir12904_1842010086/Xbox Accessories Installer.exe",
+                      "type":  ".exe"
+                  },
+                  {
+                      "label":  "Xbox Accessories Installer.exe",
+                      "sizeBytes":  813088,
+                      "isHub":  false,
+                      "id":  "scoped_dir12904_936751135/Xbox Accessories Installer.exe",
+                      "type":  ".exe"
                   },
                   {
                       "label":  "package-lock.json",

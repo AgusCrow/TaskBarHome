@@ -6,8 +6,8 @@ Generated automatically by Graphify.
 
 ## 1. Architectural Metrics
 
-* Total Scanned Files: 150
-* Total Module Relationships: 110
+* Total Scanned Files: 165
+* Total Module Relationships: 113
 
 ### File Breakdown by Extension
 * **.example**: 2 files
@@ -17,15 +17,17 @@ Generated automatically by Graphify.
 * **.zip**: 2 files
 * **.xml**: 1 files
 * **.js**: 6 files
+* **.winmd**: 5 files
 * **.md**: 48 files
 * **.json**: 10 files
 * **.yml**: 2 files
 * **.css**: 6 files
 * **.webp**: 2 files
 * **.gitignore**: 1 files
+* **.exe**: 9 files
 * **.woff2**: 4 files
 * **.html**: 2 files
-* **.tsx**: 31 files
+* **.tsx**: 32 files
 * **.svg**: 9 files
 
 ---
@@ -95,6 +97,7 @@ flowchart TD
     client_src_components_CalendarWidget_tsx["client/src/components/CalendarWidget.tsx"] --> ___lib_actions["../lib/actions"]
     client_src_components_CalendarWidget_tsx["client/src/components/CalendarWidget.tsx"] --> ___lib_useToday["../lib/useToday"]
     client_src_components_CalendarWidget_tsx["client/src/components/CalendarWidget.tsx"] --> ___lib_dates["../lib/dates"]
+    client_src_components_CalendarWidget_tsx["client/src/components/CalendarWidget.tsx"] --> __ConfirmModal["./ConfirmModal"]
     client_src_components_DateStrip_tsx["client/src/components/DateStrip.tsx"] --> ___types["../types"]
     client_src_components_DateStrip_tsx["client/src/components/DateStrip.tsx"] --> ___lib_useToday["../lib/useToday"]
     client_src_components_FocusPanel_tsx["client/src/components/FocusPanel.tsx"] --> ___types["../types"]
@@ -102,7 +105,6 @@ flowchart TD
     client_src_components_FocusPanel_tsx["client/src/components/FocusPanel.tsx"] --> ___lib_useToday["../lib/useToday"]
     client_src_components_FocusPanel_tsx["client/src/components/FocusPanel.tsx"] --> ___lib_dates["../lib/dates"]
     client_src_components_FocusPanel_tsx["client/src/components/FocusPanel.tsx"] --> __TaskRow["./TaskRow"]
-    client_src_components_GamificationWidget_tsx["client/src/components/GamificationWidget.tsx"] --> ___types["../types"]
 ```
 
 ---

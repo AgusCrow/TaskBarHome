@@ -40,6 +40,8 @@ repomix-output.*
 # Scraped assets & references
 hq.easymachineai.com*
 *.zip
+*.exe
+scoped_dir*/
 EMAI FREE Starter Vault/
 *.tar.gz
 tbh-dashboard-interactivo/

@@ -370,10 +370,10 @@ export const StageHeroCarousel: React.FC<StageHeroCarouselProps> = ({
             )}
           </div>
 
-          {/* Botón de acción principal melocotón */}
+          {/* Botón de acción principal melocotón estilo EMAI */}
           <button
             onClick={handleAction}
-            className="px-6 py-2.5 rounded-2xl bg-[var(--accent)] text-[#1a2d33] font-semibold text-sm hover:brightness-105 active:scale-95 transition-all shadow-[0_4px_16px_rgba(241,188,144,0.3)] flex items-center gap-2 group"
+            className="px-6 py-2.5 rounded-full bg-[var(--accent)] text-[#15272c] font-medium text-sm hover:brightness-105 active:scale-95 transition-all shadow-[0_4px_18px_rgba(241,188,144,0.3)] flex items-center gap-2 group"
           >
             <span>{current.buttonLabel}</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
