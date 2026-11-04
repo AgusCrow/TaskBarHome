@@ -63,12 +63,31 @@ export function parseKanban(content: string, filename: string): KanbanBoard {
   };
 }
 
+/** Deducir el nombre del proyecto o contexto según el archivo */
+function inferProjectContext(filename: string): string {
+  const norm = filename.replace(/\\/g, '/');
+  if (norm.includes('30 Projects/') || norm.includes('Projects/')) {
+    const base = norm.split('/').pop() || norm;
+    return base.replace(/\.md$/, '');
+  }
+  if (norm.includes('10 Daily Notes/') || norm.includes('Daily Notes/')) {
+    const match = norm.match(/(\d{4}-\d{2}-\d{2})/);
+    return match ? `Diaria (${match[1]})` : 'Nota Diaria';
+  }
+  if (norm.endsWith('tasks.md')) {
+    return 'Bandeja Principal';
+  }
+  const base = norm.split('/').pop() || norm;
+  return base.replace(/\.md$/, '');
+}
+
 /**
- * Parses markdown tasks (standard checklists, with optional dates and tags).
+ * Parses markdown tasks (standard checklists, with full Obsidian Tasks metadata).
  */
 export function parseTasks(content: string, filename: string): TaskItem[] {
   const lines = splitLines(content);
   const tasks: TaskItem[] = [];
+  const project = inferProjectContext(filename);
 
   for (let i = 0; i < lines.length; i++) {
     const rawLine = lines[i];
@@ -80,18 +99,55 @@ export function parseTasks(content: string, filename: string): TaskItem[] {
     const completed = line.startsWith('- [x]') || line.startsWith('- [X]');
     let rawText = line.replace(/^- \[( |x|X)\]\s*/, '').trim();
 
-    // Fecha de cierre que agrega Obsidian Tasks: ✅ YYYY-MM-DD
+    // Fecha de cierre (Done): ✅ YYYY-MM-DD
     const doneMatch = rawText.match(/✅\s*(\d{4}-\d{2}-\d{2})/);
     const completedDate = doneMatch ? doneMatch[1] : undefined;
     if (doneMatch) {
       rawText = rawText.replace(doneMatch[0], '').trim();
     }
 
-    // Extract due date: 📅 YYYY-MM-DD or due:YYYY-MM-DD
+    // Due date: 📅 YYYY-MM-DD o due:YYYY-MM-DD
     const dateMatch = rawText.match(/(?:📅|due:)\s*(\d{4}-\d{2}-\d{2})/);
     const dueDate = dateMatch ? dateMatch[1] : undefined;
     if (dateMatch) {
       rawText = rawText.replace(dateMatch[0], '').trim();
+    }
+
+    // Scheduled date: ⏳ YYYY-MM-DD
+    const schedMatch = rawText.match(/⏳\s*(\d{4}-\d{2}-\d{2})/);
+    const scheduledDate = schedMatch ? schedMatch[1] : undefined;
+    if (schedMatch) {
+      rawText = rawText.replace(schedMatch[0], '').trim();
+    }
+
+    // Start date: 🛫 YYYY-MM-DD
+    const startMatch = rawText.match(/🛫\s*(\d{4}-\d{2}-\d{2})/);
+    const startDate = startMatch ? startMatch[1] : undefined;
+    if (startMatch) {
+      rawText = rawText.replace(startMatch[0], '').trim();
+    }
+
+    // Recurrencia: 🔁 ...
+    const recurMatch = rawText.match(/🔁\s*([^📅⏳🛫✅🔺⏫🔼🔽⏬#]+)/);
+    const recurrence = recurMatch ? recurMatch[1].trim() : undefined;
+    if (recurMatch) {
+      rawText = rawText.replace(recurMatch[0], '').trim();
+    }
+
+    // Prioridad de Obsidian Tasks (🔺 ⏫ 🔼 🔽 ⏬)
+    let priority: TaskItem['priority'];
+    if (/[🔺⏫]/.test(rawText)) {
+      priority = 'highest';
+      rawText = rawText.replace(/[🔺⏫]/g, '').trim();
+    } else if (/🔼/.test(rawText)) {
+      priority = 'high';
+      rawText = rawText.replace(/🔼/g, '').trim();
+    } else if (/🔽/.test(rawText)) {
+      priority = 'medium';
+      rawText = rawText.replace(/🔽/g, '').trim();
+    } else if (/⏬/.test(rawText)) {
+      priority = 'low';
+      rawText = rawText.replace(/⏬/g, '').trim();
     }
 
     // Extract tags (#urgente, #casa, etc.)
@@ -101,13 +157,28 @@ export function parseTasks(content: string, filename: string): TaskItem[] {
       rawText = rawText.replace(/#([\w-]+)/g, '').replace(/\s{2,}/g, ' ').trim();
     }
 
+    // Si tiene tags de alta prioridad y no tiene prioridad explícita
+    if (!priority && (tags.includes('urgente') || tags.includes('alta') || tags.includes('foco'))) {
+      priority = 'high';
+    }
+
+    // Ignorar checklists vacías o placeholders
+    if (!rawText || rawText.replace(/[^a-zA-Z0-9áéíóúÁÉÍÓÚñÑ]/g, '').length === 0) {
+      continue;
+    }
+
     tasks.push({
       id: `${filename}:${i}`,
       text: rawText,
       completed,
+      priority,
       dueDate,
+      scheduledDate,
+      startDate,
       completedDate,
+      recurrence,
       tags,
+      project,
       file: filename,
       line: i,
       raw: rawLine

@@ -62,11 +62,6 @@
                   },
                   {
                       "from":  "client/src/App.tsx",
-                      "to":  "./components/GamificationWidget",
-                      "type":  "import"
-                  },
-                  {
-                      "from":  "client/src/App.tsx",
                       "to":  "./components/QuickAdd",
                       "type":  "import"
                   },
@@ -322,7 +317,7 @@
                   }
               ],
     "projectRoot":  "D:\\Proyectos\\TBH",
-    "generatedAt":  "2026-11-04 00:34:51",
+    "generatedAt":  "2026-11-04 02:26:55",
     "metrics":  {
                     "extensions":  {
                                        ".example":  1,
@@ -332,7 +327,7 @@
                                        ".zip":  1,
                                        ".xml":  1,
                                        ".js":  6,
-                                       ".md":  48,
+                                       ".md":  47,
                                        ".json":  10,
                                        ".yml":  1,
                                        ".css":  5,
@@ -343,8 +338,8 @@
                                        ".tsx":  21,
                                        ".svg":  9
                                    },
-                    "totalEdges":  64,
-                    "totalFiles":  127
+                    "totalEdges":  63,
+                    "totalFiles":  126
                 },
     "nodes":  [
                   {
@@ -384,14 +379,14 @@
                   },
                   {
                       "label":  "graph.json",
-                      "sizeBytes":  49162,
+                      "sizeBytes":  50159,
                       "isHub":  false,
                       "id":  "graph.json",
                       "type":  ".json"
                   },
                   {
                       "label":  "GRAPH_REPORT.md",
-                      "sizeBytes":  5037,
+                      "sizeBytes":  5027,
                       "isHub":  false,
                       "id":  "GRAPH_REPORT.md",
                       "type":  ".md"
@@ -426,7 +421,7 @@
                   },
                   {
                       "label":  "repomix-output.xml",
-                      "sizeBytes":  310549,
+                      "sizeBytes":  319968,
                       "isHub":  false,
                       "id":  "repomix-output.xml",
                       "type":  ".xml"
@@ -489,7 +484,7 @@
                   },
                   {
                       "label":  "App.tsx",
-                      "sizeBytes":  11636,
+                      "sizeBytes":  11481,
                       "isHub":  true,
                       "id":  "client/src/App.tsx",
                       "type":  ".tsx"
@@ -510,7 +505,7 @@
                   },
                   {
                       "label":  "types.ts",
-                      "sizeBytes":  2045,
+                      "sizeBytes":  2230,
                       "isHub":  false,
                       "id":  "client/src/types.ts",
                       "type":  ".ts"
@@ -538,7 +533,7 @@
                   },
                   {
                       "label":  "FloatingDock.tsx",
-                      "sizeBytes":  2863,
+                      "sizeBytes":  2864,
                       "isHub":  false,
                       "id":  "client/src/components/FloatingDock.tsx",
                       "type":  ".tsx"
@@ -601,14 +596,14 @@
                   },
                   {
                       "label":  "TaskRow.tsx",
-                      "sizeBytes":  3877,
+                      "sizeBytes":  5088,
                       "isHub":  false,
                       "id":  "client/src/components/TaskRow.tsx",
                       "type":  ".tsx"
                   },
                   {
                       "label":  "TasksWidget.tsx",
-                      "sizeBytes":  4336,
+                      "sizeBytes":  6239,
                       "isHub":  false,
                       "id":  "client/src/components/TasksWidget.tsx",
                       "type":  ".tsx"
@@ -1028,21 +1023,21 @@
                   },
                   {
                       "label":  "types.ts",
-                      "sizeBytes":  2045,
+                      "sizeBytes":  2230,
                       "isHub":  true,
                       "id":  "server/src/types.ts",
                       "type":  ".ts"
                   },
                   {
                       "label":  "markdown.ts",
-                      "sizeBytes":  5805,
+                      "sizeBytes":  8333,
                       "isHub":  true,
                       "id":  "server/src/parsers/markdown.ts",
                       "type":  ".ts"
                   },
                   {
                       "label":  "photos.ts",
-                      "sizeBytes":  1229,
+                      "sizeBytes":  613,
                       "isHub":  true,
                       "id":  "server/src/services/photos.ts",
                       "type":  ".ts"
@@ -1056,7 +1051,7 @@
                   },
                   {
                       "label":  "vault.ts",
-                      "sizeBytes":  8207,
+                      "sizeBytes":  9503,
                       "isHub":  true,
                       "id":  "server/src/services/vault.ts",
                       "type":  ".ts"
@@ -1132,10 +1127,10 @@
                       "type":  ".md"
                   },
                   {
-                      "label":  "Example Day.md",
-                      "sizeBytes":  360,
+                      "label":  "2026-11-04.md",
+                      "sizeBytes":  466,
                       "isHub":  false,
-                      "id":  "vault/00 Human/10 Daily Notes/Example Day.md",
+                      "id":  "vault/00 Human/10 Daily Notes/2026-11-04.md",
                       "type":  ".md"
                   },
                   {
@@ -1143,13 +1138,6 @@
                       "sizeBytes":  593,
                       "isHub":  false,
                       "id":  "vault/00 Human/30 Projects/Client Website.md",
-                      "type":  ".md"
-                  },
-                  {
-                      "label":  "Completed Example.md",
-                      "sizeBytes":  268,
-                      "isHub":  false,
-                      "id":  "vault/00 Human/30 Projects/Completed Example.md",
                       "type":  ".md"
                   },
                   {
@@ -1168,7 +1156,7 @@
                   },
                   {
                       "label":  "Daily Driver.md",
-                      "sizeBytes":  255,
+                      "sizeBytes":  249,
                       "isHub":  false,
                       "id":  "vault/00 Human/80 Templates/Daily Driver.md",
                       "type":  ".md"

@@ -6,8 +6,8 @@ Generated automatically by Graphify.
 
 ## 1. Architectural Metrics
 
-* Total Scanned Files: 127
-* Total Module Relationships: 64
+* Total Scanned Files: 126
+* Total Module Relationships: 63
 
 ### File Breakdown by Extension
 * **.example**: 1 files
@@ -17,7 +17,7 @@ Generated automatically by Graphify.
 * **.zip**: 1 files
 * **.xml**: 1 files
 * **.js**: 6 files
-* **.md**: 48 files
+* **.md**: 47 files
 * **.json**: 10 files
 * **.yml**: 1 files
 * **.css**: 5 files
@@ -77,7 +77,6 @@ flowchart TD
     client_src_App_tsx["client/src/App.tsx"] --> __components_TimersWidget["./components/TimersWidget"]
     client_src_App_tsx["client/src/App.tsx"] --> __components_NotesWidget["./components/NotesWidget"]
     client_src_App_tsx["client/src/App.tsx"] --> __components_FocusPanel["./components/FocusPanel"]
-    client_src_App_tsx["client/src/App.tsx"] --> __components_GamificationWidget["./components/GamificationWidget"]
     client_src_App_tsx["client/src/App.tsx"] --> __components_QuickAdd["./components/QuickAdd"]
     client_src_App_tsx["client/src/App.tsx"] --> __components_TimerAlert["./components/TimerAlert"]
     client_src_App_tsx["client/src/App.tsx"] --> __components_Toast["./components/Toast"]
@@ -95,6 +94,7 @@ flowchart TD
     client_src_components_FocusPanel_tsx["client/src/components/FocusPanel.tsx"] --> ___lib_useToday["../lib/useToday"]
     client_src_components_FocusPanel_tsx["client/src/components/FocusPanel.tsx"] --> ___lib_dates["../lib/dates"]
     client_src_components_FocusPanel_tsx["client/src/components/FocusPanel.tsx"] --> __TaskRow["./TaskRow"]
+    client_src_components_GamificationWidget_tsx["client/src/components/GamificationWidget.tsx"] --> ___types["../types"]
 ```
 
 ---

@@ -22,13 +22,20 @@ export interface KanbanBoard {
   columns: KanbanColumn[];
 }
 
+export type TaskPriority = 'highest' | 'high' | 'medium' | 'low';
+
 export interface TaskItem extends LineRef {
   id: string;
   text: string;
   completed: boolean;
+  priority?: TaskPriority;
   dueDate?: string;
+  scheduledDate?: string;
+  startDate?: string;
   completedDate?: string;
+  recurrence?: string;
   tags: string[];
+  project?: string;
 }
 
 export interface CalendarEvent extends LineRef {

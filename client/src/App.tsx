@@ -11,7 +11,6 @@ import { CalendarWidget } from './components/CalendarWidget';
 import { TimersWidget } from './components/TimersWidget';
 import { NotesWidget } from './components/NotesWidget';
 import { FocusPanel } from './components/FocusPanel';
-import { GamificationWidget } from './components/GamificationWidget';
 import { QuickAdd } from './components/QuickAdd';
 import { TimerAlert } from './components/TimerAlert';
 import { Toast, type ToastState } from './components/Toast';
@@ -229,7 +228,6 @@ export const App: React.FC = () => {
 
               {/* Paneles Bento de Apoyo (Visibles al hacer scroll o en pantallas amplias) */}
               <div className="space-y-6 pt-4 border-t border-white/5 opacity-85 hover:opacity-100 transition-opacity">
-                <GamificationWidget tasks={data?.tasks || []} isTvMode={isTvMode} />
                 <FocusPanel data={data} isTvMode={isTvMode} />
               </div>
             </div>

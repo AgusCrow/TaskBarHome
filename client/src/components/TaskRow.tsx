@@ -1,5 +1,5 @@
 import React from 'react';
-import { Calendar, Tag, CheckCircle2, Circle, Trash2 } from 'lucide-react';
+import { Calendar, Tag, CheckCircle2, Circle, Trash2, AlertCircle, Folder } from 'lucide-react';
 import type { TaskItem } from '../types';
 import { useActions } from '../lib/actions';
 import { daysBetween, relativeDay } from '../lib/dates';
@@ -8,7 +8,6 @@ interface TaskRowProps {
   task: TaskItem;
   today: string;
   isTvMode: boolean;
-  /** Tamaño de tipografía mayor (panel Hoy/Foco en la TV). */
   large?: boolean;
 }
 
@@ -19,68 +18,92 @@ export const TaskRow: React.FC<TaskRowProps> = ({ task, today, isTvMode, large =
 
   return (
     <div
-      className={`group p-3 rounded-xl border flex items-start justify-between gap-3 shadow-sm transition-colors ${
+      className={`group p-3 rounded-xl border flex items-start justify-between gap-3 shadow-sm transition-all ${
         task.completed
-          ? 'bg-slate-950/40 border-slate-800/60'
+          ? 'bg-black/20 border-white/5 opacity-60'
           : overdue
-          ? 'bg-rose-950/30 border-rose-800/50'
-          : 'bg-slate-800/80 border-slate-700/80 hover:border-slate-600'
+          ? 'bg-rose-950/25 border-rose-500/40'
+          : 'bg-black/30 border-[var(--line)] hover:border-[var(--accent)]/40'
       } ${large || isTvMode ? 'text-base' : 'text-sm'}`}
     >
-      <div className="flex items-start gap-3 min-w-0">
+      <div className="flex items-start gap-3 min-w-0 flex-1">
         {isTvMode ? (
           task.completed ? (
-            <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-1" />
+            <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-1" />
           ) : (
-            <Circle className="w-4 h-4 text-slate-400 shrink-0 mt-1" />
+            <Circle className="w-4 h-4 text-[var(--muted)] shrink-0 mt-1" />
           )
         ) : (
           <button
             onClick={() => toggleTask(task)}
             aria-label={task.completed ? 'Marcar como pendiente' : 'Marcar como hecha'}
-            className="shrink-0 -m-1.5 p-1.5 rounded-full active:scale-90 transition-transform"
+            className="shrink-0 -m-1 p-1 rounded-full active:scale-90 transition-transform"
           >
             {task.completed ? (
-              <CheckCircle2 className="w-6 h-6 text-emerald-400" />
+              <CheckCircle2 className="w-5 h-5 text-emerald-400" />
             ) : (
-              <Circle className="w-6 h-6 text-slate-400 hover:text-emerald-300" />
+              <Circle className="w-5 h-5 text-[var(--muted)] hover:text-[var(--accent)]" />
             )}
           </button>
         )}
 
-        <div className="min-w-0">
+        <div className="min-w-0 flex-1">
           <p
-            className={`font-medium leading-snug break-words ${
-              task.completed ? 'line-through text-slate-500' : 'text-slate-100'
+            className={`font-normal leading-snug break-words ${
+              task.completed ? 'line-through text-[var(--muted)] opacity-60' : 'text-[var(--ink)]'
             }`}
           >
             {task.text}
           </p>
-          <div className="flex flex-wrap items-center gap-2 mt-1.5">
+
+          <div className="flex flex-wrap items-center gap-1.5 mt-2">
+            {/* Proyecto o Contexto de origen */}
+            {task.project && (
+              <span className="inline-flex items-center gap-1 text-[10px] font-medium px-2 py-0.5 rounded-md bg-white/[0.04] border border-white/5 text-[var(--muted)] font-mono">
+                <Folder className="w-2.5 h-2.5 opacity-60" />
+                {task.project}
+              </span>
+            )}
+
+            {/* Prioridad */}
+            {task.priority && !task.completed && (
+              <span
+                className={`inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-md border uppercase tracking-wider ${
+                  task.priority === 'highest' || task.priority === 'high'
+                    ? 'bg-rose-950/50 text-rose-300 border-rose-500/40'
+                    : task.priority === 'medium'
+                    ? 'bg-amber-950/40 text-amber-300 border-amber-500/30'
+                    : 'bg-slate-800/60 text-slate-400 border-slate-700'
+                }`}
+              >
+                <AlertCircle className="w-2.5 h-2.5" />
+                {task.priority === 'highest' ? 'Alta+' : task.priority === 'high' ? 'Alta' : task.priority}
+              </span>
+            )}
+
+            {/* Fecha de vencimiento */}
             {task.dueDate && !task.completed && (
               <span
-                className={`inline-flex items-center gap-1 text-xs font-medium px-2 py-0.5 rounded border ${
+                className={`inline-flex items-center gap-1 text-[11px] font-medium px-2 py-0.5 rounded-md border ${
                   overdue
                     ? 'text-rose-300 bg-rose-950/50 border-rose-800/60'
                     : dueToday
-                    ? 'text-amber-200 bg-amber-900/40 border-amber-600/50'
-                    : 'text-amber-300/90 bg-amber-950/40 border-amber-800/40'
+                    ? 'text-[var(--accent)] bg-[var(--accent)]/15 border-[var(--accent)]/30 font-semibold'
+                    : 'text-[var(--muted)] bg-black/40 border-white/10'
                 }`}
               >
                 <Calendar className="w-3 h-3" />
                 {relativeDay(task.dueDate, today)}
               </span>
             )}
+
+            {/* Tags */}
             {task.tags.map((tag) => (
               <span
                 key={tag}
-                className={`inline-flex items-center gap-1 text-[11px] font-semibold px-1.5 py-0.5 rounded ${
-                  tag.toLowerCase() === 'urgente'
-                    ? 'bg-rose-950/60 text-rose-300 border border-rose-800/60'
-                    : 'bg-indigo-950/60 text-indigo-300 border border-indigo-800/40'
-                }`}
+                className="inline-flex items-center gap-1 text-[10px] font-medium px-1.5 py-0.5 rounded-md bg-white/[0.04] border border-white/5 text-[var(--muted)]"
               >
-                <Tag className="w-2.5 h-2.5" />#{tag}
+                <Tag className="w-2.5 h-2.5 opacity-60" />#{tag}
               </span>
             ))}
           </div>
@@ -93,9 +116,9 @@ export const TaskRow: React.FC<TaskRowProps> = ({ task, today, isTvMode, large =
             if (window.confirm(`¿Eliminar "${task.text}"?`)) deleteItem(task);
           }}
           aria-label="Eliminar tarea"
-          className="p-1.5 rounded-lg text-slate-500 hover:text-rose-400 hover:bg-rose-950/40 shrink-0"
+          className="p-1.5 rounded-lg text-[var(--muted)] hover:text-rose-400 hover:bg-rose-950/40 opacity-0 group-hover:opacity-100 transition-opacity shrink-0"
         >
-          <Trash2 className="w-4 h-4" />
+          <Trash2 className="w-3.5 h-3.5" />
         </button>
       )}
     </div>

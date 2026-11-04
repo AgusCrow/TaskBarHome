@@ -75,7 +75,7 @@ export function parseVault(vaultPath: string) {
   }
 
   const relFiles = getMarkdownFiles(vaultPath);
-  const allTasks: TaskItem[] = [];
+  const tasksMap = new Map<string, TaskItem>();
   const allCalendar: CalendarEvent[] = [];
   const allNotes: NoteItem[] = [];
   const allProjects: ProjectItem[] = [];
@@ -89,6 +89,18 @@ export function parseVault(vaultPath: string) {
   }).format(new Date());
 
   for (const relFile of relFiles) {
+    const norm = relFile.replace(/\\/g, '/');
+
+    // Ignorar plantillas, sistema o ejemplos para no generar datos fantasma
+    if (
+      norm.includes('80 Templates/') ||
+      norm.includes('Templates/') ||
+      norm.includes('System/') ||
+      norm.includes('examples/')
+    ) {
+      continue;
+    }
+
     const fullPath = path.join(vaultPath, relFile);
     try {
       const content = fs.readFileSync(fullPath, 'utf-8');
@@ -97,7 +109,7 @@ export function parseVault(vaultPath: string) {
       const meta = parseFrontmatter(content);
 
       // Check for Daily Notes / Today's Focus
-      if (relFile.includes('Daily Notes') || meta.type === 'daily' || /^\d{4}-\d{2}-\d{2}\.md$/.test(baseName)) {
+      if (norm.includes('Daily Notes') || meta.type === 'daily' || /^\d{4}-\d{2}-\d{2}\.md$/.test(baseName)) {
         const dateMatch = baseName.match(/(\d{4}-\d{2}-\d{2})/);
         const noteDate = meta.date || (dateMatch ? dateMatch[1] : todayStr);
 
@@ -122,11 +134,13 @@ export function parseVault(vaultPath: string) {
 
         // Also extract tasks from daily note
         const dailyTasks = parseTasks(content, relFile);
-        allTasks.push(...dailyTasks);
+        for (const t of dailyTasks) {
+          tasksMap.set(t.id, t);
+        }
       }
 
       // Check for Projects (Properties: type is project)
-      if (meta.type === 'project' || relFile.includes('Projects/')) {
+      if (meta.type === 'project' || norm.includes('Projects/')) {
         allProjects.push({
           id: `project-${relFile.replace(/[^a-z0-9]/gi, '-')}`,
           title: baseName.replace(/\.md$/, ''),
@@ -146,11 +160,15 @@ export function parseVault(vaultPath: string) {
       // Check for Tasks / To-Do
       if (lowerName.includes('task') || lowerName.includes('todo') || lowerName.includes('quehacer')) {
         const parsed = parseTasks(content, relFile);
-        allTasks.push(...parsed);
-      } else if (!relFile.includes('Daily Notes')) {
+        for (const t of parsed) {
+          tasksMap.set(t.id, t);
+        }
+      } else if (!norm.includes('Daily Notes')) {
         const inlineTasks = parseTasks(content, relFile);
         if (inlineTasks.length > 0 && !lowerName.includes('kanban') && !content.includes('kanban-plugin:')) {
-          allTasks.push(...inlineTasks);
+          for (const t of inlineTasks) {
+            tasksMap.set(t.id, t);
+          }
         }
       }
 
@@ -161,7 +179,7 @@ export function parseVault(vaultPath: string) {
       }
 
       // Notes (if not purely daily or kanban)
-      if (!content.includes('kanban-plugin:') && !relFile.includes('Daily Notes') && meta.type !== 'daily') {
+      if (!content.includes('kanban-plugin:') && !norm.includes('Daily Notes') && meta.type !== 'daily') {
         const note = parseNotes(content, relFile);
         allNotes.push({ ...note, file: relFile });
       }
@@ -192,8 +210,37 @@ export function parseVault(vaultPath: string) {
     }
   }
 
+  // Ordenamiento inteligente de tareas
+  const priorityWeights: Record<string, number> = {
+    highest: 4,
+    high: 3,
+    medium: 2,
+    low: 1
+  };
+
+  const sortedTasks = Array.from(tasksMap.values()).sort((a, b) => {
+    // 1. Incompletas primero
+    if (a.completed !== b.completed) {
+      return a.completed ? 1 : -1;
+    }
+    // 2. Prioridad más alta primero
+    const weightA = a.priority ? (priorityWeights[a.priority] || 0) : 0;
+    const weightB = b.priority ? (priorityWeights[b.priority] || 0) : 0;
+    if (weightA !== weightB) {
+      return weightB - weightA;
+    }
+    // 3. Due date más próxima primero
+    if (a.dueDate && b.dueDate) {
+      return a.dueDate.localeCompare(b.dueDate);
+    }
+    if (a.dueDate && !b.dueDate) return -1;
+    if (!a.dueDate && b.dueDate) return 1;
+
+    return a.file.localeCompare(b.file);
+  });
+
   currentKanban = foundKanban;
-  currentTasks = allTasks;
+  currentTasks = sortedTasks;
   currentCalendar = allCalendar;
   currentNotes = allNotes;
   currentDailyFocus = latestDaily;

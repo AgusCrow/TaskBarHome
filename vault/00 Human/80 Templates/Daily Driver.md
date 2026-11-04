@@ -12,7 +12,6 @@ tags:
 ## Today's Focus
 
 ## Tasks
-- [ ]
 
 ## Working Project
 [[Client Website]]
